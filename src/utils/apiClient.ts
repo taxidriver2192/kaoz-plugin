@@ -2,22 +2,23 @@
 // API CONFIGURATION - Secure environment configuration
 // =============================================================================
 // These placeholders will be replaced by the build process with actual values
-const API_BASE_URL = 'PLACEHOLDER_API_BASE_URL';
+const API_BASE_URL = 'https://kaoz.dk/api';
 const API_KEY = 'PLACEHOLDER_API_KEY';
 // =============================================================================
 // DATA INTERFACES
 // =============================================================================
 
-export interface JobData {
-  jobId: string;
-  title: string;
-  company: string;
-  location: string;
-  description?: string;
-  postedDate?: string;
-  url: string;
-  salary?: string;
-  employmentType?: string;
+export interface JobDetails {
+  linkedin_job_id: number | null;
+  title: string | null;
+  location: string | null;
+  description: string | null;
+  apply_url: string | null;
+  posted_date: string | null; // Format: YYYY-MM-DD
+  applicants: number | null;
+  skills: string[];
+  company: string | null;
+  company_id: number | null; // New field for company ID
 }
 
 export interface ProfileData {
@@ -57,6 +58,55 @@ export interface ApiResponse<T> {
   exists?: boolean;
 }
 
+export interface JobIdsResponse {
+  success: boolean;
+  count: number;
+  linkedin_job_ids: number[];
+}
+
+// -----------------------------------------------------------------------------
+// COMPANY INTERFACES
+// -----------------------------------------------------------------------------
+export interface CompanyCreateRequest {
+  name: string;
+  image_url: string;
+}
+
+export interface CompanyNamesResponse {
+  success: boolean;
+  count: number;
+  company_names: string[];
+}
+
+export interface CompanyRecord {
+  company_id: number;
+  name: string;
+  vat?: string | null;
+  status?: string | null;
+  address?: string | null;
+  zipcode?: string | null;
+  city?: string | null;
+  website?: string | null;
+  email?: string | null;
+  employees?: number | null;
+  industrycode?: string | null;
+  industrydesc?: string | null;
+  companytype?: string | null;
+  image_url?: string | null;
+  full_image_url?: string | null;
+}
+
+export interface CompanyExistsResponse {
+  exists: boolean;
+  company?: CompanyRecord;
+}
+
+export interface CompanyCreateResponse {
+  success: boolean;
+  message?: string;
+  company?: CompanyRecord;
+}
+
 class ApiClient {
   private log(message: string, ...args: any[]) {
     console.log(`[LINKEDIN_SCRAPER_API] ${message}`, ...args);
@@ -71,6 +121,7 @@ class ApiClient {
       this.log(`Making request to: ${url}`);
       this.log(`Request headers:`, {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'X-API-Key': API_KEY,
         ...options.headers,
       });
@@ -79,6 +130,7 @@ class ApiClient {
       const response = await fetch(url, {
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
           'X-API-Key': API_KEY,
           ...options.headers,
         },
@@ -238,7 +290,27 @@ class ApiClient {
 
   // ============================================================================
   // JOB-RELATED METHODS (for future development - keep for jobs feature)
-  // ============================================================================
+  // ==========================================================================
+
+  // Get all existing job IDs from the database
+  async getExistingJobIds(): Promise<Set<string>> {
+    try {
+      const response = await this.makeRequest<JobIdsResponse>('/jobs/ids');
+      
+      if (response.success && response.data?.linkedin_job_ids) {
+        // Convert numbers to strings and return as Set for fast lookup
+        const jobIds = response.data.linkedin_job_ids.map(id => id.toString());
+        this.log(`Fetched ${jobIds.length} existing job IDs from database`);
+        return new Set(jobIds);
+      }
+      
+      this.log('No existing job IDs found or API call failed');
+      return new Set<string>();
+    } catch (error) {
+      this.log('Error fetching existing job IDs:', error);
+      return new Set<string>();
+    }
+  }
 
   // Check if a job already exists (future jobs API)
   async checkJobExists(jobId: string): Promise<boolean> {
@@ -247,16 +319,66 @@ class ApiClient {
   }
 
   // Send new job data (future jobs API)
-  async sendJobData(jobData: JobData): Promise<ApiResponse<JobData>> {
-    return this.makeRequest<JobData>('/jobs', {
+  async sendJobData(jobData: JobDetails): Promise<ApiResponse<JobDetails>> {
+    return this.makeRequest<JobDetails>('/jobs', {
       method: 'POST',
       body: JSON.stringify(jobData),
     });
   }
 
   // Get recent jobs (for background worker - future jobs API)
-  async getRecentJobs(limit: number = 10): Promise<ApiResponse<JobData[]>> {
-    return this.makeRequest<JobData[]>(`/jobs/recent?limit=${limit}`);
+  async getRecentJobs(limit: number = 10): Promise<ApiResponse<JobDetails[]>> {
+    return this.makeRequest<JobDetails[]>(`/jobs/recent?limit=${limit}`);
+  }
+
+  // ----------------------------------------------------------------------------
+  // COMPANY METHODS
+  // ----------------------------------------------------------------------------
+  async getCompanyNames(): Promise<ApiResponse<CompanyNamesResponse>> {
+    return this.makeRequest<CompanyNamesResponse>('/companies/names');
+  }
+
+  async checkCompanyExists(name: string): Promise<ApiResponse<CompanyExistsResponse>> {
+    // First try documented POST JSON
+    const primary = await this.makeRequest<CompanyExistsResponse>('/companies/exists', {
+      method: 'POST',
+      body: JSON.stringify({ name }),
+    });
+
+    // If 405 Method Not Allowed or other failure, try a GET fallback with query param
+    if (!primary.success && (primary.message?.includes('HTTP 405') || primary.message?.includes('Method Not Allowed'))) {
+      this.log('POST /companies/exists returned 405. Trying GET fallback with query parameter...');
+      const query = encodeURIComponent(name);
+      return this.makeRequest<CompanyExistsResponse>(`/companies/exists?name=${query}`, {
+        method: 'GET',
+      });
+    }
+
+    // Also try a form-encoded POST if generic failure persists (some servers expect form data)
+    if (!primary.success && !primary.message?.includes('HTTP 405')) {
+      try {
+        this.log('Retrying /companies/exists with application/x-www-form-urlencoded...');
+        const urlEncodedBody = new URLSearchParams({ name }).toString();
+        return await this.makeRequest<CompanyExistsResponse>('/companies/exists', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: urlEncodedBody,
+        });
+      } catch (e) {
+        // Fall-through to return primary
+      }
+    }
+
+    return primary;
+  }
+
+  async createCompany(payload: CompanyCreateRequest): Promise<ApiResponse<CompanyCreateResponse>> {
+    return this.makeRequest<CompanyCreateResponse>('/companies', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
   }
 
   // ============================================================================

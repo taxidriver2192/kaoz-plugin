@@ -51,6 +51,11 @@ initializeConfig({
 });
 EOF
 
+# Replace placeholders in apiClient.ts with actual values
+echo "🔧 Injecting environment variables into apiClient..."
+sed -i.bak "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/utils/apiClient.ts
+sed -i.bak "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/utils/apiClient.ts
+
 # Compile TypeScript and bundle with esbuild
 echo "📦 Bundling with esbuild..."
 npx esbuild src/content/scrapeProfile.ts --bundle --outfile=dist/scrapeProfile.js --format=iife --platform=browser --target=chrome88
@@ -66,6 +71,12 @@ cp manifest.json dist/
 # Clean up temporary files
 echo "🧹 Cleaning up temporary files..."
 rm -f src/config/injected.ts
+
+# Restore original apiClient.ts (remove environment variables)
+echo "🔒 Restoring original apiClient.ts..."
+if [ -f "src/utils/apiClient.ts.bak" ]; then
+    mv src/utils/apiClient.ts.bak src/utils/apiClient.ts
+fi
 
 # Check if build was successful
 if [ $? -eq 0 ]; then

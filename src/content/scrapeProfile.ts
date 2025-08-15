@@ -471,97 +471,6 @@ class ProfileScraper {
     return educations;
   }
 
-  private async navigateToExpandedExperiencePage(): Promise<boolean> {
-    try {
-      const currentUrl = window.location.href;
-      this.log(`INFO: Current URL: ${currentUrl}`);
-      
-      // Check if we're already on the expanded experience page
-      if (currentUrl.includes('/details/experience/')) {
-        this.log('INFO: Already on expanded experience page');
-        return true;
-      }
-      
-      // Extract the base profile URL and construct the expanded experience URL
-      const profileUrlMatch = currentUrl.match(/^(https:\/\/www\.linkedin\.com\/in\/[^\/\?]+)/);
-      if (!profileUrlMatch) {
-        this.log('ERROR: Could not extract profile URL from current URL');
-        return false;
-      }
-      
-      const baseProfileUrl = profileUrlMatch[1];
-      const expandedExperienceUrl = `${baseProfileUrl}/details/experience/`;
-      
-      this.log(`INFO: Navigating to expanded experience page: ${expandedExperienceUrl}`);
-      
-      // Navigate to the expanded experience page
-      window.location.href = expandedExperienceUrl;
-      
-      // Wait for the page to load
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      return true;
-    } catch (error) {
-      this.log('ERROR: Error navigating to expanded experience page:', error);
-      return false;
-    }
-  }
-
-  private async navigateToExpandedEducationPage(): Promise<boolean> {
-    try {
-      const currentUrl = window.location.href;
-      this.log(`INFO: Current URL: ${currentUrl}`);
-      
-      // Check if we're already on the expanded education page
-      if (currentUrl.includes('/details/education/')) {
-        this.log('INFO: Already on expanded education page');
-        return true;
-      }
-      
-      // Extract the base profile URL and construct the expanded education URL
-      const profileUrlMatch = currentUrl.match(/^(https:\/\/www\.linkedin\.com\/in\/[^\/\?]+)/);
-      if (!profileUrlMatch) {
-        this.log('ERROR: Could not extract profile URL from current URL');
-        return false;
-      }
-      
-      const baseProfileUrl = profileUrlMatch[1];
-      const expandedEducationUrl = `${baseProfileUrl}/details/education/`;
-      
-      this.log(`INFO: Navigating to expanded education page: ${expandedEducationUrl}`);
-      
-      // Navigate to the expanded education page
-      window.location.href = expandedEducationUrl;
-      
-      // Wait for the page to load
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      return true;
-    } catch (error) {
-      this.log('ERROR: Error navigating to expanded education page:', error);
-      return false;
-    }
-  }
-
-  private async navigateBackToProfile(): Promise<void> {
-    try {
-      const currentUrl = window.location.href;
-      
-      // Extract the base profile URL from the expanded experience URL
-      const profileUrlMatch = currentUrl.match(/^(https:\/\/www\.linkedin\.com\/in\/[^\/\?]+)/);
-      if (profileUrlMatch) {
-        const baseProfileUrl = profileUrlMatch[1] + '/';
-        this.log(`INFO: Navigating back to profile page: ${baseProfileUrl}`);
-        window.location.href = baseProfileUrl;
-        
-        // Wait for the page to load
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      }
-    } catch (error) {
-      this.log('ERROR: Error navigating back to profile:', error);
-    }
-  }
-
   private async navigateToExpandedExperiencePageForMoreData(): Promise<void> {
     try {
       const currentUrl = window.location.href;
@@ -605,35 +514,6 @@ class ProfileScraper {
       }
     } catch (error) {
       this.log('ERROR: Error navigating to expanded education page:', error);
-    }
-  }
-
-  private isEducationItemByDom(item: Element): boolean {
-    try {
-      // Check if the item is within an education section by traversing up the DOM
-      let currentElement = item as Element | null;
-      while (currentElement) {
-        // Check if we're in an education section
-        if (currentElement.querySelector?.('#education') || 
-            currentElement.id === 'education' ||
-            currentElement.getAttribute?.('data-section') === 'education') {
-          return true;
-        }
-        currentElement = currentElement.parentElement;
-      }
-
-      // Check for education-specific classes or attributes on the item itself
-      const itemClasses = item.className || '';
-      const itemHtml = item.innerHTML?.toLowerCase() || '';
-      
-      if (itemClasses.includes('education') || itemHtml.includes('education-section')) {
-        return true;
-      }
-
-      return false;
-    } catch (error) {
-      this.log('ERROR: Error checking if item is education by DOM:', error);
-      return false;
     }
   }
 

@@ -42,6 +42,11 @@ class PopupController {
       this.startScraping('profiles');
     });
 
+    // Bulk scrape jobs button
+    document.getElementById('bulkScrapeJobsBtn')?.addEventListener('click', () => {
+      this.bulkScrapeJobs();
+    });
+
     // Stop polling button
     document.getElementById('stopPollingBtn')?.addEventListener('click', () => {
       this.stopPolling();
@@ -248,6 +253,61 @@ class PopupController {
     } catch (error) {
       console.error('Error saving settings:', error);
       this.addLog('❌ Failed to save settings', 'error');
+    }
+  }
+
+  private async bulkScrapeJobs() {
+    this.addLog('🚀 Starting bulk job scraping...', 'info');
+    
+    try {
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+      const currentTab = tabs[0];
+      
+      if (!currentTab?.url || !currentTab.id) {
+        this.addLog('❌ No active tab found', 'error');
+        return;
+      }
+
+      // Check if we're on a LinkedIn jobs search page
+      if (!currentTab.url.includes('linkedin.com/jobs/search')) {
+        this.addLog('⚠️ Please navigate to a LinkedIn jobs search page first', 'warning');
+        this.addLog('💡 Go to linkedin.com/jobs/search with your filters', 'info');
+        return;
+      }
+
+      this.addLog('📋 Collecting job IDs from current page...', 'info');
+      
+      // First, just collect the job IDs to show progress
+      const jobIdsResponse = await new Promise<any>((resolve) => {
+        chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJobIds' }, resolve);
+      });
+      
+      if (jobIdsResponse?.success) {
+        const jobCount = jobIdsResponse.jobIds?.length || 0;
+        this.addLog(`✅ Found ${jobCount} jobs to process`, 'success');
+        
+        if (jobCount === 0) {
+          this.addLog('❌ No jobs found on this page', 'error');
+          return;
+        }
+
+        // Now start the bulk scraping process
+        this.addLog('🔄 Starting bulk processing...', 'info');
+        
+        const bulkResponse = await new Promise<any>((resolve) => {
+          chrome.tabs.sendMessage(currentTab.id!, { action: 'bulkScrapeJobs' }, resolve);
+        });
+        
+        if (bulkResponse?.success) {
+          this.addLog('✅ Bulk job scraping completed successfully', 'success');
+        } else {
+          this.addLog(`❌ Bulk scraping failed: ${bulkResponse?.error || 'Unknown error'}`, 'error');
+        }
+      } else {
+        this.addLog(`❌ Failed to collect job IDs: ${jobIdsResponse?.error || 'Unknown error'}`, 'error');
+      }
+    } catch (error) {
+      this.addLog(`❌ Error during bulk scraping: ${error}`, 'error');
     }
   }
 }

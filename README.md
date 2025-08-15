@@ -34,10 +34,22 @@ This extension automatically scrapes LinkedIn profiles and sends the data to my 
 
 ## Usage
 
-1. Visit any LinkedIn profile
+1. Visit any LinkedIn profile or job listing
 2. Click the extension icon
-3. Click "Scrape Profile"
-4. Data is automatically sent to kaoz.dk
+3. Choose from available options:
+   - **"Scrape Profile"** - Extract current profile data
+   - **"Scrape Job"** - Extract current job listing data
+   - **"Bulk Scrape Jobs"** - Scroll through job list and extract all jobs
+4. Data is automatically sent to kaoz.dk API
+5. Extension checks for duplicates before sending
+
+## Smart Duplicate Detection
+
+The extension intelligently avoids sending duplicate data:
+- Fetches existing job IDs from your kaoz.dk database
+- Compares scraped jobs against existing records
+- Only sends new, unique job data
+- Shows clear statistics: "New: X, Duplicates: Y, Errors: Z"
 
 ## Privacy
 
