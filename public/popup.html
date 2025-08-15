@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Scraper</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 350px;
+      min-height: 500px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      color: white;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .scraping-section {
+      margin-bottom: 24px;
+    }
+
+    .scraping-section h3 {
+      color: #374151;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .scraping-section h3::before {
+      content: '🎯';
+      margin-right: 8px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+
+    .btn-secondary {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #059669;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+
+    .btn-current {
+      background: #8b5cf6;
+      color: white;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .btn-current:hover {
+      background: #7c3aed;
+    }
+
+    .status-section h3 {
+      color: #374151;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .status-section h3::before {
+      content: '📊';
+      margin-right: 8px;
+    }
+
+    .status-log {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      max-height: 150px;
+      overflow-y: auto;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .log-entry {
+      margin-bottom: 6px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .log-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .log-success {
+      background: #dcfce7;
+      color: #166534;
+      border-left: 3px solid #10b981;
+    }
+
+    .log-error {
+      background: #fef2f2;
+      color: #991b1b;
+      border-left: 3px solid #ef4444;
+    }
+
+    .log-warning {
+      background: #fefbeb;
+      color: #92400e;
+      border-left: 3px solid #f59e0b;
+    }
+
+    .log-info {
+      background: #eff6ff;
+      color: #1e40af;
+      border-left: 3px solid #3b82f6;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .status-active {
+      background: #10b981;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    }
+
+    .status-inactive {
+      background: #ef4444;
+    }
+
+    .polling-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      background: #f8fafc;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .settings-section {
+      margin-top: 16px;
+    }
+
+    .settings-section h4 {
+      color: #6b7280;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+    }
+
+    .checkbox-group label {
+      font-size: 14px;
+      color: #374151;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .loading {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .empty-log {
+      text-align: center;
+      color: #9ca3af;
+      font-style: italic;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>LinkedIn Scraper</h1>
+      <p>Extract structured data from profiles and job posts</p>
+    </div>
+
+    <div class="card">
+      <div class="scraping-section">
+        <h3>Quick Actions</h3>
+        
+        <button class="btn btn-current" id="scrapeCurrentBtn">
+          <span>🎯</span>
+          Scrape Current Page
+        </button>
+
+        <div class="button-group">
+          <button class="btn btn-primary" id="scrapeJobsBtn">
+            <span>💼</span>
+            Jobs
+          </button>
+          <button class="btn btn-secondary" id="scrapeProfilesBtn">
+            <span>👤</span>
+            Profiles
+          </button>
+        </div>
+
+        <button class="btn btn-danger" id="stopPollingBtn" style="width: 100%;">
+          <span>⏹️</span>
+          Stop Polling
+        </button>
+      </div>
+
+      <div class="polling-status">
+        <div>
+          <span class="status-indicator" id="statusIndicator"></span>
+          <span id="pollingStatusText">Polling inactive</span>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h4>Settings</h4>
+        <div class="checkbox-group">
+          <input type="checkbox" id="autoScrapeCheckbox" checked>
+          <label for="autoScrapeCheckbox">Auto-scrape new pages</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="status-section">
+        <h3>Activity Log</h3>
+        <div class="status-log" id="statusLog">
+          <div class="empty-log">No activity yet. Start scraping to see logs here.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

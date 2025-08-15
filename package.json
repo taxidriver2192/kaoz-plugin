@@ -1,0 +1,21 @@
+{
+  "name": "linkedin-scraper-extension",
+  "version": "1.0.0",
+  "description": "LinkedIn scraping Chrome extension with TypeScript",
+  "scripts": {
+    "build": "./build.sh",
+    "build-unsafe": "npm run bundle && npm run copy-assets",
+    "bundle": "esbuild src/content/scrapeProfile.ts src/content/scrapeJobs.ts src/background.ts src/popup.ts --bundle --outdir=dist --format=iife --platform=browser --target=chrome88",
+    "copy-assets": "cp -r public/* dist/ && cp manifest.json dist/",
+    "watch": "tsc --watch",
+    "clean": "rm -rf dist/*",
+    "dev": "npm run clean && npm run build",
+    "setup": "cp .env.template .env && echo 'Please edit .env with your API key'"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.254",
+    "@types/node": "^20.10.5",
+    "esbuild": "^0.19.12",
+    "typescript": "^5.3.3"
+  }
+}
