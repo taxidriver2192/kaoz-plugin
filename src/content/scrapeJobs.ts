@@ -356,6 +356,34 @@ class JobScraper {
           const postedDateMatch = postedDateRegex.exec(tertiaryInfoText);
           jobDetails.posted_date = postedDateMatch ? this.parseRelativeDate(postedDateMatch[0]) : new Date().toISOString().split('T')[0];
         }
+
+        // Work Type - try multiple selectors
+        const workTypeSelectors = [
+          '.job-details-fit-level-preferences button',
+          '.job-criteria-list__item',
+          '.job-details-jobs-unified-top-card__job-insight'
+        ];
+        
+        for (const selector of workTypeSelectors) {
+          const workTypeElements = Array.from(topCardEl.querySelectorAll<HTMLElement>(selector));
+          const workTypeEl = workTypeElements.find(btn => 
+            btn.innerText.includes('Fuldtid') || 
+            btn.innerText.includes('Deltid') || 
+            btn.innerText.includes('Kontrakt') ||
+            btn.innerText.includes('Full-time') ||
+            btn.innerText.includes('Part-time') ||
+            btn.innerText.includes('Fysisk tilstedeværelse') ||
+            btn.innerText.includes('Hybridarbejde') ||
+            btn.innerText.includes('Fjernarbejde') ||
+            btn.innerText.includes('Remote') ||
+            btn.innerText.includes('Hybrid')
+          );
+          if (workTypeEl) {
+            // jobDetails.work_type = this.normalizeWorkType(workTypeEl.innerText.trim());
+            this.log(`Found work type using selector: ${selector}`);
+            break;
+          }
+        }
         
       } else {
         this.log("Could not find any job card element - trying global fallback selectors");
@@ -456,7 +484,7 @@ class JobScraper {
         skillsButton.click();
         this.log("Skills button clicked. Waiting for modal...");
 
-        await this.sleep(1500); // Wait for modal animation
+        await this.sleep(3000); // Wait for modal animation
 
         const skillsModalSelectors = [
           '.job-details-preferences-and-skills__modal-section-insights-list-item .text-body-small',
@@ -545,6 +573,50 @@ class JobScraper {
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // SEARCH PAGE NAVIGATION (pagination helpers)
+  // ---------------------------------------------------------------------------
+  private getCurrentSearchStart(): number {
+    try {
+      const url = new URL(window.location.href);
+      const startParam = url.searchParams.get('start');
+      const start = parseInt(startParam ?? '0', 10);
+      return Number.isNaN(start) ? 0 : start;
+    } catch {
+      return 0;
+    }
+  }
+
+  private async navigateToSearchStart(start: number): Promise<boolean> {
+    this.log(`Navigating to search page with start=${start}...`);
+    try {
+      const currentUrl = new URL(window.location.href);
+      if (!currentUrl.pathname.includes('/jobs/search')) {
+        currentUrl.pathname = '/jobs/search/';
+      }
+      currentUrl.searchParams.set('start', String(start));
+
+      const newUrl = currentUrl.toString();
+      this.log(`Navigating to search URL: ${newUrl}`);
+
+      window.history.pushState(null, '', newUrl);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.dispatchEvent(new Event('hashchange'));
+      try {
+        const routerEvent = new CustomEvent('router:navigate', { detail: { path: newUrl } });
+        window.dispatchEvent(routerEvent);
+      } catch {}
+
+      // Give the list time to refresh
+      await this.sleep(1500);
+
+      return true;
+    } catch (error) {
+      this.log('Error navigating to search page:', error);
+      return false;
+    }
+  }
+
   /**
    * Scrape all job IDs from the LinkedIn job list by scrolling through it
    */
@@ -628,106 +700,112 @@ class JobScraper {
   }
 
   /**
-   * Bulk scrape all jobs from the current job list page
+   * Bulk scrape all jobs across search pages (25 per page)
    */
   async bulkScrapeJobs(): Promise<void> {
     try {
-      this.log('Starting bulk job scraping...');
+      this.log('Starting bulk job scraping across pages...');
       
-      // First, fetch existing job IDs from the database
+      // Fetch existing job IDs once at the start
       this.showNotification('📋 Fetching existing jobs from database...', 'success');
       const existingJobIds = await apiClient.getExistingJobIds();
       this.log(`Found ${existingJobIds.size} existing jobs in database`);
-      
-      // Then, collect all job IDs by scrolling the current page
-      const scrapedJobIds = await this.scrapeLinkedInJobIds();
-      
-      if (scrapedJobIds.size === 0) {
-        this.showNotification('❌ No job IDs found to scrape', 'error');
-        return;
-      }
 
-      // Filter out jobs that already exist in the database
-      const newJobIds = new Set<string>();
-      let duplicateCount = 0;
-      
-      for (const jobId of scrapedJobIds) {
-        if (existingJobIds.has(jobId)) {
-          duplicateCount++;
-          this.log(`Job ${jobId} already exists in database - skipping`);
-        } else {
-          newJobIds.add(jobId);
-        }
-      }
+      const pageSize = 25;
+      let start = this.getCurrentSearchStart();
+      const maxPages = 20; // Safety cap to prevent infinite loops
 
-      this.log(`Total scraped: ${scrapedJobIds.size}, New jobs: ${newJobIds.size}, Duplicates: ${duplicateCount}`);
-      
-      if (newJobIds.size === 0) {
-        this.showNotification(`ℹ️ All ${scrapedJobIds.size} jobs already exist in database`, 'warning');
-        return;
-      }
+      let totalSuccess = 0;
+      let totalErrors = 0;
+      let totalDuplicates = 0;
 
-      this.showNotification(`🚀 Processing ${newJobIds.size} new jobs (${duplicateCount} duplicates skipped)...`, 'success');
-
-      let processedCount = 0;
-      let successCount = 0;
-      let errorCount = 0;
-      const newJobIdArray = Array.from(newJobIds);
-
-      this.log(`Starting to process ${newJobIdArray.length} jobs:`, newJobIdArray.slice(0, 5).join(', ') + (newJobIdArray.length > 5 ? '...' : ''));
-
-      // Process each new job ID
-      for (const jobId of newJobIds) {
-        try {
-          processedCount++; // Move counter increment to the beginning
-          this.log(`Processing job ${processedCount}/${newJobIds.size}: ${jobId}`);
-          
-          // Navigate to the specific job
-          const navigated = await this.navigateToJob(jobId);
-          
-          if (!navigated) {
-            this.log(`Failed to navigate to job ${jobId}`);
+      for (let page = 0; page < maxPages; page++) {
+        if (page > 0) {
+          start += pageSize;
+          const navOk = await this.navigateToSearchStart(start);
+          if (!navOk) {
+            this.log(`Failed to navigate to next page (start=${start}). Stopping.`);
+            break;
           }
-
-          await this.sleep(500);
-
-
-          // Use the existing single job scraping logic (without duplicate check since we already filtered)
-          this.log(`Running single job scrape for job ${jobId}...`);
-          const result = await this.scrapeJobInternal(false);
-          
-          if (result.success) {
-            this.log(`✅ Job ${jobId} processed successfully`);
-            successCount++;
-          } else {
-            this.log(`❌ Job ${jobId} failed: ${result.message}`);
-            errorCount++;
-          }
-
-          // Add a small delay between jobs to be respectful
           await this.sleep(1500);
+        }
 
-        } catch (error) {
-          this.log(`Error processing job ${jobId}:`, error);
-          errorCount++;
+        this.log(`Scraping page ${page + 1} (start=${start})...`);
+        const scrapedJobIds = await this.scrapeLinkedInJobIds();
+
+        if (scrapedJobIds.size === 0) {
+          this.log('No job IDs found on this page. Stopping pagination.');
+          break;
+        }
+
+        // Filter out jobs that already exist in the database
+        const newJobIds = new Set<string>();
+        let duplicateCount = 0;
+        for (const jobId of scrapedJobIds) {
+          if (existingJobIds.has(jobId)) {
+            duplicateCount++;
+            this.log(`Job ${jobId} already exists in database - skipping`);
+          } else {
+            newJobIds.add(jobId);
+          }
+        }
+        totalDuplicates += duplicateCount;
+
+        this.log(`Page ${page + 1}: Total scraped: ${scrapedJobIds.size}, New: ${newJobIds.size}, Duplicates: ${duplicateCount}`);
+
+        if (newJobIds.size === 0) {
+          // Continue to next page if nothing to process here
+          continue;
+        }
+
+        this.showNotification(`🚀 Processing ${newJobIds.size} new jobs on page ${page + 1}...`, 'success');
+
+        let processedCount = 0;
+        for (const jobId of newJobIds) {
+          try {
+            processedCount++;
+            this.log(`Processing job ${processedCount}/${newJobIds.size} (page ${page + 1}): ${jobId}`);
+            
+            const navigated = await this.navigateToJob(jobId);
+            if (!navigated) {
+              this.log(`Failed to navigate to job ${jobId}`);
+            }
+
+            await this.sleep(500);
+
+            const result = await this.scrapeJobInternal(false);
+            if (result.success) {
+              this.log(`✅ Job ${jobId} processed successfully`);
+              totalSuccess++;
+              // Prevent reprocessing the same job on later pages
+              existingJobIds.add(jobId);
+            } else {
+              this.log(`❌ Job ${jobId} failed: ${result.message}`);
+              totalErrors++;
+            }
+
+            // Small delay between jobs to be respectful
+            await this.sleep(1500);
+
+          } catch (error) {
+            this.log(`Error processing job ${jobId}:`, error);
+            totalErrors++;
+          }
         }
       }
 
-      // Show final results
-      const totalAttempted = successCount + errorCount;
+      const totalAttempted = totalSuccess + totalErrors;
+      this.log(`Bulk scraping complete across pages! Successfully processed: ${totalSuccess}, Duplicates skipped: ${totalDuplicates}, Errors: ${totalErrors}, Total attempted: ${totalAttempted}`);
       
-      this.log(`Bulk scraping complete! Successfully processed: ${successCount}, Duplicates skipped: ${duplicateCount}, Errors: ${errorCount}, Total attempted: ${totalAttempted}`);
-      
-      // Determine notification type based on results
       let notificationType: NotificationType = 'warning';
-      if (successCount > 0) {
+      if (totalSuccess > 0) {
         notificationType = 'success';
-      } else if (errorCount > 0) {
+      } else if (totalErrors > 0) {
         notificationType = 'error';
       }
       
       this.showNotification(
-        `✅ Bulk scraping complete! Success: ${successCount}, Duplicates: ${duplicateCount}, Errors: ${errorCount}`, 
+        `✅ Bulk scraping complete! Success: ${totalSuccess}, Duplicates: ${totalDuplicates}, Errors: ${totalErrors}`,
         notificationType
       );
 
@@ -771,7 +849,6 @@ class JobScraper {
       // Send job data to API
       this.log(`Sending job data to API for job ${jobIdFromUrl}...`);
       const apiResponse = await apiClient.sendJobData(jobDetails);
-
       if (apiResponse.success) {
         this.log(`✅ Job ${jobIdFromUrl} successfully sent to API`);
         return { success: true, message: 'Job data sent successfully' };
