@@ -1,79 +1,63 @@
-/**
- * Environment Configuration Module
- * Handles loading and validating environment variables for the extension
- */
+// Environment configuration for the LinkedIn Scraper Chrome Extension
+// Update these values according to your environment
 
-export interface ExtensionConfig {
-  apiKey: string;
-  apiBaseUrl: string;
-  debugMode: boolean;
-  logLevel: string;
-}
-
-/**
- * Default configuration values
- */
-const DEFAULT_CONFIG: ExtensionConfig = {
-  apiKey: '',
-  apiBaseUrl: 'https://kaoz.dk/api',
-  debugMode: false,
-  logLevel: 'error'
+export const CONFIG = {
+  // API Configuration
+  API: {
+    BASE_URL: 'https://laravel-job-dashboard.test/api', // Will be replaced by build script
+    API_KEY: 'PLACEHOLDER_API_KEY', // Will be replaced by build script
+  },
+  
+  // LinkedIn Configuration
+  LINKEDIN: {
+    JOB_URL_PREFIX: 'https://www.linkedin.com/jobs/view/',
+    PROFILE_URL_PREFIX: 'https://www.linkedin.com/in/',
+  },
+  
+  // Scraping Configuration
+  SCRAPING: {
+    DELAY_BETWEEN_CHECKS: 2000, // 2 seconds delay between job checks
+    TAB_LOAD_TIMEOUT: 10000, // 10 seconds timeout for tab loading
+    MAX_RETRIES: 3, // Maximum number of retries for failed requests
+  },
+  
+  // Debug Configuration
+  DEBUG: {
+    ENABLE_VERBOSE_LOGGING: true, // Set to false in production
+    LOG_API_REQUESTS: true, // Log all API requests
+    LOG_SCRAPING_ACTIONS: true, // Log scraping actions
+  }
 };
 
-/**
- * Runtime configuration - will be populated by injected values
- */
-let runtimeConfig: ExtensionConfig | null = null;
-
-/**
- * Initialize configuration with injected values
- * This function should be called by the build system's injected code
- */
-export function initializeConfig(config: Partial<ExtensionConfig>): void {
-  runtimeConfig = {
-    ...DEFAULT_CONFIG,
-    ...config
+// Validation function to check if configuration is properly set
+export function validateConfig(): { isValid: boolean; errors: string[] } {
+  const errors: string[] = [];
+  
+  if (!CONFIG.API.BASE_URL || CONFIG.API.BASE_URL === 'https://laravel-job-dashboard.test/api') {
+    errors.push('API BASE_URL is not configured properly');
+  }
+  
+  if (!CONFIG.API.API_KEY || CONFIG.API.API_KEY === 'PLACEHOLDER_API_KEY') {
+    errors.push('API_KEY is not configured properly');
+  }
+  
+  return {
+    isValid: errors.length === 0,
+    errors
   };
 }
 
-/**
- * Get the current environment configuration
- */
-export function getConfig(): ExtensionConfig {
-  if (runtimeConfig) {
-    return runtimeConfig;
+// Function to get validated configuration
+export function getValidatedConfig() {
+  const validation = validateConfig();
+  if (!validation.isValid) {
+    throw new Error(`Configuration validation failed: ${validation.errors.join(', ')}`);
   }
-
-  // Fallback to default config if no runtime config is available
-  return DEFAULT_CONFIG;
-}
-
-/**
- * Validate that required configuration is present
- */
-export function validateConfig(config: ExtensionConfig): boolean {
-  if (!config.apiKey || config.apiKey.trim() === '') {
-    console.error('API_KEY is required but not provided');
-    return false;
-  }
-
-  if (!config.apiBaseUrl || config.apiBaseUrl.trim() === '') {
-    console.error('API_BASE_URL is required but not provided');
-    return false;
-  }
-
-  return true;
-}
-
-/**
- * Get validated configuration or throw error
- */
-export function getValidatedConfig(): ExtensionConfig {
-  const config = getConfig();
   
-  if (!validateConfig(config)) {
-    throw new Error('Invalid extension configuration. Please check your environment settings.');
-  }
-
-  return config;
+  return {
+    apiKey: CONFIG.API.API_KEY,
+    apiBaseUrl: CONFIG.API.BASE_URL,
+    debugMode: CONFIG.DEBUG.ENABLE_VERBOSE_LOGGING,
+    logLevel: CONFIG.DEBUG.LOG_API_REQUESTS ? 'verbose' : 'error'
+  };
 }

@@ -11,7 +11,8 @@
   ],
   "host_permissions": [
     "https://*.linkedin.com/*",
-    "https://kaoz.dk/*"
+    "https://kaoz.dk/*",
+    "https://laravel-job-dashboard.test/*"
   ],
   "background": {
     "service_worker": "background.js"

@@ -47,6 +47,11 @@ class PopupController {
       this.bulkScrapeJobs();
     });
 
+    // Check closed jobs button
+    document.getElementById('checkClosedJobsBtn')?.addEventListener('click', () => {
+      this.checkClosedJobs();
+    });
+
     // Stop polling button
     document.getElementById('stopPollingBtn')?.addEventListener('click', () => {
       this.stopPolling();
@@ -308,6 +313,36 @@ class PopupController {
       }
     } catch (error) {
       this.addLog(`❌ Error during bulk scraping: ${error}`, 'error');
+    }
+  }
+
+  private async checkClosedJobs() {
+    this.addLog('🔍 Starting closed jobs check...', 'info');
+    
+    try {
+      const response = await new Promise<any>((resolve) => {
+        chrome.runtime.sendMessage({ action: 'checkClosedJobs' }, resolve);
+      });
+      
+      if (response?.success) {
+        const { closedJobs, totalChecked, message } = response;
+        this.addLog(`✅ ${message}`, 'success');
+        
+        if (closedJobs && closedJobs.length > 0) {
+          this.addLog(`📋 Found ${closedJobs.length} closed jobs:`, 'info');
+          closedJobs.forEach((jobId: number, index: number) => {
+            this.addLog(`   ${index + 1}. Job ID: ${jobId}`, 'info');
+          });
+        } else {
+          this.addLog('📋 No closed jobs found', 'info');
+        }
+        
+        this.addLog(`📊 Total jobs checked: ${totalChecked}`, 'info');
+      } else {
+        this.addLog(`❌ Failed to check closed jobs: ${response?.error || 'Unknown error'}`, 'error');
+      }
+    } catch (error) {
+      this.addLog(`❌ Error checking closed jobs: ${error}`, 'error');
     }
   }
 }

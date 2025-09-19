@@ -2,7 +2,7 @@
 // API CONFIGURATION - Secure environment configuration
 // =============================================================================
 // These placeholders will be replaced by the build process with actual values
-const API_BASE_URL = 'https://kaoz.dk/api';
+const API_BASE_URL = 'https://laravel-job-dashboard.test/api';
 const API_KEY = 'PLACEHOLDER_API_KEY';
 // =============================================================================
 // DATA INTERFACES
@@ -109,7 +109,8 @@ export interface CompanyCreateResponse {
 
 class ApiClient {
   private log(message: string, ...args: any[]) {
-    console.log(`[LINKEDIN_SCRAPER_API] ${message}`, ...args);
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] [LINKEDIN_SCRAPER_API] ${message}`, ...args);
   }
 
   private async makeRequest<T>(

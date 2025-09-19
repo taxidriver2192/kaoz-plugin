@@ -1,7 +1,7 @@
 // =============================================================================
 // IMPORTS - Clean modular approach with ES modules
 // =============================================================================
-import '../config/injected.js'; // Initialize configuration
+// Configuration is handled by environment.ts
 import { apiClient, type ProfileData, type PositionItem, type EducationItem, type ApiResponse } from '../config/apiClient.js';
 import { showNotification } from '../utils/uiUtils.js';
 

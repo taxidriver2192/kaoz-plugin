@@ -36,25 +36,22 @@ echo "✅ Environment variables loaded successfully"
 echo "🧹 Cleaning previous build..."
 rm -rf dist/*
 
-# Create environment config file for injection
-echo "🔧 Creating environment config..."
-cat > src/config/injected.ts << EOF
-// This file is auto-generated during build - do not edit manually
-import { initializeConfig } from './environment.js';
-
-// Initialize the configuration with environment values
-initializeConfig({
-  apiKey: '${API_KEY}',
-  apiBaseUrl: '${API_BASE_URL}',
-  debugMode: ${DEBUG_MODE:-false},
-  logLevel: '${LOG_LEVEL:-error}'
-});
-EOF
+# Environment config will be injected directly into source files
 
 # Replace placeholders in apiClient.ts with actual values
 echo "🔧 Injecting environment variables into apiClient..."
 sed -i.bak "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/utils/apiClient.ts
 sed -i.bak "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/utils/apiClient.ts
+
+# Replace placeholders in background.ts with actual values
+echo "🔧 Injecting environment variables into background.ts..."
+sed -i.bak "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/background.ts
+sed -i.bak "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/background.ts
+
+# Replace placeholders in environment.ts with actual values
+echo "🔧 Injecting environment variables into environment.ts..."
+sed -i.bak "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/config/environment.ts
+sed -i.bak "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/config/environment.ts
 
 # Compile TypeScript and bundle with esbuild
 echo "📦 Bundling with esbuild..."
@@ -70,12 +67,17 @@ cp manifest.json dist/
 
 # Clean up temporary files
 echo "🧹 Cleaning up temporary files..."
-rm -f src/config/injected.ts
 
-# Restore original apiClient.ts (remove environment variables)
-echo "🔒 Restoring original apiClient.ts..."
+# Restore original files (remove environment variables)
+echo "🔒 Restoring original files..."
 if [ -f "src/utils/apiClient.ts.bak" ]; then
     mv src/utils/apiClient.ts.bak src/utils/apiClient.ts
+fi
+if [ -f "src/background.ts.bak" ]; then
+    mv src/background.ts.bak src/background.ts
+fi
+if [ -f "src/config/environment.ts.bak" ]; then
+    mv src/config/environment.ts.bak src/config/environment.ts
 fi
 
 # Check if build was successful

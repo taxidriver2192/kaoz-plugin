@@ -10,7 +10,8 @@ import { showNotification, NotificationType } from '../utils/uiUtils.js';
 
 class JobScraper {
   private log(message: string, ...args: any[]) {
-    console.log(`[LINKEDIN_SCRAPER_JOBS] ${message}`, ...args);
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] [LINKEDIN_SCRAPER_JOBS] ${message}`, ...args);
   }
 
   private showNotification(message: string, type: NotificationType = 'success') {
@@ -820,46 +821,73 @@ class JobScraper {
    */
   private async scrapeJobInternal(checkDuplicate: boolean = true): Promise<{ success: boolean; message?: string }> {
     try {
+      this.log('🚀 Starting job scraping process...');
+      
       // First, get the job ID from URL to check if it exists
       const jobIdFromUrl = this.extractJobId();
+      this.log(`📋 Extracted job ID from URL: ${jobIdFromUrl}`);
+      
       if (!jobIdFromUrl || jobIdFromUrl === `job_${Date.now()}`) {
+        this.log('❌ Could not extract valid job ID from URL');
         return { success: false, message: 'Could not extract job ID from URL' };
       }
       
       // Check if job already exists (if requested)
       if (checkDuplicate) {
-        this.log('Checking if job already exists in database...');
+        this.log('🔍 Checking if job already exists in database...');
         const existingJobIds = await apiClient.getExistingJobIds();
+        this.log(`📊 Found ${existingJobIds.size} existing jobs in database`);
         
         if (existingJobIds.has(jobIdFromUrl)) {
-          this.log('Job already exists in database');
+          this.log(`⚠️ Job ${jobIdFromUrl} already exists in database - skipping`);
           return { success: false, message: 'Job already exists in database' };
         }
+        this.log(`✅ Job ${jobIdFromUrl} is new - proceeding with extraction`);
       }
       
-      this.log('Proceeding with comprehensive extraction...');
+      this.log('🔧 Starting comprehensive job data extraction...');
       
       // Use the comprehensive extraction method
       const jobDetails = await this.extractJobDetails();
+      this.log('📝 Job extraction completed:', {
+        linkedin_job_id: jobDetails.linkedin_job_id,
+        title: jobDetails.title,
+        company: jobDetails.company,
+        location: jobDetails.location,
+        hasDescription: !!jobDetails.description,
+        skillsCount: jobDetails.skills?.length || 0,
+        company_id: jobDetails.company_id
+      });
       
       if (!jobDetails.linkedin_job_id || !jobDetails.title || !jobDetails.company) {
+        this.log('❌ Missing required job data:', {
+          hasJobId: !!jobDetails.linkedin_job_id,
+          hasTitle: !!jobDetails.title,
+          hasCompany: !!jobDetails.company
+        });
         return { success: false, message: 'Could not extract complete job data' };
       }
 
       // Send job data to API
-      this.log(`Sending job data to API for job ${jobIdFromUrl}...`);
+      this.log(`📤 Sending job data to API for job ${jobIdFromUrl}...`);
+      this.log('📋 Job data payload:', JSON.stringify(jobDetails, null, 2));
+      
       const apiResponse = await apiClient.sendJobData(jobDetails);
+      
       if (apiResponse.success) {
         this.log(`✅ Job ${jobIdFromUrl} successfully sent to API`);
+        this.log('📊 API response:', apiResponse.data);
         return { success: true, message: 'Job data sent successfully' };
       } else {
         this.log(`❌ Failed to send job ${jobIdFromUrl} to API:`, apiResponse.message);
+        this.log('📊 API error details:', apiResponse);
         return { success: false, message: `API error: ${apiResponse.message}` };
       }
       
     } catch (error) {
-      this.log('Error during job scraping:', error);
+      this.log('💥 Error during job scraping:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      this.log('📊 Error stack:', error instanceof Error ? error.stack : 'No stack trace');
       return { success: false, message: `Scraping error: ${errorMessage}` };
     }
   }
