@@ -1,9 +1,34 @@
 // =============================================================================
-// API CONFIGURATION - Secure environment configuration
+// API CONFIGURATION - Dynamic environment configuration
 // =============================================================================
-// These placeholders will be replaced by the build process with actual values
-const API_BASE_URL = 'https://laravel-job-dashboard.test/api';
-const API_KEY = 'PLACEHOLDER_API_KEY';
+// Environment configurations - values will be injected by build script
+const ENVIRONMENTS = {
+  DEV: {
+    API_BASE_URL: 'PLACEHOLDER_DEV_API_BASE_URL',
+    API_KEY: 'PLACEHOLDER_DEV_API_KEY'
+  },
+  PROD: {
+    API_BASE_URL: 'PLACEHOLDER_PROD_API_BASE_URL',
+    API_KEY: 'PLACEHOLDER_PROD_API_KEY'
+  }
+};
+
+// Get current environment from Chrome storage (defaults to DEV)
+async function getCurrentEnvironment(): Promise<keyof typeof ENVIRONMENTS> {
+  try {
+    const result = await chrome.storage.local.get(['environment']);
+    return result.environment || 'DEV';
+  } catch (error) {
+    console.warn('Failed to get environment from storage, defaulting to DEV:', error);
+    return 'DEV';
+  }
+}
+
+// Get current API configuration
+async function getCurrentApiConfig() {
+  const env = await getCurrentEnvironment();
+  return ENVIRONMENTS[env];
+}
 // =============================================================================
 // DATA INTERFACES
 // =============================================================================
@@ -118,12 +143,15 @@ class ApiClient {
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
     try {
-      const url = `${API_BASE_URL}${endpoint}`;
+      // Get current API configuration
+      const apiConfig = await getCurrentApiConfig();
+      const url = `${apiConfig.API_BASE_URL}${endpoint}`;
+      
       this.log(`Making request to: ${url}`);
       this.log(`Request headers:`, {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'X-API-Key': API_KEY,
+        'X-API-Key': apiConfig.API_KEY,
         ...options.headers,
       });
       this.log(`Request body:`, options.body || 'No body');
@@ -132,7 +160,7 @@ class ApiClient {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'X-API-Key': API_KEY,
+          'X-API-Key': apiConfig.API_KEY,
           ...options.headers,
         },
         ...options,

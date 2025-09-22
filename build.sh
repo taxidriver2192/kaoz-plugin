@@ -7,9 +7,11 @@ echo "🔧 Building LinkedIn Scraper Extension..."
 # Check if .env file exists
 if [ ! -f ".env" ]; then
     echo "❌ Error: .env file not found!"
-    echo "📋 Please copy .env.template to .env and configure your API key:"
-    echo "   cp .env.template .env"
-    echo "   # Then edit .env with your actual API key"
+    echo "📋 Please create a .env file with your API keys:"
+    echo "   DEV_API_KEY=your_dev_key"
+    echo "   DEV_API_BASE_URL=your_dev_url"
+    echo "   PROD_API_KEY=your_prod_key"
+    echo "   PROD_API_BASE_URL=your_prod_url"
     exit 1
 fi
 
@@ -20,13 +22,9 @@ source .env
 set +a
 
 # Validate required variables
-if [ -z "$API_KEY" ]; then
-    echo "❌ Error: API_KEY not set in .env file"
-    exit 1
-fi
-
-if [ -z "$API_BASE_URL" ]; then
-    echo "❌ Error: API_BASE_URL not set in .env file"
+if [ -z "$DEV_API_KEY" ] || [ -z "$DEV_API_BASE_URL" ] || [ -z "$PROD_API_KEY" ] || [ -z "$PROD_API_BASE_URL" ]; then
+    echo "❌ Error: Missing required environment variables in .env file"
+    echo "Required: DEV_API_KEY, DEV_API_BASE_URL, PROD_API_KEY, PROD_API_BASE_URL"
     exit 1
 fi
 
@@ -36,22 +34,27 @@ echo "✅ Environment variables loaded successfully"
 echo "🧹 Cleaning previous build..."
 rm -rf dist/*
 
-# Environment config will be injected directly into source files
+# Inject environment variables into source files
+echo "🔧 Injecting environment variables into source files..."
 
-# Replace placeholders in apiClient.ts with actual values
-echo "🔧 Injecting environment variables into apiClient..."
-sed -i.bak "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/utils/apiClient.ts
-sed -i.bak "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/utils/apiClient.ts
-
-# Replace placeholders in background.ts with actual values
-echo "🔧 Injecting environment variables into background.ts..."
-sed -i.bak "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/background.ts
-sed -i.bak "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/background.ts
+# Create backup files first
+echo "🔧 Creating backup files..."
+cp src/config/environment.ts src/config/environment.ts.bak
+cp src/utils/apiClient.ts src/utils/apiClient.ts.bak
 
 # Replace placeholders in environment.ts with actual values
 echo "🔧 Injecting environment variables into environment.ts..."
-sed -i.bak "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/config/environment.ts
-sed -i.bak "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/config/environment.ts
+sed -i "s|PLACEHOLDER_DEV_API_BASE_URL|${DEV_API_BASE_URL}|g" src/config/environment.ts
+sed -i "s|PLACEHOLDER_DEV_API_KEY|${DEV_API_KEY}|g" src/config/environment.ts
+sed -i "s|PLACEHOLDER_PROD_API_BASE_URL|${PROD_API_BASE_URL}|g" src/config/environment.ts
+sed -i "s|PLACEHOLDER_PROD_API_KEY|${PROD_API_KEY}|g" src/config/environment.ts
+
+# Replace placeholders in utils/apiClient.ts with actual values
+echo "🔧 Injecting environment variables into utils/apiClient.ts..."
+sed -i "s|PLACEHOLDER_DEV_API_BASE_URL|${DEV_API_BASE_URL}|g" src/utils/apiClient.ts
+sed -i "s|PLACEHOLDER_DEV_API_KEY|${DEV_API_KEY}|g" src/utils/apiClient.ts
+sed -i "s|PLACEHOLDER_PROD_API_BASE_URL|${PROD_API_BASE_URL}|g" src/utils/apiClient.ts
+sed -i "s|PLACEHOLDER_PROD_API_KEY|${PROD_API_KEY}|g" src/utils/apiClient.ts
 
 # Compile TypeScript and bundle with esbuild
 echo "📦 Bundling with esbuild..."
@@ -70,14 +73,11 @@ echo "🧹 Cleaning up temporary files..."
 
 # Restore original files (remove environment variables)
 echo "🔒 Restoring original files..."
-if [ -f "src/utils/apiClient.ts.bak" ]; then
-    mv src/utils/apiClient.ts.bak src/utils/apiClient.ts
-fi
-if [ -f "src/background.ts.bak" ]; then
-    mv src/background.ts.bak src/background.ts
-fi
 if [ -f "src/config/environment.ts.bak" ]; then
     mv src/config/environment.ts.bak src/config/environment.ts
+fi
+if [ -f "src/utils/apiClient.ts.bak" ]; then
+    mv src/utils/apiClient.ts.bak src/utils/apiClient.ts
 fi
 
 # Check if build was successful
@@ -85,8 +85,8 @@ if [ $? -eq 0 ]; then
     echo "✅ Build completed successfully!"
     echo "📦 Extension ready in dist/ folder"
     echo ""
-    echo "🔐 Security Note: API key has been injected into the build"
-    echo "⚠️  Do not commit the dist/ folder to version control"
+    echo "🔐 Security Note: API keys have been injected from .env file"
+    echo "⚠️  Do not commit the dist/ folder or .env file to version control"
 else
     echo "❌ Build failed!"
     exit 1
@@ -95,5 +95,6 @@ fi
 echo ""
 echo "📚 Next steps:"
 echo "1. Load the extension in Chrome from the dist/ folder"
-echo "2. Test the extension functionality"
-echo "3. For production, update .env with production API keys"
+echo "2. Use the environment toggle button in the popup to switch between DEV/PROD"
+echo "3. Test the extension functionality"
+echo "4. Keep your .env file secure and never commit it to GitHub"

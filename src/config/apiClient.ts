@@ -42,8 +42,6 @@ export interface ApiResponse<T> {
 }
 
 export class ApiClient {
-  private readonly config = getValidatedConfig();
-
   private log(message: string, ...args: any[]) {
     console.info(`[LINKEDIN_SCRAPER_API] ${message}`, ...args);
   }
@@ -53,11 +51,14 @@ export class ApiClient {
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
     try {
-      const url = `${this.config.apiBaseUrl}${endpoint}`;
+      // Get current configuration dynamically
+      const config = await getValidatedConfig();
+      const url = `${config.apiBaseUrl}${endpoint}`;
+      
       this.log(`INFO: Making request to: ${url}`);
       this.log(`INFO: Request headers:`, {
         'Content-Type': 'application/json',
-        'X-API-Key': this.config.apiKey,
+        'X-API-Key': config.apiKey,
         ...options.headers,
       });
       this.log(`INFO: Request body:`, options.body || 'No body');
@@ -65,7 +66,7 @@ export class ApiClient {
       const response = await fetch(url, {
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': this.config.apiKey,
+          'X-API-Key': config.apiKey,
           ...options.headers,
         },
         ...options,

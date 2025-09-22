@@ -8,12 +8,18 @@ class PopupController {
   private readonly statusLog: HTMLElement;
   private readonly statusIndicator: HTMLElement;
   private readonly pollingStatusText: HTMLElement;
+  private readonly envToggleBtn: HTMLElement;
+  private readonly envStatus: HTMLElement;
+  private readonly envText: HTMLElement;
   private logs: LogEntry[] = [];
 
   constructor() {
     this.statusLog = document.getElementById('statusLog')!;
     this.statusIndicator = document.getElementById('statusIndicator')!;
     this.pollingStatusText = document.getElementById('pollingStatusText')!;
+    this.envToggleBtn = document.getElementById('envToggleBtn')!;
+    this.envStatus = document.getElementById('envStatus')!;
+    this.envText = document.getElementById('envText')!;
     
     this.initializeEventListeners();
     // Initialize async operations after construction
@@ -24,6 +30,7 @@ class PopupController {
     await this.loadSettings();
     await this.updateStatus();
     await this.loadLogs();
+    await this.updateEnvironmentDisplay();
   }
 
   private initializeEventListeners() {
@@ -61,6 +68,11 @@ class PopupController {
     document.getElementById('autoScrapeCheckbox')?.addEventListener('change', (event) => {
       const target = event.target as HTMLInputElement;
       this.saveSettings({ autoScrape: target.checked });
+    });
+
+    // Environment toggle button
+    document.getElementById('envToggleBtn')?.addEventListener('click', () => {
+      this.toggleEnvironment();
     });
   }
 
@@ -343,6 +355,52 @@ class PopupController {
       }
     } catch (error) {
       this.addLog(`❌ Error checking closed jobs: ${error}`, 'error');
+    }
+  }
+
+  private async toggleEnvironment() {
+    try {
+      // Get current environment
+      const result = await chrome.storage.local.get(['environment']);
+      const currentEnv = result.environment || 'DEV';
+      const newEnv = currentEnv === 'DEV' ? 'PROD' : 'DEV';
+      
+      // Save new environment
+      await chrome.storage.local.set({ environment: newEnv });
+      
+      // Update display
+      await this.updateEnvironmentDisplay();
+      
+      // Log the change
+      this.addLog(`🔄 Environment switched to: ${newEnv}`, 'info');
+      
+      // Show environment details
+      const envDetails = newEnv === 'DEV' 
+        ? 'Local development (laravel-job-dashboard.test)'
+        : 'Production (kaoz.dk)';
+      this.addLog(`📍 ${envDetails}`, 'info');
+      
+    } catch (error) {
+      this.addLog(`❌ Failed to toggle environment: ${error}`, 'error');
+    }
+  }
+
+  private async updateEnvironmentDisplay() {
+    try {
+      const result = await chrome.storage.local.get(['environment']);
+      const currentEnv = result.environment || 'DEV';
+      
+      // Update button text and styling
+      this.envText.textContent = currentEnv === 'DEV' ? 'Development' : 'Production';
+      this.envStatus.textContent = currentEnv === 'DEV' ? '🛠️' : '🚀';
+      
+      // Update button class for styling
+      this.envToggleBtn.className = `btn btn-env ${currentEnv.toLowerCase()}`;
+      
+    } catch (error) {
+      console.error('Error updating environment display:', error);
+      this.envText.textContent = 'Error';
+      this.envStatus.textContent = '❌';
     }
   }
 }

@@ -452,7 +452,7 @@ class BackgroundService {
       });
       
       // Validate API configuration
-      const configValidation = validateConfig();
+      const configValidation = await validateConfig();
       if (!configValidation.isValid) {
         this.log('ERROR: Configuration validation failed:', configValidation.errors);
         return {

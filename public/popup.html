@@ -143,6 +143,52 @@
       background: #d97706;
     }
 
+    .btn-env {
+      background: #6366f1;
+      color: white;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .btn-env:hover {
+      background: #4f46e5;
+    }
+
+    .btn-env.dev {
+      background: #10b981;
+    }
+
+    .btn-env.dev:hover {
+      background: #059669;
+    }
+
+    .btn-env.prod {
+      background: #ef4444;
+    }
+
+    .btn-env.prod:hover {
+      background: #dc2626;
+    }
+
+    .environment-toggle {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .environment-toggle h4 {
+      color: #6b7280;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .toggle-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .status-section h3 {
       color: #374151;
       font-size: 16px;
@@ -335,6 +381,16 @@
         <div class="checkbox-group">
           <input type="checkbox" id="autoScrapeCheckbox" checked>
           <label for="autoScrapeCheckbox">Auto-scrape new pages</label>
+        </div>
+        
+        <div class="environment-toggle">
+          <h4>Environment</h4>
+          <div class="toggle-container">
+            <button class="btn btn-env" id="envToggleBtn">
+              <span id="envStatus">🔄</span>
+              <span id="envText">Loading...</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

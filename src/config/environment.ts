@@ -1,11 +1,55 @@
 // Environment configuration for the LinkedIn Scraper Chrome Extension
-// Update these values according to your environment
+// Environment toggle system - no more .env file needed!
+
+// Environment configurations - values will be injected by build script
+const ENVIRONMENTS = {
+  DEV: {
+    API_BASE_URL: 'PLACEHOLDER_DEV_API_BASE_URL',
+    API_KEY: 'PLACEHOLDER_DEV_API_KEY'
+  },
+  PROD: {
+    API_BASE_URL: 'PLACEHOLDER_PROD_API_BASE_URL',
+    API_KEY: 'PLACEHOLDER_PROD_API_KEY'
+  }
+};
+
+// Get current environment from Chrome storage (defaults to DEV)
+async function getCurrentEnvironment(): Promise<keyof typeof ENVIRONMENTS> {
+  try {
+    const result = await chrome.storage.local.get(['environment']);
+    return result.environment || 'DEV';
+  } catch (error) {
+    console.warn('Failed to get environment from storage, defaulting to DEV:', error);
+    return 'DEV';
+  }
+}
+
+// Get current API configuration
+export async function getCurrentApiConfig() {
+  const env = await getCurrentEnvironment();
+  return ENVIRONMENTS[env];
+}
+
+// Set environment
+export async function setEnvironment(env: keyof typeof ENVIRONMENTS) {
+  try {
+    await chrome.storage.local.set({ environment: env });
+    console.log(`Environment switched to: ${env}`);
+  } catch (error) {
+    console.error('Failed to save environment:', error);
+  }
+}
+
+// Get current environment name
+export async function getCurrentEnvironmentName(): Promise<string> {
+  return await getCurrentEnvironment();
+}
 
 export const CONFIG = {
-  // API Configuration
+  // API Configuration - will be dynamically loaded
   API: {
-    BASE_URL: 'https://laravel-job-dashboard.test/api', // Will be replaced by build script
-    API_KEY: 'PLACEHOLDER_API_KEY', // Will be replaced by build script
+    BASE_URL: 'PLACEHOLDER_DEV_API_BASE_URL', // Default fallback
+    API_KEY: 'PLACEHOLDER_DEV_API_KEY', // Default fallback
   },
   
   // LinkedIn Configuration
@@ -30,14 +74,15 @@ export const CONFIG = {
 };
 
 // Validation function to check if configuration is properly set
-export function validateConfig(): { isValid: boolean; errors: string[] } {
+export async function validateConfig(): Promise<{ isValid: boolean; errors: string[] }> {
   const errors: string[] = [];
+  const apiConfig = await getCurrentApiConfig();
   
-  if (!CONFIG.API.BASE_URL || CONFIG.API.BASE_URL === 'https://laravel-job-dashboard.test/api') {
+  if (!apiConfig.API_BASE_URL) {
     errors.push('API BASE_URL is not configured properly');
   }
   
-  if (!CONFIG.API.API_KEY || CONFIG.API.API_KEY === 'PLACEHOLDER_API_KEY') {
+  if (!apiConfig.API_KEY) {
     errors.push('API_KEY is not configured properly');
   }
   
@@ -48,15 +93,17 @@ export function validateConfig(): { isValid: boolean; errors: string[] } {
 }
 
 // Function to get validated configuration
-export function getValidatedConfig() {
-  const validation = validateConfig();
+export async function getValidatedConfig() {
+  const validation = await validateConfig();
   if (!validation.isValid) {
     throw new Error(`Configuration validation failed: ${validation.errors.join(', ')}`);
   }
   
+  const apiConfig = await getCurrentApiConfig();
+  
   return {
-    apiKey: CONFIG.API.API_KEY,
-    apiBaseUrl: CONFIG.API.BASE_URL,
+    apiKey: apiConfig.API_KEY,
+    apiBaseUrl: apiConfig.API_BASE_URL,
     debugMode: CONFIG.DEBUG.ENABLE_VERBOSE_LOGGING,
     logLevel: CONFIG.DEBUG.LOG_API_REQUESTS ? 'verbose' : 'error'
   };
