@@ -143,111 +143,7 @@
       background: #d97706;
     }
 
-    .btn-env {
-      background: #6366f1;
-      color: white;
-      width: 100%;
-      margin-bottom: 8px;
-    }
 
-    .btn-env:hover {
-      background: #4f46e5;
-    }
-
-    .btn-env.dev {
-      background: #10b981;
-    }
-
-    .btn-env.dev:hover {
-      background: #059669;
-    }
-
-    .btn-env.prod {
-      background: #ef4444;
-    }
-
-    .btn-env.prod:hover {
-      background: #dc2626;
-    }
-
-    .environment-toggle {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    .environment-toggle h4 {
-      color: #6b7280;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .toggle-container {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .status-section h3 {
-      color: #374151;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-    }
-
-    .status-section h3::before {
-      content: '📊';
-      margin-right: 8px;
-    }
-
-    .status-log {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 12px;
-      max-height: 150px;
-      overflow-y: auto;
-      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .log-entry {
-      margin-bottom: 6px;
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-
-    .log-entry:last-child {
-      margin-bottom: 0;
-    }
-
-    .log-success {
-      background: #dcfce7;
-      color: #166534;
-      border-left: 3px solid #10b981;
-    }
-
-    .log-error {
-      background: #fef2f2;
-      color: #991b1b;
-      border-left: 3px solid #ef4444;
-    }
-
-    .log-warning {
-      background: #fefbeb;
-      color: #92400e;
-      border-left: 3px solid #f59e0b;
-    }
-
-    .log-info {
-      background: #eff6ff;
-      color: #1e40af;
-      border-left: 3px solid #3b82f6;
-    }
 
     .status-indicator {
       display: inline-block;
@@ -318,12 +214,6 @@
       animation: pulse 1.5s ease-in-out infinite;
     }
 
-    .empty-log {
-      text-align: center;
-      color: #9ca3af;
-      font-style: italic;
-      padding: 20px;
-    }
   </style>
 </head>
 <body>
@@ -383,26 +273,9 @@
           <label for="autoScrapeCheckbox">Auto-scrape new pages</label>
         </div>
         
-        <div class="environment-toggle">
-          <h4>Environment</h4>
-          <div class="toggle-container">
-            <button class="btn btn-env" id="envToggleBtn">
-              <span id="envStatus">🔄</span>
-              <span id="envText">Loading...</span>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="status-section">
-        <h3>Activity Log</h3>
-        <div class="status-log" id="statusLog">
-          <div class="empty-log">No activity yet. Start scraping to see logs here.</div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <script src="popup.js"></script>

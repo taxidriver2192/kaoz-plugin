@@ -68,10 +68,11 @@ class InlineApiClient {
       const result = await response.json();
       
       if (!response.ok) {
+        const errorMessage = result?.message || result?.error || 'Unknown error';
         this.log('API request failed:', response.status, result);
         return {
           success: false,
-          message: `API request failed: ${response.status} - ${result.message || 'Unknown error'}`
+          message: `API request failed: ${response.status} - ${errorMessage}`
         };
       }
 
@@ -96,22 +97,6 @@ class InlineApiClient {
     this.log('📋 Endpoint:', endpoint);
     this.log('🔑 API Key (masked):', this.apiKey ? `${this.apiKey.substring(0, 8)}...` : 'NOT SET');
     
-    // DEBUG: Randomly add close date for about 50% of jobs
-    const shouldClose = Math.random() < 0.5; // 50% chance
-    if (shouldClose) {
-      // Add a random close date within the last 30 days
-      const randomDaysAgo = Math.floor(Math.random() * 30) + 1;
-      const closeDate = new Date();
-      closeDate.setDate(closeDate.getDate() - randomDaysAgo);
-      
-      // Add the close date to the job data
-      (jobData as any).job_post_closed_date = closeDate.toISOString();
-      
-      this.log(`🎲 DEBUG: Randomly closing job (${randomDaysAgo} days ago):`, jobData.title);
-      this.log('📅 Close date added:', closeDate.toISOString());
-    } else {
-      this.log('✅ Job will remain open (no close date added)');
-    }
     
     this.log('📤 Sending job data to:', endpoint);
     this.log('📋 Job data payload:', JSON.stringify(jobData, null, 2));
@@ -162,6 +147,7 @@ class InlineApiClient {
       }
       
       if (!response.ok) {
+        const errorMessage = result?.message || result?.error || JSON.stringify(result) || 'Unknown error';
         this.log('❌ API request failed - HTTP error:', {
           status: response.status,
           statusText: response.statusText,
@@ -169,7 +155,7 @@ class InlineApiClient {
         });
         return {
           success: false,
-          message: `API request failed: ${response.status} ${response.statusText} - ${result.message || JSON.stringify(result) || 'Unknown error'}`
+          message: `API request failed: ${response.status} ${response.statusText} - ${errorMessage}`
         };
       }
 
@@ -230,10 +216,10 @@ class InlineApiClient {
     }
   }
 
-  async getAllJobIds(): Promise<BgApiResponse<{ linkedin_job_ids: number[] }>> {
-    const endpoint = `${this.baseUrl}/jobs/ids`;
+  async getJobsToCheck(): Promise<BgApiResponse<any[]>> {
+    const endpoint = `${this.baseUrl}/jobs/check-for-closed`;
     
-    this.log('Getting all job IDs from:', endpoint);
+    this.log('Getting jobs to check from:', endpoint);
     this.log('Request details:', {
       method: 'GET',
       headers: {
@@ -276,7 +262,7 @@ class InlineApiClient {
           this.log('Parsed response JSON:', result);
         } else {
           this.log('WARNING: Empty response body');
-          result = {};
+          result = [];
         }
       } catch (parseError) {
         this.log('ERROR: Failed to parse response as JSON:', parseError);
@@ -298,10 +284,10 @@ class InlineApiClient {
         };
       }
 
-      this.log('Job IDs retrieved successfully:', {
+      this.log('Jobs to check retrieved successfully:', {
         success: true,
         data: result,
-        jobCount: result.linkedin_job_ids ? result.linkedin_job_ids.length : 'unknown'
+        jobCount: Array.isArray(result) ? result.length : 'unknown'
       });
       
       return {
@@ -309,12 +295,50 @@ class InlineApiClient {
         data: result
       };
     } catch (error) {
-      this.log('Network error getting job IDs:', {
+      this.log('Network error getting jobs to check:', {
         error: error,
         errorMessage: error instanceof Error ? error.message : 'Unknown error',
         errorType: typeof error,
         errorStack: error instanceof Error ? error.stack : 'No stack trace'
       });
+      return {
+        success: false,
+        message: `Network error: ${error instanceof Error ? error.message : 'Unknown error'}`
+      };
+    }
+  }
+
+  async markJobAsChecked(linkedinJobId: number): Promise<BgApiResponse> {
+    const endpoint = `${this.baseUrl}/jobs/linkedin/${linkedinJobId}/checked`;
+    
+    this.log('Marking job as checked:', linkedinJobId, 'at endpoint:', endpoint);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'PUT',
+        headers: {
+          'X-API-Key': this.apiKey,
+          'Accept': 'application/json'
+        }
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        this.log('API request failed:', response.status, result);
+        return {
+          success: false,
+          message: `API request failed: ${response.status} - ${result.message || 'Unknown error'}`
+        };
+      }
+
+      this.log('Job marked as checked successfully:', result);
+      return {
+        success: true,
+        data: result
+      };
+    } catch (error) {
+      this.log('Error marking job as checked:', error);
       return {
         success: false,
         message: `Network error: ${error instanceof Error ? error.message : 'Unknown error'}`
@@ -392,6 +416,23 @@ class BackgroundService {
           sendResponse({ success: false, error: error.message });
         });
         return true; // Keep message channel open for async response
+      } else if (request.action === 'startScraping') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Start scraping requested for type: ${request.type}`);
+        // For now, just use the existing scrapeCurrentTab functionality
+        this.scrapeCurrentTab();
+        sendResponse({ success: true });
+      } else if (request.action === 'getStatus') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Status requested`);
+        // Return current status (polling is disabled for now)
+        sendResponse({ 
+          success: true, 
+          isPolling: false, 
+          pollingInterval: 0 
+        });
+      } else if (request.action === 'stopPolling') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Stop polling requested`);
+        // Polling is already disabled, just return success
+        sendResponse({ success: true });
       } else {
         console.info(`[LINKEDIN_SCRAPER_BG] Unknown action: ${request.action}`);
         sendResponse({ success: false, error: 'Unknown action' });
@@ -462,64 +503,78 @@ class BackgroundService {
         };
       }
       
-      // Get all job IDs from the database
-      this.log('INFO: Calling getAllJobIds() API method...');
-      const jobIdsResponse = await apiClient.getAllJobIds();
+      // Get jobs that need to be checked from the new endpoint
+      this.log('INFO: Calling getJobsToCheck() API method...');
+      const jobsToCheckResponse = await apiClient.getJobsToCheck();
       
       this.log('INFO: API Response received:', {
-        success: jobIdsResponse.success,
-        hasData: !!jobIdsResponse.data,
-        dataKeys: jobIdsResponse.data ? Object.keys(jobIdsResponse.data) : [],
-        message: jobIdsResponse.message,
-        fullResponse: jobIdsResponse
+        success: jobsToCheckResponse.success,
+        hasData: !!jobsToCheckResponse.data,
+        dataType: Array.isArray(jobsToCheckResponse.data) ? 'array' : typeof jobsToCheckResponse.data,
+        dataLength: Array.isArray(jobsToCheckResponse.data) ? jobsToCheckResponse.data.length : 'N/A',
+        message: jobsToCheckResponse.message,
+        fullResponse: jobsToCheckResponse
       });
       
-      if (!jobIdsResponse.success) {
+      if (!jobsToCheckResponse.success) {
         this.log('ERROR: API call failed - success is false');
         this.log('ERROR: API error details:', {
-          message: jobIdsResponse.message,
-          fullResponse: jobIdsResponse
+          message: jobsToCheckResponse.message,
+          fullResponse: jobsToCheckResponse
         });
         return {
           success: false,
           error: 'API call failed',
-          message: jobIdsResponse.message || 'Unknown API error',
-          details: jobIdsResponse
+          message: jobsToCheckResponse.message || 'Unknown API error',
+          details: jobsToCheckResponse
         };
       }
       
-      if (!jobIdsResponse.data) {
+      if (!jobsToCheckResponse.data) {
         this.log('ERROR: API call succeeded but no data returned');
-        this.log('ERROR: Response structure:', jobIdsResponse);
+        this.log('ERROR: Response structure:', jobsToCheckResponse);
         return {
           success: false,
           error: 'No data returned from API',
           message: 'API call succeeded but returned no data',
-          details: jobIdsResponse
+          details: jobsToCheckResponse
         };
       }
       
-      if (!jobIdsResponse.data.linkedin_job_ids) {
-        this.log('ERROR: API data missing linkedin_job_ids field');
-        this.log('ERROR: Available data fields:', Object.keys(jobIdsResponse.data));
-        this.log('ERROR: Full data object:', jobIdsResponse.data);
+      // Handle the Laravel API response structure: {success: true, count: X, jobs: [...]}
+      let jobsToCheck: any[];
+      if (Array.isArray(jobsToCheckResponse.data)) {
+        // Direct array response (old format)
+        jobsToCheck = jobsToCheckResponse.data;
+      } else if (jobsToCheckResponse.data && typeof jobsToCheckResponse.data === 'object' && 'jobs' in jobsToCheckResponse.data && Array.isArray((jobsToCheckResponse.data as any).jobs)) {
+        // Laravel API response format: {success: true, count: X, jobs: [...]}
+        jobsToCheck = (jobsToCheckResponse.data as any).jobs;
+        this.log(`INFO: Using Laravel API response format with ${(jobsToCheckResponse.data as any).count} jobs`);
+      } else {
+        this.log('ERROR: API data is not in expected format');
+        this.log('ERROR: Data type:', typeof jobsToCheckResponse.data);
+        this.log('ERROR: Full data object:', jobsToCheckResponse.data);
         return {
           success: false,
-          error: 'Missing linkedin_job_ids field',
-          message: 'API returned data but missing linkedin_job_ids field',
-          details: jobIdsResponse.data
+          error: 'Invalid data format',
+          message: 'API returned data but it is not in expected format (array or {jobs: array})',
+          details: jobsToCheckResponse.data
         };
       }
+      this.log(`INFO: Successfully retrieved ${jobsToCheck.length} jobs that need checking`);
+      this.log('INFO: Jobs to check:', jobsToCheck.map(job => ({
+        id: job.linkedin_job_id || job.id,
+        title: job.title,
+        company: job.company_name || job.company,
+        posted_date: job.posted_date,
+        last_checked: job.updated_at
+      })));
 
-      const jobIds = jobIdsResponse.data.linkedin_job_ids;
-      this.log(`INFO: Successfully retrieved ${jobIds.length} job IDs from database`);
-      this.log('INFO: Job IDs:', jobIds);
-
-      if (jobIds.length === 0) {
-        this.log('INFO: No jobs found in database (empty array returned)');
+      if (jobsToCheck.length === 0) {
+        this.log('INFO: No jobs need checking (all jobs are up to date)');
         return {
           success: true,
-          message: 'No jobs found in database',
+          message: 'No jobs need checking - all jobs are up to date',
           closedJobs: [],
           totalChecked: 0
         };
@@ -528,7 +583,7 @@ class BackgroundService {
       const closedJobs: number[] = [];
       let checkedCount = 0;
 
-      this.log(`INFO: Starting to check ${jobIds.length} jobs using hidden background tabs...`);
+      this.log(`INFO: Starting to check ${jobsToCheck.length} jobs using hidden background tabs...`);
 
       // Create a hidden tab that will be reused for all job checks
       const hiddenTab = await chrome.tabs.create({
@@ -546,11 +601,12 @@ class BackgroundService {
 
       this.log(`INFO: Created hidden tab ${hiddenTab.id} for background job checking`);
 
-      // Check each job URL using the hidden tab
-      for (const jobId of jobIds) {
+      // Check each job using the hidden tab
+      for (const job of jobsToCheck) {
         try {
+          const jobId = job.linkedin_job_id || job.id;
           const jobUrl = `${CONFIG.LINKEDIN.JOB_URL_PREFIX}${jobId}`;
-          this.log(`INFO: Checking job ${jobId} (${checkedCount + 1}/${jobIds.length})`);
+          this.log(`INFO: Starting to process job ${jobId} (${checkedCount + 1}/${jobsToCheck.length}) - ${job.title} at ${job.company_name || job.company}`);
           
           // Navigate to the job URL in the hidden tab
           await chrome.tabs.update(hiddenTab.id, { url: jobUrl });
@@ -580,13 +636,24 @@ class BackgroundService {
             this.log(`INFO: Job ${jobId} is still active`);
           }
           
+          // Mark the job as checked (regardless of whether it's closed or not)
+          this.log(`INFO: Marking job ${jobId} as checked...`);
+          const checkedResponse = await apiClient.markJobAsChecked(jobId);
+          if (checkedResponse.success) {
+            this.log(`INFO: Successfully marked job ${jobId} as checked`);
+          } else {
+            this.log(`WARNING: Failed to mark job ${jobId} as checked: ${checkedResponse.message}`);
+          }
+          
           checkedCount++;
+          this.log(`INFO: Completed processing job ${jobId}. Moving to next job...`);
           
           // Add a small delay to avoid overwhelming LinkedIn
           await new Promise(resolve => setTimeout(resolve, 2000));
+          this.log(`INFO: Delay completed for job ${jobId}. Continuing to next job...`);
           
         } catch (error) {
-          this.log(`ERROR: Error checking job ${jobId}:`, error);
+          this.log(`ERROR: Error checking job ${job.linkedin_job_id || job.id}:`, error);
           checkedCount++;
         }
       }
@@ -668,17 +735,28 @@ class BackgroundService {
             }
           }
           
-          // Also check for specific LinkedIn elements that might indicate a closed job
-          const closedElements = document.querySelectorAll('[data-test-id*="closed"], [class*="closed"], [class*="expired"]');
-          if (closedElements.length > 0) {
-            console.log('Found closed job elements:', closedElements.length);
+          // Check for specific LinkedIn elements that indicate a closed job
+          // Only check for very specific closed job indicators
+          const closedJobElements = document.querySelectorAll(
+            '[data-test-id="job-closed"], ' +
+            '[data-test-id="job-expired"], ' +
+            '.job-closed, ' +
+            '.job-expired, ' +
+            '[class*="job-closed"], ' +
+            '[class*="job-expired"]'
+          );
+          
+          if (closedJobElements.length > 0) {
+            console.log('Found specific closed job elements:', closedJobElements.length);
             return true;
           }
           
-          // Check for "Apply" button - if it's disabled or missing, job might be closed
+          // Check for disabled apply button (more specific check)
           const applyButtons = document.querySelectorAll('button[data-test-id*="apply"], a[data-test-id*="apply"]');
-          if (applyButtons.length === 0) {
-            console.log('No apply buttons found - job might be closed');
+          const disabledApplyButtons = document.querySelectorAll('button[data-test-id*="apply"][disabled], button[data-test-id*="apply"].disabled');
+          
+          if (applyButtons.length > 0 && disabledApplyButtons.length === applyButtons.length) {
+            console.log('All apply buttons are disabled - job might be closed');
             return true;
           }
           

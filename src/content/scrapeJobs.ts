@@ -91,35 +91,68 @@ class JobScraper {
   }
 
   /**
-   * Parses a relative date string from Danish (e.g., "1 dag siden") into a YYYY-MM-DD format.
+   * Parses a relative date string from Danish/English (e.g., "30 minutter siden", "19 timer siden", "1 dag siden") 
+   * into a YYYY-MM-DD HH:MM format with precise time calculation.
    * @param dateString - The relative date string.
    */
   private parseRelativeDate(dateString: string): string | null {
     if (!dateString) return null;
 
     const now = new Date();
-    const regex = /(\d+)\s+(dag|uge|måned|time)/;
+    
+    // Enhanced regex to capture minutes, hours, days, weeks, and months
+    // Supports both Danish and English formats
+    const regex = /(\d+)\s+(minut|minutter|minute|minutes|time|timer|hour|hours|dag|dage|day|days|uge|uger|week|weeks|måned|måneder|month|months)/i;
     const match = regex.exec(dateString);
 
     if (match) {
       const value = parseInt(match[1], 10);
-      const unit = match[2];
+      const unit = match[2].toLowerCase();
 
-      if (unit.startsWith('time')) {
+      // Handle minutes
+      if (unit.startsWith('minut')) {
+        now.setMinutes(now.getMinutes() - value);
+      }
+      // Handle hours
+      else if (unit.startsWith('time') || unit.startsWith('hour')) {
         now.setHours(now.getHours() - value);
-      } else if (unit.startsWith('dag')) {
+      }
+      // Handle days
+      else if (unit.startsWith('dag') || unit.startsWith('day')) {
         now.setDate(now.getDate() - value);
-      } else if (unit.startsWith('uge')) {
+      }
+      // Handle weeks
+      else if (unit.startsWith('uge') || unit.startsWith('week')) {
         now.setDate(now.getDate() - value * 7);
-      } else if (unit.startsWith('måned')) {
+      }
+      // Handle months
+      else if (unit.startsWith('måned') || unit.startsWith('month')) {
         now.setMonth(now.getMonth() - value);
       }
-    } else if (dateString.includes('i går')) {
+    } 
+    // Handle "i går" / "yesterday"
+    else if (dateString.toLowerCase().includes('i går') || dateString.toLowerCase().includes('yesterday')) {
       now.setDate(now.getDate() - 1);
     }
+    // Handle "i dag" / "today" - no change needed
+    else if (dateString.toLowerCase().includes('i dag') || dateString.toLowerCase().includes('today')) {
+      // Keep current date
+    }
+    // If no match found, return current date
+    else {
+      this.log(`Could not parse relative date: "${dateString}" - using current date`);
+    }
     
-    // Format to YYYY-MM-DD
-    return now.toISOString().split('T')[0];
+    // Format to YYYY-MM-DD HH:MM
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+    const result = `${year}-${month}-${day} ${hours}:${minutes}`;
+    this.log(`Parsed relative date "${dateString}" to: ${result}`);
+    return result;
   }
 
   private extractJobId(): string {
@@ -352,10 +385,21 @@ class JobScraper {
           }
           jobDetails.applicants = applicantsMatch ? parseInt(applicantsMatch[1], 10) : null;
 
-          // Extract and parse posted date
-          const postedDateRegex = /(\d+\s+(dag|dage|uge|uger|måned|måneder)\s+siden|i går)/;
+          // Extract and parse posted date - enhanced to capture more formats
+          const postedDateRegex = /(\d+\s+(minut|minutter|minute|minutes|time|timer|hour|hours|dag|dage|day|days|uge|uger|week|weeks|måned|måneder|month|months)\s+siden|i går|yesterday|i dag|today)/i;
           const postedDateMatch = postedDateRegex.exec(tertiaryInfoText);
-          jobDetails.posted_date = postedDateMatch ? this.parseRelativeDate(postedDateMatch[0]) : new Date().toISOString().split('T')[0];
+          if (postedDateMatch) {
+            jobDetails.posted_date = this.parseRelativeDate(postedDateMatch[0]);
+          } else {
+            // Fallback to current date and time in YYYY-MM-DD HH:MM format
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            jobDetails.posted_date = `${year}-${month}-${day} ${hours}:${minutes}`;
+          }
         }
 
         // Work Type - try multiple selectors
@@ -879,9 +923,10 @@ class JobScraper {
         this.log('📊 API response:', apiResponse.data);
         return { success: true, message: 'Job data sent successfully' };
       } else {
-        this.log(`❌ Failed to send job ${jobIdFromUrl} to API:`, apiResponse.message);
+        const errorMessage = apiResponse.message || 'Unknown API error';
+        this.log(`❌ Failed to send job ${jobIdFromUrl} to API:`, errorMessage);
         this.log('📊 API error details:', apiResponse);
-        return { success: false, message: `API error: ${apiResponse.message}` };
+        return { success: false, message: `API error: ${errorMessage}` };
       }
       
     } catch (error) {
@@ -922,21 +967,24 @@ chrome.runtime.onMessage.addListener((request: any, sender: any, sendResponse: a
     jobScraper.scrapeJob().then(() => {
       sendResponse({ success: true });
     }).catch((error) => {
-      sendResponse({ success: false, error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      sendResponse({ success: false, error: errorMessage });
     });
     return true; // Keep message channel open for async response
   } else if (request.action === 'bulkScrapeJobs') {
     jobScraper.bulkScrapeJobs().then(() => {
       sendResponse({ success: true });
     }).catch((error) => {
-      sendResponse({ success: false, error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      sendResponse({ success: false, error: errorMessage });
     });
     return true; // Keep message channel open for async response
   } else if (request.action === 'scrapeJobIds') {
     jobScraper.scrapeLinkedInJobIds().then((jobIds) => {
       sendResponse({ success: true, jobIds: Array.from(jobIds) });
     }).catch((error) => {
-      sendResponse({ success: false, error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      sendResponse({ success: false, error: errorMessage });
     });
     return true; // Keep message channel open for async response
   }

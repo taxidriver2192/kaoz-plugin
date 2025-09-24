@@ -8,10 +8,8 @@ echo "🔧 Building LinkedIn Scraper Extension..."
 if [ ! -f ".env" ]; then
     echo "❌ Error: .env file not found!"
     echo "📋 Please create a .env file with your API keys:"
-    echo "   DEV_API_KEY=your_dev_key"
-    echo "   DEV_API_BASE_URL=your_dev_url"
-    echo "   PROD_API_KEY=your_prod_key"
-    echo "   PROD_API_BASE_URL=your_prod_url"
+    echo "   API_KEY=your_api_key"
+    echo "   API_BASE_URL=your_api_url"
     exit 1
 fi
 
@@ -22,9 +20,9 @@ source .env
 set +a
 
 # Validate required variables
-if [ -z "$DEV_API_KEY" ] || [ -z "$DEV_API_BASE_URL" ] || [ -z "$PROD_API_KEY" ] || [ -z "$PROD_API_BASE_URL" ]; then
+if [ -z "$API_KEY" ] || [ -z "$API_BASE_URL" ]; then
     echo "❌ Error: Missing required environment variables in .env file"
-    echo "Required: DEV_API_KEY, DEV_API_BASE_URL, PROD_API_KEY, PROD_API_BASE_URL"
+    echo "Required: API_KEY, API_BASE_URL"
     exit 1
 fi
 
@@ -44,17 +42,13 @@ cp src/utils/apiClient.ts src/utils/apiClient.ts.bak
 
 # Replace placeholders in environment.ts with actual values
 echo "🔧 Injecting environment variables into environment.ts..."
-sed -i "s|PLACEHOLDER_DEV_API_BASE_URL|${DEV_API_BASE_URL}|g" src/config/environment.ts
-sed -i "s|PLACEHOLDER_DEV_API_KEY|${DEV_API_KEY}|g" src/config/environment.ts
-sed -i "s|PLACEHOLDER_PROD_API_BASE_URL|${PROD_API_BASE_URL}|g" src/config/environment.ts
-sed -i "s|PLACEHOLDER_PROD_API_KEY|${PROD_API_KEY}|g" src/config/environment.ts
+sed -i "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/config/environment.ts
+sed -i "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/config/environment.ts
 
 # Replace placeholders in utils/apiClient.ts with actual values
 echo "🔧 Injecting environment variables into utils/apiClient.ts..."
-sed -i "s|PLACEHOLDER_DEV_API_BASE_URL|${DEV_API_BASE_URL}|g" src/utils/apiClient.ts
-sed -i "s|PLACEHOLDER_DEV_API_KEY|${DEV_API_KEY}|g" src/utils/apiClient.ts
-sed -i "s|PLACEHOLDER_PROD_API_BASE_URL|${PROD_API_BASE_URL}|g" src/utils/apiClient.ts
-sed -i "s|PLACEHOLDER_PROD_API_KEY|${PROD_API_KEY}|g" src/utils/apiClient.ts
+sed -i "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/utils/apiClient.ts
+sed -i "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/utils/apiClient.ts
 
 # Compile TypeScript and bundle with esbuild
 echo "📦 Bundling with esbuild..."
@@ -95,6 +89,5 @@ fi
 echo ""
 echo "📚 Next steps:"
 echo "1. Load the extension in Chrome from the dist/ folder"
-echo "2. Use the environment toggle button in the popup to switch between DEV/PROD"
-echo "3. Test the extension functionality"
-echo "4. Keep your .env file secure and never commit it to GitHub"
+echo "2. Test the extension functionality"
+echo "3. Keep your .env file secure and never commit it to GitHub"

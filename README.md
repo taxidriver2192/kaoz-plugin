@@ -10,14 +10,26 @@ This extension automatically scrapes LinkedIn profiles and sends the data to my 
 
 ## Setup
 
-1. Copy environment file:
+1. Create a `.env` file in the project root:
    ```bash
-   cp .env.template .env
+   touch .env
    ```
 
-2. Add your API key to `.env`:
+2. Add your API configuration to `.env`:
    ```env
    API_KEY=your-api-key-here
+   API_BASE_URL=https://your-domain.com/api
+   ```
+
+   **Example for local development:**
+   ```env
+   API_KEY=055d589e-your-dev-key
+   API_BASE_URL=https://laravel-job-dashboard.test/api
+   ```
+
+   **Example for production:**
+   ```env
+   API_KEY=055d589e-your-prod-key
    API_BASE_URL=https://kaoz.dk/api
    ```
 
@@ -31,6 +43,17 @@ This extension automatically scrapes LinkedIn profiles and sends the data to my 
    - Go to `chrome://extensions/`
    - Enable "Developer mode"
    - Click "Load unpacked" and select the `dist/` folder
+
+## Environment Switching
+
+The extension now uses a single API configuration from your `.env` file. To switch between environments:
+
+1. **For Development**: Update your `.env` file with development API settings
+2. **For Production**: Update your `.env` file with production API settings  
+3. **Rebuild**: Run `npm run build` after changing the `.env` file
+4. **Reload**: Reload the extension in Chrome
+
+This simplified approach eliminates the need for environment toggle buttons and makes the extension more reliable.
 
 ## Usage
 

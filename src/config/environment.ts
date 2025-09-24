@@ -1,55 +1,22 @@
 // Environment configuration for the LinkedIn Scraper Chrome Extension
-// Environment toggle system - no more .env file needed!
+// Simplified single environment configuration
 
-// Environment configurations - values will be injected by build script
-const ENVIRONMENTS = {
-  DEV: {
-    API_BASE_URL: 'PLACEHOLDER_DEV_API_BASE_URL',
-    API_KEY: 'PLACEHOLDER_DEV_API_KEY'
-  },
-  PROD: {
-    API_BASE_URL: 'PLACEHOLDER_PROD_API_BASE_URL',
-    API_KEY: 'PLACEHOLDER_PROD_API_KEY'
-  }
+// API configuration - values will be injected by build script
+const API_CONFIG = {
+  API_BASE_URL: 'PLACEHOLDER_API_BASE_URL',
+  API_KEY: 'PLACEHOLDER_API_KEY'
 };
 
-// Get current environment from Chrome storage (defaults to DEV)
-async function getCurrentEnvironment(): Promise<keyof typeof ENVIRONMENTS> {
-  try {
-    const result = await chrome.storage.local.get(['environment']);
-    return result.environment || 'DEV';
-  } catch (error) {
-    console.warn('Failed to get environment from storage, defaulting to DEV:', error);
-    return 'DEV';
-  }
-}
-
-// Get current API configuration
+// Get API configuration
 export async function getCurrentApiConfig() {
-  const env = await getCurrentEnvironment();
-  return ENVIRONMENTS[env];
-}
-
-// Set environment
-export async function setEnvironment(env: keyof typeof ENVIRONMENTS) {
-  try {
-    await chrome.storage.local.set({ environment: env });
-    console.log(`Environment switched to: ${env}`);
-  } catch (error) {
-    console.error('Failed to save environment:', error);
-  }
-}
-
-// Get current environment name
-export async function getCurrentEnvironmentName(): Promise<string> {
-  return await getCurrentEnvironment();
+  return API_CONFIG;
 }
 
 export const CONFIG = {
   // API Configuration - will be dynamically loaded
   API: {
-    BASE_URL: 'PLACEHOLDER_DEV_API_BASE_URL', // Default fallback
-    API_KEY: 'PLACEHOLDER_DEV_API_KEY', // Default fallback
+    BASE_URL: 'PLACEHOLDER_API_BASE_URL', // Default fallback
+    API_KEY: 'PLACEHOLDER_API_KEY', // Default fallback
   },
   
   // LinkedIn Configuration

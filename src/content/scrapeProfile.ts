@@ -50,6 +50,7 @@ class ProfileScraper {
     const url = window.location.href;
     const isExpanded = url.includes('/details/experience/');
     this.log(`INFO: Is expanded experience page: ${isExpanded}, URL: ${url}`);
+    console.log('🔍 [PROFILE SCRAPER] Checking if expanded experience page:', isExpanded, 'URL:', url);
     return isExpanded;
   }
 
@@ -57,6 +58,7 @@ class ProfileScraper {
     const url = window.location.href;
     const isExpanded = url.includes('/details/education/');
     this.log(`INFO: Is expanded education page: ${isExpanded}, URL: ${url}`);
+    console.log('🔍 [PROFILE SCRAPER] Checking if expanded education page:', isExpanded, 'URL:', url);
     return isExpanded;
   }
 
@@ -474,6 +476,8 @@ class ProfileScraper {
   private async navigateToExpandedExperiencePageForMoreData(): Promise<void> {
     try {
       const currentUrl = window.location.href;
+      console.log('🔍 [PROFILE SCRAPER] ===== NAVIGATING TO EXPERIENCE PAGE =====');
+      console.log('🔍 [PROFILE SCRAPER] Current URL:', currentUrl);
       
       // Only navigate if we're not already on the expanded page
       if (!currentUrl.includes('/details/experience/')) {
@@ -483,20 +487,31 @@ class ProfileScraper {
           const expandedExperienceUrl = `${baseProfileUrl}/details/experience/`;
           
           this.log(`INFO: Navigating to expanded experience page for detailed data: ${expandedExperienceUrl}`);
+          console.log('🔍 [PROFILE SCRAPER] Base profile URL:', baseProfileUrl);
+          console.log('🔍 [PROFILE SCRAPER] Expanded experience URL:', expandedExperienceUrl);
           
           // Store that we want to auto-scrape experience when we arrive
           sessionStorage.setItem('linkedin-scraper-auto-scrape-experience', 'true');
+          console.log('🔍 [PROFILE SCRAPER] Set auto-scrape experience flag');
+          console.log('🔍 [PROFILE SCRAPER] Navigating to:', expandedExperienceUrl);
           window.location.href = expandedExperienceUrl;
+        } else {
+          console.log('🔍 [PROFILE SCRAPER] ⚠️ Could not extract profile URL from current URL');
         }
+      } else {
+        console.log('🔍 [PROFILE SCRAPER] Already on expanded experience page, no navigation needed');
       }
     } catch (error) {
       this.log('ERROR: Error navigating to expanded experience page:', error);
+      console.log('🔍 [PROFILE SCRAPER] ❌ ERROR: Error navigating to expanded experience page:', error);
     }
   }
 
   private async navigateToExpandedEducationPageForMoreData(): Promise<void> {
     try {
       const currentUrl = window.location.href;
+      console.log('🔍 [PROFILE SCRAPER] ===== NAVIGATING TO EDUCATION PAGE =====');
+      console.log('🔍 [PROFILE SCRAPER] Current URL:', currentUrl);
       
       // Only navigate if we're not already on the expanded page
       if (!currentUrl.includes('/details/education/')) {
@@ -506,14 +521,23 @@ class ProfileScraper {
           const expandedEducationUrl = `${baseProfileUrl}/details/education/`;
           
           this.log(`INFO: Navigating to expanded education page for detailed data: ${expandedEducationUrl}`);
+          console.log('🔍 [PROFILE SCRAPER] Base profile URL:', baseProfileUrl);
+          console.log('🔍 [PROFILE SCRAPER] Expanded education URL:', expandedEducationUrl);
           
           // Store that we want to auto-scrape education when we arrive
           sessionStorage.setItem('linkedin-scraper-auto-scrape-education', 'true');
+          console.log('🔍 [PROFILE SCRAPER] Set auto-scrape education flag');
+          console.log('🔍 [PROFILE SCRAPER] Navigating to:', expandedEducationUrl);
           window.location.href = expandedEducationUrl;
+        } else {
+          console.log('🔍 [PROFILE SCRAPER] ⚠️ Could not extract profile URL from current URL');
         }
+      } else {
+        console.log('🔍 [PROFILE SCRAPER] Already on expanded education page, no navigation needed');
       }
     } catch (error) {
       this.log('ERROR: Error navigating to expanded education page:', error);
+      console.log('🔍 [PROFILE SCRAPER] ❌ ERROR: Error navigating to expanded education page:', error);
     }
   }
 
@@ -928,28 +952,47 @@ class ProfileScraper {
   async scrapeProfile(): Promise<void> {
     try {
       this.log('INFO: ===== Starting profile scraping =====');
+      console.log('🔍 [PROFILE SCRAPER] ===== PROFILE SCRAPING STARTED =====');
+      console.log('🔍 [PROFILE SCRAPER] Current URL:', window.location.href);
+      console.log('🔍 [PROFILE SCRAPER] Page title:', document.title);
+      console.log('🔍 [PROFILE SCRAPER] Document ready state:', document.readyState);
+      console.log('🔍 [PROFILE SCRAPER] Session storage keys:', Object.keys(sessionStorage).filter(key => key.includes('linkedin-scraper')));
       
       const currentUrl = window.location.href;
       
       // Check if we're on the expanded experience page and should auto-scrape
       if (this.isExpandedExperiencePage() && sessionStorage.getItem('linkedin-scraper-auto-scrape-experience') === 'true') {
         this.log('INFO: On expanded experience page, extracting and storing data');
+        console.log('🔍 [PROFILE SCRAPER] ===== EXPANDED EXPERIENCE PAGE DETECTED =====');
+        console.log('🔍 [PROFILE SCRAPER] Auto-scrape experience flag found');
+        console.log('🔍 [PROFILE SCRAPER] Page URL:', window.location.href);
+        console.log('🔍 [PROFILE SCRAPER] Page content preview:', document.body.innerText.substring(0, 500));
         
         // Clear the auto-scrape flag
         sessionStorage.removeItem('linkedin-scraper-auto-scrape-experience');
+        console.log('🔍 [PROFILE SCRAPER] Cleared auto-scrape experience flag');
         
         // Extract from expanded page and store in session storage
+        console.log('🔍 [PROFILE SCRAPER] Starting experience extraction from expanded page...');
         const expandedPositions = this.extractFromExpandedExperiencePage();
+        console.log('🔍 [PROFILE SCRAPER] Extracted positions:', expandedPositions);
+        console.log('🔍 [PROFILE SCRAPER] Number of positions found:', expandedPositions.length);
+        
         if (expandedPositions.length > 0) {
           sessionStorage.setItem('linkedin-scraper-expanded-experience', JSON.stringify(expandedPositions));
           this.log(`INFO: Stored ${expandedPositions.length} positions from expanded page`);
+          console.log('🔍 [PROFILE SCRAPER] Stored positions in session storage');
+        } else {
+          console.log('🔍 [PROFILE SCRAPER] ⚠️ No positions extracted from expanded page');
         }
         
         // Set flag that expanded experience extraction is complete
         sessionStorage.setItem('linkedin-scraper-experience-complete', 'true');
+        console.log('🔍 [PROFILE SCRAPER] Set experience complete flag');
         
         // Navigate directly to education page instead of back to profile
         this.log('INFO: Experience extraction complete, navigating directly to education page');
+        console.log('🔍 [PROFILE SCRAPER] Navigating to education page...');
         await this.navigateToExpandedEducationPageForMoreData();
         return;
       }
@@ -957,21 +1000,35 @@ class ProfileScraper {
       // Check if we're on the expanded education page and should auto-scrape
       if (this.isExpandedEducationPage() && sessionStorage.getItem('linkedin-scraper-auto-scrape-education') === 'true') {
         this.log('INFO: On expanded education page, extracting and storing data');
+        console.log('🔍 [PROFILE SCRAPER] ===== EXPANDED EDUCATION PAGE DETECTED =====');
+        console.log('🔍 [PROFILE SCRAPER] Auto-scrape education flag found');
+        console.log('🔍 [PROFILE SCRAPER] Page URL:', window.location.href);
+        console.log('🔍 [PROFILE SCRAPER] Page content preview:', document.body.innerText.substring(0, 500));
         
         // Clear the auto-scrape flag
         sessionStorage.removeItem('linkedin-scraper-auto-scrape-education');
+        console.log('🔍 [PROFILE SCRAPER] Cleared auto-scrape education flag');
         
         // Extract from expanded page and store in session storage
+        console.log('🔍 [PROFILE SCRAPER] Starting education extraction from expanded page...');
         const expandedEducations = this.extractFromExpandedEducationPage();
+        console.log('🔍 [PROFILE SCRAPER] Extracted educations:', expandedEducations);
+        console.log('🔍 [PROFILE SCRAPER] Number of educations found:', expandedEducations.length);
+        
         if (expandedEducations.length > 0) {
           sessionStorage.setItem('linkedin-scraper-expanded-education', JSON.stringify(expandedEducations));
           this.log(`INFO: Stored ${expandedEducations.length} educations from expanded page`);
+          console.log('🔍 [PROFILE SCRAPER] Stored educations in session storage');
+        } else {
+          console.log('🔍 [PROFILE SCRAPER] ⚠️ No educations extracted from expanded page');
         }
         
         // Set flag that expanded education extraction is complete
         sessionStorage.setItem('linkedin-scraper-education-complete', 'true');
+        console.log('🔍 [PROFILE SCRAPER] Set education complete flag');
         
         this.log('INFO: Education extraction complete, proceeding to final data processing and API submission');
+        console.log('🔍 [PROFILE SCRAPER] Proceeding to final data processing...');
         
         // Since we have both experience and education data, proceed directly to final processing
         // Assemble final data from session storage and send to API
@@ -981,68 +1038,108 @@ class ProfileScraper {
       
       // We're on the regular profile page - extract basic profile data first
       this.log('INFO: On profile page - extracting basic profile data...');
+      console.log('🔍 [PROFILE SCRAPER] ===== REGULAR PROFILE PAGE DETECTED =====');
+      console.log('🔍 [PROFILE SCRAPER] Starting basic profile data extraction...');
       
       // Wait a bit for the page to load
       await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log('🔍 [PROFILE SCRAPER] Waited 2 seconds for page load');
 
       // Extract basic profile data (only from profile page, not expanded pages)
+      console.log('🔍 [PROFILE SCRAPER] Looking for name element...');
       const nameElement = document.querySelector('h1.text-heading-xlarge, .pv-text-details__left-panel h1');
       const name = nameElement?.textContent?.trim() || '';
+      console.log('🔍 [PROFILE SCRAPER] Name element found:', nameElement);
+      console.log('🔍 [PROFILE SCRAPER] Name extracted:', name);
 
+      console.log('🔍 [PROFILE SCRAPER] Looking for headline element...');
       const headlineElement = document.querySelector('.text-body-medium.break-words, .pv-text-details__left-panel .text-body-medium');
       const headline = headlineElement?.textContent?.trim() || name;
+      console.log('🔍 [PROFILE SCRAPER] Headline element found:', headlineElement);
+      console.log('🔍 [PROFILE SCRAPER] Headline extracted:', headline);
 
+      console.log('🔍 [PROFILE SCRAPER] Looking for summary element...');
       const summaryElement = document.querySelector('#about')?.parentElement?.querySelector('.pv-shared-text-with-see-more');
       const summary = summaryElement?.textContent?.trim() || '';
+      console.log('🔍 [PROFILE SCRAPER] Summary element found:', summaryElement);
+      console.log('🔍 [PROFILE SCRAPER] Summary extracted:', summary ? `${summary.substring(0, 100)}...` : 'No summary');
 
+      console.log('🔍 [PROFILE SCRAPER] Looking for location element...');
       const locationElement = document.querySelector('.text-body-small.inline.t-black--light.break-words, .pv-text-details__left-panel .text-body-small');
       const location_city = locationElement?.textContent?.trim() || '';
+      console.log('🔍 [PROFILE SCRAPER] Location element found:', locationElement);
+      console.log('🔍 [PROFILE SCRAPER] Location extracted:', location_city);
 
+      console.log('🔍 [PROFILE SCRAPER] Looking for avatar element...');
       const avatarElement = document.querySelector('.pv-top-card__photo, .profile-photo-edit__preview img') as HTMLImageElement;
       const avatar = avatarElement?.src || '';
+      console.log('🔍 [PROFILE SCRAPER] Avatar element found:', avatarElement);
+      console.log('🔍 [PROFILE SCRAPER] Avatar URL extracted:', avatar);
 
       // Store basic profile data in session storage for later use
       const basicProfileData = { name, headline, summary, location_city, avatar };
       sessionStorage.setItem('linkedin-scraper-basic-profile', JSON.stringify(basicProfileData));
       this.log('INFO: Stored basic profile data for later use');
+      console.log('🔍 [PROFILE SCRAPER] Stored basic profile data:', basicProfileData);
 
       // Handle experience extraction - check if we have completed data
+      console.log('🔍 [PROFILE SCRAPER] ===== CHECKING EXPERIENCE DATA =====');
       let positions: PositionItem[] = [];
       const storedExpandedExperience = sessionStorage.getItem('linkedin-scraper-expanded-experience');
       const experienceComplete = sessionStorage.getItem('linkedin-scraper-experience-complete') === 'true';
       
+      console.log('🔍 [PROFILE SCRAPER] Stored experience data exists:', !!storedExpandedExperience);
+      console.log('🔍 [PROFILE SCRAPER] Experience complete flag:', experienceComplete);
+      
       if (storedExpandedExperience && experienceComplete) {
         this.log('INFO: Using stored expanded experience data');
+        console.log('🔍 [PROFILE SCRAPER] Using stored experience data');
         positions = JSON.parse(storedExpandedExperience);
+        console.log('🔍 [PROFILE SCRAPER] Parsed positions:', positions);
+        console.log('🔍 [PROFILE SCRAPER] Number of stored positions:', positions.length);
         // Clean up the stored data
         sessionStorage.removeItem('linkedin-scraper-expanded-experience');
         sessionStorage.removeItem('linkedin-scraper-experience-complete');
+        console.log('🔍 [PROFILE SCRAPER] Cleaned up experience session storage');
       } else {
         this.log('INFO: Need to extract experience from expanded page');
+        console.log('🔍 [PROFILE SCRAPER] Need to extract experience from expanded page');
+        console.log('🔍 [PROFILE SCRAPER] Navigating to expanded experience page...');
         // Navigate to expanded experience page
         await this.navigateToExpandedExperiencePageForMoreData();
         return; // Navigation will trigger re-scraping
       }
 
       // Handle education extraction - check if we have completed data
+      console.log('🔍 [PROFILE SCRAPER] ===== CHECKING EDUCATION DATA =====');
       let educations: EducationItem[] = [];
       const storedExpandedEducation = sessionStorage.getItem('linkedin-scraper-expanded-education');
       const educationComplete = sessionStorage.getItem('linkedin-scraper-education-complete') === 'true';
       
+      console.log('🔍 [PROFILE SCRAPER] Stored education data exists:', !!storedExpandedEducation);
+      console.log('🔍 [PROFILE SCRAPER] Education complete flag:', educationComplete);
+      
       if (storedExpandedEducation && educationComplete) {
         this.log('INFO: Using stored expanded education data');
+        console.log('🔍 [PROFILE SCRAPER] Using stored education data');
         educations = JSON.parse(storedExpandedEducation);
+        console.log('🔍 [PROFILE SCRAPER] Parsed educations:', educations);
+        console.log('🔍 [PROFILE SCRAPER] Number of stored educations:', educations.length);
         // Clean up the stored data
         sessionStorage.removeItem('linkedin-scraper-expanded-education');
         sessionStorage.removeItem('linkedin-scraper-education-complete');
+        console.log('🔍 [PROFILE SCRAPER] Cleaned up education session storage');
       } else {
         this.log('INFO: Need to extract education from expanded page');
+        console.log('🔍 [PROFILE SCRAPER] Need to extract education from expanded page');
+        console.log('🔍 [PROFILE SCRAPER] Navigating to expanded education page...');
         // Navigate to expanded education page
         await this.navigateToExpandedEducationPageForMoreData();
         return; // Navigation will trigger re-scraping
       }
 
       // Generate skill frequencies from all extracted skills
+      console.log('🔍 [PROFILE SCRAPER] ===== GENERATING SKILL FREQUENCIES =====');
       const allSkills: string[] = [];
       positions.forEach(position => {
         if (position.skills) {
@@ -1054,8 +1151,11 @@ class ProfileScraper {
           allSkills.push(...education.skills);
         }
       });
+      console.log('🔍 [PROFILE SCRAPER] All skills collected:', allSkills);
       const skill_frequencies = this.createSkillFrequencies(allSkills);
+      console.log('🔍 [PROFILE SCRAPER] Skill frequencies:', skill_frequencies);
 
+      console.log('🔍 [PROFILE SCRAPER] ===== CONSTRUCTING FINAL PROFILE DATA =====');
       const profileData: ProfileData = {
         linkedin_url: currentUrl,
         headline,
@@ -1068,7 +1168,9 @@ class ProfileScraper {
       };
 
       this.log('INFO: Profile data constructed successfully');
+      console.log('🔍 [PROFILE SCRAPER] Profile data constructed successfully');
       this.log('INFO: Profile data validation:');
+      console.log('🔍 [PROFILE SCRAPER] ===== PROFILE DATA VALIDATION =====');
       this.log(`  - linkedin_url: ${profileData.linkedin_url} (length: ${profileData.linkedin_url?.length || 0})`);
       this.log(`  - headline: ${profileData.headline} (length: ${profileData.headline?.length || 0})`);
       this.log(`  - summary: ${profileData.summary ? 'Present' : 'Not present'} (length: ${profileData.summary?.length || 0})`);
@@ -1078,9 +1180,29 @@ class ProfileScraper {
       this.log(`  - educations: ${profileData.educations.length} items`);
       this.log(`  - skill_frequencies: ${Object.keys(profileData.skill_frequencies).length} skills`);
       
+      console.log('🔍 [PROFILE SCRAPER] Profile data validation:');
+      console.log(`🔍 [PROFILE SCRAPER] - linkedin_url: ${profileData.linkedin_url} (length: ${profileData.linkedin_url?.length || 0})`);
+      console.log(`🔍 [PROFILE SCRAPER] - headline: ${profileData.headline} (length: ${profileData.headline?.length || 0})`);
+      console.log(`🔍 [PROFILE SCRAPER] - summary: ${profileData.summary ? 'Present' : 'Not present'} (length: ${profileData.summary?.length || 0})`);
+      console.log(`🔍 [PROFILE SCRAPER] - location_city: ${profileData.location_city} (length: ${profileData.location_city?.length || 0})`);
+      console.log(`🔍 [PROFILE SCRAPER] - avatar: ${profileData.avatar ? 'Present' : 'Not present'} (length: ${profileData.avatar?.length || 0})`);
+      console.log(`🔍 [PROFILE SCRAPER] - positions: ${profileData.positions.length} items`);
+      console.log(`🔍 [PROFILE SCRAPER] - educations: ${profileData.educations.length} items`);
+      console.log(`🔍 [PROFILE SCRAPER] - skill_frequencies: ${Object.keys(profileData.skill_frequencies).length} skills`);
+      
       // Validate positions
+      console.log('🔍 [PROFILE SCRAPER] ===== VALIDATING POSITIONS =====');
       profileData.positions.forEach((position, index) => {
         this.log(`  - positions[${index}]:`, {
+          title: position.title,
+          company_name: position.company_name,
+          summary: position.summary ? `${position.summary.length} chars` : 'none',
+          location: position.location || 'none',
+          start_date: position.start_date || 'none',
+          end_date: position.end_date || 'none',
+          skills: position.skills ? `${position.skills.length} skills` : 'none'
+        });
+        console.log(`🔍 [PROFILE SCRAPER] - positions[${index}]:`, {
           title: position.title,
           company_name: position.company_name,
           summary: position.summary ? `${position.summary.length} chars` : 'none',
@@ -1092,8 +1214,17 @@ class ProfileScraper {
       });
       
       // Validate educations
+      console.log('🔍 [PROFILE SCRAPER] ===== VALIDATING EDUCATIONS =====');
       profileData.educations.forEach((education, index) => {
         this.log(`  - educations[${index}]:`, {
+          school_name: education.school_name,
+          degree: education.degree,
+          summary: education.summary ? `${education.summary.length} chars` : 'none',
+          start_year: education.start_year || 'none',
+          end_year: education.end_year || 'none',
+          skills: education.skills ? `${education.skills.length} skills` : 'none'
+        });
+        console.log(`🔍 [PROFILE SCRAPER] - educations[${index}]:`, {
           school_name: education.school_name,
           degree: education.degree,
           summary: education.summary ? `${education.summary.length} chars` : 'none',
@@ -1104,31 +1235,44 @@ class ProfileScraper {
       });
 
       this.log('INFO: Complete profile data being sent:', JSON.stringify(profileData, null, 2));
+      console.log('🔍 [PROFILE SCRAPER] ===== COMPLETE PROFILE DATA =====');
+      console.log('🔍 [PROFILE SCRAPER] Complete profile data being sent:', JSON.stringify(profileData, null, 2));
 
       // Check if profile already exists
       this.log('INFO: Checking if profile already exists...');
+      console.log('🔍 [PROFILE SCRAPER] ===== CHECKING IF PROFILE EXISTS =====');
+      console.log('🔍 [PROFILE SCRAPER] Checking if profile already exists for URL:', profileData.linkedin_url);
       const exists = await apiClient.checkProfileExists(profileData.linkedin_url);
+      console.log('🔍 [PROFILE SCRAPER] Profile exists check result:', exists);
       
       if (exists) {
         this.log('WARNING: Profile already exists in database');
+        console.log('🔍 [PROFILE SCRAPER] ⚠️ Profile already exists in database');
         showNotification('⚠️ Profile already exists in database', 'warning');
         return;
       }
 
       this.log('INFO: Profile is new, sending data to API...');
+      console.log('🔍 [PROFILE SCRAPER] ===== SENDING DATA TO API =====');
+      console.log('🔍 [PROFILE SCRAPER] Profile is new, sending data to API...');
       // Send profile data to API
       const response = await apiClient.sendProfileDataToAPI(profileData);
+      console.log('🔍 [PROFILE SCRAPER] API response:', response);
       
       if (response.success) {
         this.log('SUCCESS: Profile data sent successfully to API');
+        console.log('🔍 [PROFILE SCRAPER] ✅ SUCCESS: Profile data sent successfully to API');
         showNotification('✅ Profile data sent successfully', 'success');
       } else {
         this.log('ERROR: Failed to send profile data:', response.message);
+        console.log('🔍 [PROFILE SCRAPER] ❌ ERROR: Failed to send profile data:', response.message);
         showNotification(`❌ Failed to send data: ${response.message}`, 'error');
       }
 
     } catch (error) {
       this.log('ERROR: Error in scrapeProfile:', error);
+      console.log('🔍 [PROFILE SCRAPER] ❌ ERROR: Error in scrapeProfile:', error);
+      console.log('🔍 [PROFILE SCRAPER] Error stack:', error instanceof Error ? error.stack : 'No stack trace');
       showNotification('❌ Error during scraping', 'error');
     }
   }

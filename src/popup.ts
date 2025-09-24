@@ -1,25 +1,16 @@
-interface LogEntry {
-  message: string;
-  type: 'success' | 'error' | 'warning' | 'info';
-  timestamp: Date;
-}
-
 class PopupController {
-  private readonly statusLog: HTMLElement;
   private readonly statusIndicator: HTMLElement;
   private readonly pollingStatusText: HTMLElement;
-  private readonly envToggleBtn: HTMLElement;
-  private readonly envStatus: HTMLElement;
-  private readonly envText: HTMLElement;
-  private logs: LogEntry[] = [];
 
   constructor() {
-    this.statusLog = document.getElementById('statusLog')!;
+    console.log('🚀 PopupController constructor called');
     this.statusIndicator = document.getElementById('statusIndicator')!;
     this.pollingStatusText = document.getElementById('pollingStatusText')!;
-    this.envToggleBtn = document.getElementById('envToggleBtn')!;
-    this.envStatus = document.getElementById('envStatus')!;
-    this.envText = document.getElementById('envText')!;
+    
+    console.log('🎯 DOM elements found:', {
+      statusIndicator: !!this.statusIndicator,
+      pollingStatusText: !!this.pollingStatusText
+    });
     
     this.initializeEventListeners();
     // Initialize async operations after construction
@@ -29,11 +20,11 @@ class PopupController {
   private async initialize() {
     await this.loadSettings();
     await this.updateStatus();
-    await this.loadLogs();
-    await this.updateEnvironmentDisplay();
   }
 
   private initializeEventListeners() {
+    console.log('🎧 Initializing event listeners...');
+    
     // Scrape current page button
     document.getElementById('scrapeCurrentBtn')?.addEventListener('click', () => {
       this.scrapeCurrentPage();
@@ -70,21 +61,19 @@ class PopupController {
       this.saveSettings({ autoScrape: target.checked });
     });
 
-    // Environment toggle button
-    document.getElementById('envToggleBtn')?.addEventListener('click', () => {
-      this.toggleEnvironment();
-    });
+    
+    console.log('✅ Event listeners initialized');
   }
 
   private async scrapeCurrentPage() {
-    this.addLog('Scraping current page...', 'info');
+    console.log('🎯 Scraping current page...');
     
     try {
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
       const currentTab = tabs[0];
       
       if (!currentTab?.url || !currentTab.id) {
-        this.addLog('❌ No active tab found', 'error');
+        console.error('❌ No active tab found');
         return;
       }
 
@@ -93,29 +82,31 @@ class PopupController {
           chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, resolve);
         });
         if (response?.success) {
-          this.addLog('✅ Job page scraped successfully', 'success');
+          console.log('✅ Job page scraped successfully');
         } else {
-          this.addLog(`❌ Failed to scrape job: ${response?.error || 'Unknown error'}`, 'error');
+          const errorMsg = response?.error || response?.message || 'Unknown error';
+          console.error(`❌ Failed to scrape job: ${errorMsg}`);
         }
       } else if (currentTab.url.includes('linkedin.com/in/')) {
         const response = await new Promise<any>((resolve) => {
           chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeProfile' }, resolve);
         });
         if (response?.success) {
-          this.addLog('✅ Profile page scraped successfully', 'success');
+          console.log('✅ Profile page scraped successfully');
         } else {
-          this.addLog(`❌ Failed to scrape profile: ${response?.error || 'Unknown error'}`, 'error');
+          const errorMsg = response?.error || response?.message || 'Unknown error';
+          console.error(`❌ Failed to scrape profile: ${errorMsg}`);
         }
       } else {
-        this.addLog('⚠️ Current page is not a LinkedIn job or profile page', 'warning');
+        console.warn('⚠️ Current page is not a LinkedIn job or profile page');
       }
     } catch (error) {
-      this.addLog(`❌ Error scraping current page: ${error}`, 'error');
+      console.error(`❌ Error scraping current page: ${error}`);
     }
   }
 
   private async startScraping(type: 'jobs' | 'profiles') {
-    this.addLog(`🚀 Starting ${type} scraping...`, 'info');
+    console.log(`🚀 Starting ${type} scraping...`);
     
     try {
       const response = await new Promise<any>((resolve) => {
@@ -126,18 +117,18 @@ class PopupController {
       });
       
       if (response?.success) {
-        this.addLog(`✅ ${type} scraping started`, 'success');
+        console.log(`✅ ${type} scraping started`);
         this.updateStatus();
       } else {
-        this.addLog(`❌ Failed to start ${type} scraping`, 'error');
+        console.error(`❌ Failed to start ${type} scraping`);
       }
     } catch (error) {
-      this.addLog(`❌ Error starting ${type} scraping: ${error}`, 'error');
+      console.error(`❌ Error starting ${type} scraping: ${error}`);
     }
   }
 
   private async stopPolling() {
-    this.addLog('⏹️ Stopping polling...', 'info');
+    console.log('⏹️ Stopping polling...');
     
     try {
       const response = await new Promise<any>((resolve) => {
@@ -145,13 +136,13 @@ class PopupController {
       });
       
       if (response?.success) {
-        this.addLog('✅ Polling stopped', 'success');
+        console.log('✅ Polling stopped');
         this.updateStatus();
       } else {
-        this.addLog('❌ Failed to stop polling', 'error');
+        console.error('❌ Failed to stop polling');
       }
     } catch (error) {
-      this.addLog(`❌ Error stopping polling: ${error}`, 'error');
+      console.error(`❌ Error stopping polling: ${error}`);
     }
   }
 
@@ -181,74 +172,6 @@ class PopupController {
     }
   }
 
-  private addLog(message: string, type: LogEntry['type'] = 'info') {
-    const logEntry: LogEntry = {
-      message,
-      type,
-      timestamp: new Date()
-    };
-
-    this.logs.unshift(logEntry); // Add to beginning
-    
-    // Keep only last 50 logs
-    if (this.logs.length > 50) {
-      this.logs = this.logs.slice(0, 50);
-    }
-
-    this.saveLogs();
-    this.renderLogs();
-  }
-
-  private renderLogs() {
-    if (this.logs.length === 0) {
-      this.statusLog.innerHTML = '<div class="empty-log">No activity yet. Start scraping to see logs here.</div>';
-      return;
-    }
-
-    const logsHtml = this.logs.map(log => {
-      const timeStr = log.timestamp.toLocaleTimeString('en-US', { 
-        hour12: false, 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit' 
-      });
-      
-      return `
-        <div class="log-entry log-${log.type}">
-          <span style="color: #6b7280; font-size: 11px;">[${timeStr}]</span>
-          ${log.message}
-        </div>
-      `;
-    }).join('');
-
-    this.statusLog.innerHTML = logsHtml;
-    
-    // Scroll to top to show latest log
-    this.statusLog.scrollTop = 0;
-  }
-
-  private async loadLogs() {
-    try {
-      const result = await chrome.storage.local.get(['scrapingLogs']);
-      if (result.scrapingLogs) {
-        this.logs = result.scrapingLogs.map((log: any) => ({
-          ...log,
-          timestamp: new Date(log.timestamp)
-        }));
-        this.renderLogs();
-      }
-    } catch (error) {
-      console.error('Error loading logs:', error);
-    }
-  }
-
-  private async saveLogs() {
-    try {
-      await chrome.storage.local.set({ scrapingLogs: this.logs });
-    } catch (error) {
-      console.error('Error saving logs:', error);
-    }
-  }
 
   private async loadSettings() {
     try {
@@ -266,33 +189,33 @@ class PopupController {
   private async saveSettings(settings: { autoScrape?: boolean }) {
     try {
       await chrome.storage.local.set(settings);
-      this.addLog(`⚙️ Settings updated: ${Object.keys(settings).join(', ')}`, 'info');
+      console.log(`⚙️ Settings updated: ${Object.keys(settings).join(', ')}`);
     } catch (error) {
       console.error('Error saving settings:', error);
-      this.addLog('❌ Failed to save settings', 'error');
+      console.error('❌ Failed to save settings');
     }
   }
 
   private async bulkScrapeJobs() {
-    this.addLog('🚀 Starting bulk job scraping...', 'info');
+    console.log('🚀 Starting bulk job scraping...');
     
     try {
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
       const currentTab = tabs[0];
       
       if (!currentTab?.url || !currentTab.id) {
-        this.addLog('❌ No active tab found', 'error');
+        console.error('❌ No active tab found');
         return;
       }
 
       // Check if we're on a LinkedIn jobs search page
       if (!currentTab.url.includes('linkedin.com/jobs/search')) {
-        this.addLog('⚠️ Please navigate to a LinkedIn jobs search page first', 'warning');
-        this.addLog('💡 Go to linkedin.com/jobs/search with your filters', 'info');
+        console.warn('⚠️ Please navigate to a LinkedIn jobs search page first');
+        console.log('💡 Go to linkedin.com/jobs/search with your filters');
         return;
       }
 
-      this.addLog('📋 Collecting job IDs from current page...', 'info');
+      console.log('📋 Collecting job IDs from current page...');
       
       // First, just collect the job IDs to show progress
       const jobIdsResponse = await new Promise<any>((resolve) => {
@@ -301,35 +224,37 @@ class PopupController {
       
       if (jobIdsResponse?.success) {
         const jobCount = jobIdsResponse.jobIds?.length || 0;
-        this.addLog(`✅ Found ${jobCount} jobs to process`, 'success');
+        console.log(`✅ Found ${jobCount} jobs to process`);
         
         if (jobCount === 0) {
-          this.addLog('❌ No jobs found on this page', 'error');
+          console.error('❌ No jobs found on this page');
           return;
         }
 
         // Now start the bulk scraping process
-        this.addLog('🔄 Starting bulk processing...', 'info');
+        console.log('🔄 Starting bulk processing...');
         
         const bulkResponse = await new Promise<any>((resolve) => {
           chrome.tabs.sendMessage(currentTab.id!, { action: 'bulkScrapeJobs' }, resolve);
         });
         
         if (bulkResponse?.success) {
-          this.addLog('✅ Bulk job scraping completed successfully', 'success');
+          console.log('✅ Bulk job scraping completed successfully');
         } else {
-          this.addLog(`❌ Bulk scraping failed: ${bulkResponse?.error || 'Unknown error'}`, 'error');
+          const errorMsg = bulkResponse?.error || bulkResponse?.message || 'Unknown error';
+          console.error(`❌ Bulk scraping failed: ${errorMsg}`);
         }
-      } else {
-        this.addLog(`❌ Failed to collect job IDs: ${jobIdsResponse?.error || 'Unknown error'}`, 'error');
-      }
+        } else {
+          const errorMsg = jobIdsResponse?.error || jobIdsResponse?.message || 'Unknown error';
+          console.error(`❌ Failed to collect job IDs: ${errorMsg}`);
+        }
     } catch (error) {
-      this.addLog(`❌ Error during bulk scraping: ${error}`, 'error');
+      console.error(`❌ Error during bulk scraping: ${error}`);
     }
   }
 
   private async checkClosedJobs() {
-    this.addLog('🔍 Starting closed jobs check...', 'info');
+    console.log('🔍 Starting closed jobs check...');
     
     try {
       const response = await new Promise<any>((resolve) => {
@@ -338,79 +263,46 @@ class PopupController {
       
       if (response?.success) {
         const { closedJobs, totalChecked, message } = response;
-        this.addLog(`✅ ${message}`, 'success');
+        console.log(`✅ ${message}`);
         
         if (closedJobs && closedJobs.length > 0) {
-          this.addLog(`📋 Found ${closedJobs.length} closed jobs:`, 'info');
+          console.log(`📋 Found ${closedJobs.length} closed jobs:`);
           closedJobs.forEach((jobId: number, index: number) => {
-            this.addLog(`   ${index + 1}. Job ID: ${jobId}`, 'info');
+            console.log(`   ${index + 1}. Job ID: ${jobId}`);
           });
         } else {
-          this.addLog('📋 No closed jobs found', 'info');
+          console.log('📋 No closed jobs found');
         }
         
-        this.addLog(`📊 Total jobs checked: ${totalChecked}`, 'info');
-      } else {
-        this.addLog(`❌ Failed to check closed jobs: ${response?.error || 'Unknown error'}`, 'error');
-      }
+        console.log(`📊 Total jobs checked: ${totalChecked}`);
+        } else {
+          const errorMsg = response?.error || response?.message || 'Unknown error';
+          console.error(`❌ Failed to check closed jobs: ${errorMsg}`);
+        }
     } catch (error) {
-      this.addLog(`❌ Error checking closed jobs: ${error}`, 'error');
+      console.error(`❌ Error checking closed jobs: ${error}`);
     }
   }
 
-  private async toggleEnvironment() {
-    try {
-      // Get current environment
-      const result = await chrome.storage.local.get(['environment']);
-      const currentEnv = result.environment || 'DEV';
-      const newEnv = currentEnv === 'DEV' ? 'PROD' : 'DEV';
-      
-      // Save new environment
-      await chrome.storage.local.set({ environment: newEnv });
-      
-      // Update display
-      await this.updateEnvironmentDisplay();
-      
-      // Log the change
-      this.addLog(`🔄 Environment switched to: ${newEnv}`, 'info');
-      
-      // Show environment details
-      const envDetails = newEnv === 'DEV' 
-        ? 'Local development (laravel-job-dashboard.test)'
-        : 'Production (kaoz.dk)';
-      this.addLog(`📍 ${envDetails}`, 'info');
-      
-    } catch (error) {
-      this.addLog(`❌ Failed to toggle environment: ${error}`, 'error');
-    }
-  }
-
-  private async updateEnvironmentDisplay() {
-    try {
-      const result = await chrome.storage.local.get(['environment']);
-      const currentEnv = result.environment || 'DEV';
-      
-      // Update button text and styling
-      this.envText.textContent = currentEnv === 'DEV' ? 'Development' : 'Production';
-      this.envStatus.textContent = currentEnv === 'DEV' ? '🛠️' : '🚀';
-      
-      // Update button class for styling
-      this.envToggleBtn.className = `btn btn-env ${currentEnv.toLowerCase()}`;
-      
-    } catch (error) {
-      console.error('Error updating environment display:', error);
-      this.envText.textContent = 'Error';
-      this.envStatus.textContent = '❌';
-    }
-  }
 }
 
 // Initialize popup when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('🚀 DOM Content Loaded - Initializing popup...');
   const popupController = new PopupController();
   // Store reference to avoid unused variable warning
-  console.log('Popup controller initialized:', popupController);
+  console.log('✅ Popup controller initialized:', popupController);
 });
+
+// Also try immediate initialization as fallback
+console.log('🔧 Script loaded, checking if DOM is ready...');
+if (document.readyState === 'loading') {
+  console.log('⏳ DOM still loading, waiting for DOMContentLoaded...');
+} else {
+  console.log('✅ DOM already ready, initializing immediately...');
+  const popupController = new PopupController();
+  console.log('✅ Popup controller initialized (immediate):', popupController);
+}
 
 // Handle runtime messages (if any)
 if (typeof chrome !== 'undefined' && chrome.runtime) {

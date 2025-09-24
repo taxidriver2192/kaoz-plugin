@@ -1,33 +1,15 @@
 // =============================================================================
-// API CONFIGURATION - Dynamic environment configuration
+// API CONFIGURATION - Simplified single environment configuration
 // =============================================================================
-// Environment configurations - values will be injected by build script
-const ENVIRONMENTS = {
-  DEV: {
-    API_BASE_URL: 'PLACEHOLDER_DEV_API_BASE_URL',
-    API_KEY: 'PLACEHOLDER_DEV_API_KEY'
-  },
-  PROD: {
-    API_BASE_URL: 'PLACEHOLDER_PROD_API_BASE_URL',
-    API_KEY: 'PLACEHOLDER_PROD_API_KEY'
-  }
+// API configuration - values will be injected by build script
+const API_CONFIG = {
+  API_BASE_URL: 'PLACEHOLDER_API_BASE_URL',
+  API_KEY: 'PLACEHOLDER_API_KEY'
 };
 
-// Get current environment from Chrome storage (defaults to DEV)
-async function getCurrentEnvironment(): Promise<keyof typeof ENVIRONMENTS> {
-  try {
-    const result = await chrome.storage.local.get(['environment']);
-    return result.environment || 'DEV';
-  } catch (error) {
-    console.warn('Failed to get environment from storage, defaulting to DEV:', error);
-    return 'DEV';
-  }
-}
-
-// Get current API configuration
+// Get API configuration
 async function getCurrentApiConfig() {
-  const env = await getCurrentEnvironment();
-  return ENVIRONMENTS[env];
+  return API_CONFIG;
 }
 // =============================================================================
 // DATA INTERFACES
@@ -196,9 +178,24 @@ class ApiClient {
 
       if (!response.ok) {
         const errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-        const detailedError = responseData ? 
-          `${errorMessage} - ${JSON.stringify(responseData)}` : 
-          `${errorMessage} - ${responseText || 'No response body'}`;
+        
+        // Extract meaningful error message from Laravel API response
+        let detailedError = errorMessage;
+        if (responseData) {
+          if (responseData.message) {
+            detailedError = responseData.message;
+          } else if (responseData.error) {
+            detailedError = responseData.error;
+          } else if (responseData.errors && typeof responseData.errors === 'object') {
+            // Handle Laravel validation errors
+            const validationErrors = Object.values(responseData.errors).flat();
+            detailedError = `Validation failed: ${validationErrors.join(', ')}`;
+          } else {
+            detailedError = `${errorMessage} - ${JSON.stringify(responseData)}`;
+          }
+        } else {
+          detailedError = `${errorMessage} - ${responseText || 'No response body'}`;
+        }
         
         this.log(`Request failed with detailed error:`, detailedError);
         
