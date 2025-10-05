@@ -91,7 +91,7 @@ class JobScraper {
   }
 
   /**
-   * Parses a relative date string from Danish/English (e.g., "30 minutter siden", "19 timer siden", "1 dag siden") 
+   * Parses a relative date string from Danish/English (e.g., "30 minutter siden", "19 timer siden", "1 dag siden", "1 week ago") 
    * into a YYYY-MM-DD HH:MM format with precise time calculation.
    * @param dateString - The relative date string.
    */
@@ -101,7 +101,7 @@ class JobScraper {
     const now = new Date();
     
     // Enhanced regex to capture minutes, hours, days, weeks, and months
-    // Supports both Danish and English formats
+    // Supports both Danish and English formats (with "siden" or "ago")
     const regex = /(\d+)\s+(minut|minutter|minute|minutes|time|timer|hour|hours|dag|dage|day|days|uge|uger|week|weeks|måned|måneder|month|months)/i;
     const match = regex.exec(dateString);
 
@@ -329,6 +329,9 @@ class JobScraper {
         if (tertiaryInfoEl) {
           const tertiaryInfoText = tertiaryInfoEl.innerText ?? '';
           
+          // DEBUG: Log the full tertiary info text to see what LinkedIn is actually showing
+          this.log(`🔍 TERTIARY INFO TEXT: "${tertiaryInfoText}"`);
+          
           // Location - try multiple approaches to extract from tertiary info
           let locationFound = false;
           
@@ -386,11 +389,18 @@ class JobScraper {
           jobDetails.applicants = applicantsMatch ? parseInt(applicantsMatch[1], 10) : null;
 
           // Extract and parse posted date - enhanced to capture more formats
-          const postedDateRegex = /(\d+\s+(minut|minutter|minute|minutes|time|timer|hour|hours|dag|dage|day|days|uge|uger|week|weeks|måned|måneder|month|months)\s+siden|i går|yesterday|i dag|today)/i;
+          // Updated regex to handle both English and Danish formats
+          const postedDateRegex = /(\d+\s+(minut|minutter|minute|minutes|time|timer|hour|hours|dag|dage|day|days|uge|uger|week|weeks|måned|måneder|month|months)\s+(siden|ago)|(i går|yesterday|i dag|today))/i;
           const postedDateMatch = postedDateRegex.exec(tertiaryInfoText);
+          
+          // DEBUG: Log posted date extraction attempt
+          this.log(`🔍 POSTED DATE EXTRACTION: regex match=${!!postedDateMatch}, match result:`, postedDateMatch);
+          
           if (postedDateMatch) {
+            this.log(`🔍 FOUND POSTED DATE: "${postedDateMatch[0]}"`);
             jobDetails.posted_date = this.parseRelativeDate(postedDateMatch[0]);
           } else {
+            this.log(`🔍 NO POSTED DATE FOUND - using fallback current date`);
             // Fallback to current date and time in YYYY-MM-DD HH:MM format
             const now = new Date();
             const year = now.getFullYear();
