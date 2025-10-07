@@ -78,24 +78,44 @@ class PopupController {
       }
 
       if (currentTab.url.includes('linkedin.com/jobs/')) {
-        const response = await new Promise<any>((resolve) => {
-          chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, resolve);
-        });
-        if (response?.success) {
-          console.log('✅ Job page scraped successfully');
-        } else {
-          const errorMsg = response?.error || response?.message || 'Unknown error';
-          console.error(`❌ Failed to scrape job: ${errorMsg}`);
+        try {
+          const response = await new Promise<any>((resolve) => {
+            chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, (response) => {
+              if (chrome.runtime.lastError) {
+                resolve({ success: false, error: 'Content script not available on this page' });
+              } else {
+                resolve(response);
+              }
+            });
+          });
+          if (response?.success) {
+            console.log('✅ Job page scraped successfully');
+          } else {
+            const errorMsg = response?.error || response?.message || 'Unknown error';
+            console.error(`❌ Failed to scrape job: ${errorMsg}`);
+          }
+        } catch (error) {
+          console.error('❌ Content script not available on this page');
         }
       } else if (currentTab.url.includes('linkedin.com/in/')) {
-        const response = await new Promise<any>((resolve) => {
-          chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeProfile' }, resolve);
-        });
-        if (response?.success) {
-          console.log('✅ Profile page scraped successfully');
-        } else {
-          const errorMsg = response?.error || response?.message || 'Unknown error';
-          console.error(`❌ Failed to scrape profile: ${errorMsg}`);
+        try {
+          const response = await new Promise<any>((resolve) => {
+            chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeProfile' }, (response) => {
+              if (chrome.runtime.lastError) {
+                resolve({ success: false, error: 'Content script not available on this page' });
+              } else {
+                resolve(response);
+              }
+            });
+          });
+          if (response?.success) {
+            console.log('✅ Profile page scraped successfully');
+          } else {
+            const errorMsg = response?.error || response?.message || 'Unknown error';
+            console.error(`❌ Failed to scrape profile: ${errorMsg}`);
+          }
+        } catch (error) {
+          console.error('❌ Content script not available on this page');
         }
       } else {
         console.warn('⚠️ Current page is not a LinkedIn job or profile page');
@@ -219,7 +239,13 @@ class PopupController {
       
       // First, just collect the job IDs to show progress
       const jobIdsResponse = await new Promise<any>((resolve) => {
-        chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJobIds' }, resolve);
+        chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJobIds' }, (response) => {
+          if (chrome.runtime.lastError) {
+            resolve({ success: false, error: 'Content script not available on this page' });
+          } else {
+            resolve(response);
+          }
+        });
       });
       
       if (jobIdsResponse?.success) {
@@ -235,7 +261,13 @@ class PopupController {
         console.log('🔄 Starting bulk processing...');
         
         const bulkResponse = await new Promise<any>((resolve) => {
-          chrome.tabs.sendMessage(currentTab.id!, { action: 'bulkScrapeJobs' }, resolve);
+          chrome.tabs.sendMessage(currentTab.id!, { action: 'bulkScrapeJobs' }, (response) => {
+            if (chrome.runtime.lastError) {
+              resolve({ success: false, error: 'Content script not available on this page' });
+            } else {
+              resolve(response);
+            }
+          });
         });
         
         if (bulkResponse?.success) {

@@ -759,12 +759,13 @@ class JobScraper {
    */
   async bulkScrapeJobs(): Promise<void> {
     try {
-      this.log('Starting bulk job scraping across pages...');
+      const startTime = Date.now();
+      this.log('🚀 Starter bulk job scraping...');
       
       // Fetch existing job IDs once at the start
-      this.showNotification('📋 Fetching existing jobs from database...', 'success');
+      this.showNotification('📋 Henter eksisterende jobs fra database...', 'success');
       const existingJobIds = await apiClient.getExistingJobIds();
-      this.log(`Found ${existingJobIds.size} existing jobs in database`);
+      this.log(`📊 Fandt ${existingJobIds.size} eksisterende jobs i database`);
 
       const pageSize = 25;
       let start = this.getCurrentSearchStart();
@@ -773,6 +774,7 @@ class JobScraper {
       let totalSuccess = 0;
       let totalErrors = 0;
       let totalDuplicates = 0;
+      let totalSkills = 0;
 
       for (let page = 0; page < maxPages; page++) {
         if (page > 0) {
@@ -785,11 +787,11 @@ class JobScraper {
           await this.sleep(1500);
         }
 
-        this.log(`Scraping page ${page + 1} (start=${start})...`);
+        this.log(`📄 Scraper side ${page + 1} (start=${start})...`);
         const scrapedJobIds = await this.scrapeLinkedInJobIds();
 
         if (scrapedJobIds.size === 0) {
-          this.log('No job IDs found on this page. Stopping pagination.');
+          this.log('ℹ️ Ingen job IDs fundet på denne side - stopper pagination');
           break;
         }
 
@@ -799,43 +801,53 @@ class JobScraper {
         for (const jobId of scrapedJobIds) {
           if (existingJobIds.has(jobId)) {
             duplicateCount++;
-            this.log(`Job ${jobId} already exists in database - skipping`);
           } else {
             newJobIds.add(jobId);
           }
         }
         totalDuplicates += duplicateCount;
 
-        this.log(`Page ${page + 1}: Total scraped: ${scrapedJobIds.size}, New: ${newJobIds.size}, Duplicates: ${duplicateCount}`);
+        this.log(`📊 Side ${page + 1}: Total: ${scrapedJobIds.size}, Nye: ${newJobIds.size}, Duplikater: ${duplicateCount}`);
 
         if (newJobIds.size === 0) {
           // Continue to next page if nothing to process here
           continue;
         }
 
-        this.showNotification(`🚀 Processing ${newJobIds.size} new jobs on page ${page + 1}...`, 'success');
+        this.showNotification(`🚀 Behandler ${newJobIds.size} nye jobs på side ${page + 1}...`, 'success');
 
         let processedCount = 0;
         for (const jobId of newJobIds) {
           try {
             processedCount++;
-            this.log(`Processing job ${processedCount}/${newJobIds.size} (page ${page + 1}): ${jobId}`);
+            
+            // Log job summary with LinkedIn link
+            const jobUrl = `https://www.linkedin.com/jobs/view/${jobId}/`;
+            this.log(`📋 Job ${processedCount}/${newJobIds.size} (side ${page + 1}): ${jobId}`);
+            this.log(`🔗 LinkedIn link: ${jobUrl}`);
             
             const navigated = await this.navigateToJob(jobId);
             if (!navigated) {
-              this.log(`Failed to navigate to job ${jobId}`);
+              this.log(`❌ Kunne ikke navigere til job ${jobId}`);
             }
 
             await this.sleep(500);
 
             const result = await this.scrapeJobInternal(false);
             if (result.success) {
-              this.log(`✅ Job ${jobId} processed successfully`);
+              // Extract skills count from the result if available
+              const skillsCount = result.skillsCount || 0;
+              if (skillsCount > 0) {
+                totalSkills += skillsCount;
+                this.log(`✅ Job ${jobId}: TILFØJET | Status: OK | Skills: ${skillsCount}`);
+              } else {
+                this.log(`✅ Job ${jobId}: TILFØJET | Status: OK`);
+              }
               totalSuccess++;
               // Prevent reprocessing the same job on later pages
               existingJobIds.add(jobId);
             } else {
-              this.log(`❌ Job ${jobId} failed: ${result.message}`);
+              this.log(`❌ Job ${jobId}: FEJL | Status: ${result.message}`);
               totalErrors++;
             }
 
@@ -843,14 +855,25 @@ class JobScraper {
             await this.sleep(1500);
 
           } catch (error) {
-            this.log(`Error processing job ${jobId}:`, error);
+            this.log(`❌ Fejl ved behandling af job ${jobId}:`, error);
             totalErrors++;
           }
         }
       }
 
+      const endTime = Date.now();
+      const totalTimeMs = endTime - startTime;
+      const totalTimeSeconds = Math.round(totalTimeMs / 1000);
       const totalAttempted = totalSuccess + totalErrors;
-      this.log(`Bulk scraping complete across pages! Successfully processed: ${totalSuccess}, Duplicates skipped: ${totalDuplicates}, Errors: ${totalErrors}, Total attempted: ${totalAttempted}`);
+      const averageTimePerJob = totalAttempted > 0 ? Math.round(totalTimeMs / totalAttempted) : 0;
+      const averageTimePerJobSeconds = Math.round(averageTimePerJob / 1000);
+      
+      this.log(`🏁 Bulk scraping afsluttet: ${totalSuccess} jobs tilføjet, ${totalDuplicates} duplikater, ${totalErrors} fejl`);
+      this.log(`⏱️ Køretid: ${totalTimeSeconds}s | Gennemsnit: ${averageTimePerJobSeconds}s per job`);
+      this.log(`📊 Total behandlet: ${totalAttempted} jobs`);
+      if (totalSkills > 0) {
+        this.log(`🎯 Total skills fundet: ${totalSkills}`);
+      }
       
       let notificationType: NotificationType = 'warning';
       if (totalSuccess > 0) {
@@ -860,7 +883,7 @@ class JobScraper {
       }
       
       this.showNotification(
-        `✅ Bulk scraping complete! Success: ${totalSuccess}, Duplicates: ${totalDuplicates}, Errors: ${totalErrors}`,
+        `✅ Bulk scraping afsluttet! Tilføjet: ${totalSuccess}, Duplikater: ${totalDuplicates}, Fejl: ${totalErrors}`,
         notificationType
       );
 
@@ -873,7 +896,7 @@ class JobScraper {
   /**
    * Internal method to scrape and send job data - shared by both single and bulk scraping
    */
-  private async scrapeJobInternal(checkDuplicate: boolean = true): Promise<{ success: boolean; message?: string }> {
+  private async scrapeJobInternal(checkDuplicate: boolean = true): Promise<{ success: boolean; message?: string; skillsCount?: number }> {
     try {
       this.log('🚀 Starting job scraping process...');
       
@@ -903,15 +926,22 @@ class JobScraper {
       
       // Use the comprehensive extraction method
       const jobDetails = await this.extractJobDetails();
+      const skillsCount = jobDetails.skills?.length || 0;
+      
       this.log('📝 Job extraction completed:', {
         linkedin_job_id: jobDetails.linkedin_job_id,
         title: jobDetails.title,
         company: jobDetails.company,
         location: jobDetails.location,
         hasDescription: !!jobDetails.description,
-        skillsCount: jobDetails.skills?.length || 0,
+        skillsCount: skillsCount,
         company_id: jobDetails.company_id
       });
+      
+      // Log skills if found
+      if (skillsCount > 0) {
+        this.log(`🎯 Skills fundet (${skillsCount}): ${jobDetails.skills?.join(', ')}`);
+      }
       
       if (!jobDetails.linkedin_job_id || !jobDetails.title || !jobDetails.company) {
         this.log('❌ Missing required job data:', {
@@ -931,7 +961,7 @@ class JobScraper {
       if (apiResponse.success) {
         this.log(`✅ Job ${jobIdFromUrl} successfully sent to API`);
         this.log('📊 API response:', apiResponse.data);
-        return { success: true, message: 'Job data sent successfully' };
+        return { success: true, message: 'Job data sent successfully', skillsCount: skillsCount };
       } else {
         const errorMessage = apiResponse.message || 'Unknown API error';
         this.log(`❌ Failed to send job ${jobIdFromUrl} to API:`, errorMessage);
