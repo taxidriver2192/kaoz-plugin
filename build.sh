@@ -50,10 +50,15 @@ echo "🔧 Injecting environment variables into utils/apiClient.ts..."
 sed -i "s|PLACEHOLDER_API_BASE_URL|${API_BASE_URL}|g" src/utils/apiClient.ts
 sed -i "s|PLACEHOLDER_API_KEY|${API_KEY}|g" src/utils/apiClient.ts
 
+# Note: multiSourceApiClient.ts uses getValidatedConfig() which gets values from environment.ts
+# So we don't need to inject placeholders directly into this file
+
 # Compile TypeScript and bundle with esbuild
 echo "📦 Bundling with esbuild..."
 npx esbuild src/content/scrapeProfile.ts --bundle --outfile=dist/scrapeProfile.js --format=iife --platform=browser --target=chrome88
-npx esbuild src/content/scrapeJobs.ts --bundle --outfile=dist/scrapeJobs.js --format=iife --platform=browser --target=chrome88
+npx esbuild src/content/multiSourceScraper.ts --bundle --outfile=dist/multiSourceScraper.js --format=iife --platform=browser --target=chrome88
+npx esbuild src/content/jobDescriptionScraper.ts --bundle --outfile=dist/jobDescriptionScraper.js --format=iife --platform=browser --target=chrome88
+npx esbuild src/config/jobDescriptionConfig.ts --bundle --outfile=dist/jobDescriptionConfig.js --format=iife --platform=browser --target=chrome88
 npx esbuild src/background.ts --bundle --outfile=dist/background.js --format=iife --platform=browser --target=chrome88
 npx esbuild src/popup.ts --bundle --outfile=dist/popup.js --format=iife --platform=browser --target=chrome88
 

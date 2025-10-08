@@ -2,6 +2,8 @@
 // Inline types and API client for Chrome extension compatibility
 
 import { CONFIG, validateConfig } from './config/environment';
+import { batchScraper } from './background/jobDescriptionBatchScraper';
+import { jobindexBulkBatchScraper } from './background/jobindexBulkBatchScraper';
 
 interface BgProfileData {
   firstName: string;
@@ -414,6 +416,71 @@ class BackgroundService {
         console.info(`[LINKEDIN_SCRAPER_BG] Stop polling requested`);
         // Polling is already disabled, just return success
         sendResponse({ success: true });
+      } else if (request.action === 'resolveJobindexFinalUrls') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Resolving Jobindex final URLs...`);
+        this.resolveJobindexFinalUrls()
+          .then(result => sendResponse({ success: true, updated: result.updated }))
+          .catch(error => sendResponse({ success: false, error: error instanceof Error ? error.message : String(error) }));
+        return true;
+      } else if (request.action === 'startBatchScraping') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Starting batch job description scraping...`);
+        console.info(`[LINKEDIN_SCRAPER_BG] batchScraper object:`, batchScraper);
+        console.info(`[LINKEDIN_SCRAPER_BG] batchScraper.startScraping:`, typeof batchScraper.startScraping);
+        
+        try {
+          batchScraper.startScraping()
+            .then(() => {
+              console.info(`[LINKEDIN_SCRAPER_BG] ✅ Batch scraping completed successfully`);
+              sendResponse({ success: true });
+            })
+            .catch(error => {
+              console.error(`[LINKEDIN_SCRAPER_BG] ❌ Batch scraping error:`, error);
+              sendResponse({ success: false, error: error instanceof Error ? error.message : String(error) });
+            });
+        } catch (error) {
+          console.error(`[LINKEDIN_SCRAPER_BG] ❌ Error calling startScraping:`, error);
+          sendResponse({ success: false, error: error instanceof Error ? error.message : String(error) });
+        }
+        return true;
+      } else if (request.action === 'stopBatchScraping') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Stopping batch job description scraping...`);
+        batchScraper.stopScraping();
+        sendResponse({ success: true });
+      } else if (request.action === 'getBatchScrapingStatus') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Getting batch scraping status...`);
+        sendResponse({ 
+          success: true, 
+          isRunning: batchScraper.isScrapingRunning() 
+        });
+      } else if (request.action === 'startJobindexBulkScraping') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Starting Jobindex bulk scraping...`);
+        console.info(`[LINKEDIN_SCRAPER_BG] Base URL: ${request.baseUrl}, Max pages: ${request.maxPages}`);
+        
+        try {
+          jobindexBulkBatchScraper.startBulkScraping(request.baseUrl, request.maxPages || 10)
+            .then(() => {
+              console.info(`[LINKEDIN_SCRAPER_BG] ✅ Jobindex bulk scraping completed successfully`);
+              sendResponse({ success: true });
+            })
+            .catch(error => {
+              console.error(`[LINKEDIN_SCRAPER_BG] ❌ Jobindex bulk scraping error:`, error);
+              sendResponse({ success: false, error: error instanceof Error ? error.message : String(error) });
+            });
+        } catch (error) {
+          console.error(`[LINKEDIN_SCRAPER_BG] ❌ Error calling startBulkScraping:`, error);
+          sendResponse({ success: false, error: error instanceof Error ? error.message : String(error) });
+        }
+        return true;
+      } else if (request.action === 'stopJobindexBulkScraping') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Stopping Jobindex bulk scraping...`);
+        jobindexBulkBatchScraper.stopScraping();
+        sendResponse({ success: true });
+      } else if (request.action === 'getJobindexBulkScrapingStatus') {
+        console.info(`[LINKEDIN_SCRAPER_BG] Getting Jobindex bulk scraping status...`);
+        sendResponse({ 
+          success: true, 
+          isRunning: jobindexBulkBatchScraper.isScrapingRunning() 
+        });
       } else {
         console.info(`[LINKEDIN_SCRAPER_BG] Unknown action: ${request.action}`);
         sendResponse({ success: false, error: 'Unknown action' });
@@ -428,12 +495,66 @@ class BackgroundService {
     // but removing auto-scraping functionality and logging
     chrome.tabs.onUpdated.addListener((tabId: number, changeInfo: any, tab: any) => {
       if (changeInfo.status === 'complete' && tab.url) {
-        if (tab.url.includes('linkedin.com/jobs/') || tab.url.includes('linkedin.com/in/')) {
+        if (tab.url.includes('linkedin.com/jobs/') || 
+            tab.url.includes('linkedin.com/in/') || 
+            tab.url.includes('jobindex.dk/jobsoegning/stilling/')) {
           // Auto-scraping removed - manual scraping only
           // Logging removed to reduce noise
         }
       }
     });
+  }
+
+  private async resolveJobindexFinalUrls(): Promise<{ updated: number }> {
+    const jobs: any[] = await new Promise((resolve) => {
+      chrome.storage.local.get(['jobindexBulkJobs'], (data) => {
+        resolve((data?.jobindexBulkJobs as any[]) || []);
+      });
+    });
+
+    let updated = 0;
+    for (const job of jobs) {
+      if (!job?.redirectUrl) { continue; }
+
+      const tab = await chrome.tabs.create({ url: job.redirectUrl, active: false });
+
+      const finalUrl: string = await new Promise((resolve) => {
+        let settled = false;
+        const timeout = setTimeout(async () => {
+          if (settled) return;
+          settled = true;
+          try {
+            const info = await chrome.tabs.get(tab.id!);
+            resolve(info.url || job.redirectUrl);
+          } catch {
+            resolve(job.redirectUrl);
+          }
+        }, 8000);
+
+        const listener = async (tabId: number, changeInfo: chrome.tabs.TabChangeInfo, tabInfo: chrome.tabs.Tab) => {
+          if (tabId === tab.id && changeInfo.status === 'complete' && !settled) {
+            settled = true;
+            clearTimeout(timeout);
+            chrome.tabs.onUpdated.removeListener(listener);
+            resolve(tabInfo.url || job.redirectUrl);
+          }
+        };
+
+        chrome.tabs.onUpdated.addListener(listener);
+      });
+
+      try { if (tab.id) { await chrome.tabs.remove(tab.id); } } catch {}
+
+      job.finalUrl = finalUrl;
+      updated++;
+      await new Promise(r => setTimeout(r, 300));
+    }
+
+    await new Promise<void>((resolve) => {
+      chrome.storage.local.set({ jobindexBulkJobs: jobs }, () => resolve());
+    });
+
+    return { updated };
   }
 
   private async scrapeCurrentTab() {
@@ -456,9 +577,13 @@ class BackgroundService {
       } else if (currentTab.url.includes('linkedin.com/in/')) {
         this.log('INFO: Detected LinkedIn profile page, sending scrape profile message...');
         chrome.tabs.sendMessage(currentTab.id, { action: 'scrapeProfile' });
+      } else if (currentTab.url.includes('jobindex.dk/jobsoegning/stilling/')) {
+        this.log('INFO: Detected Jobindex job page, sending scrape job message...');
+        chrome.tabs.sendMessage(currentTab.id, { action: 'scrapeJob' });
       } else {
-        this.log('WARNING: Current tab is not a LinkedIn job or profile page');
-        this.log('INFO: URL does not match LinkedIn patterns:', currentTab.url);
+        this.log('WARNING: Current tab is not a supported job or profile page');
+        this.log('INFO: URL does not match supported patterns:', currentTab.url);
+        this.log('INFO: Supported platforms: LinkedIn jobs/profiles, Jobindex jobs');
       }
     } catch (error) {
       this.log('ERROR: Error scraping current tab:', error);

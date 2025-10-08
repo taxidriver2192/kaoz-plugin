@@ -3,8 +3,8 @@
 // =============================================================================
 // API configuration - values will be injected by build script
 const API_CONFIG = {
-  API_BASE_URL: 'PLACEHOLDER_API_BASE_URL',
-  API_KEY: 'PLACEHOLDER_API_KEY'
+  API_BASE_URL: 'https://laravel-job-dashboard.test/api',
+  API_KEY: '055d589e8ed8658e4dc22c27e908b974c23e04f505fdcf9b8c58e1ee37d14aee'
 };
 
 // Get API configuration

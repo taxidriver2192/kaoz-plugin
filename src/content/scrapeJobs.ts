@@ -1001,6 +1001,9 @@ class JobScraper {
 // Initialize scraper
 const jobScraper = new JobScraper();
 
+// Export the class for use in other modules
+export { JobScraper };
+
 // Listen for messages from popup/background
 chrome.runtime.onMessage.addListener((request: any, sender: any, sendResponse: any) => {
   if (request.action === 'scrapeJob') {

@@ -11,8 +11,20 @@
   ],
   "host_permissions": [
     "https://*.linkedin.com/*",
+    "https://*.jobindex.dk/*",
     "https://kaoz.dk/*",
-    "https://laravel-job-dashboard.test/*"
+    "https://laravel-job-dashboard.test/*",
+    "https://candidate.hr-manager.net/*",
+    "https://thehub.io/*",
+    "https://efzu.fa.em2.oraclecloud.com/*",
+    "https://*.career.emply.com/*",
+    "https://*.myworkdayjobs.com/*",
+    "https://portal.emagine.org/*",
+    "https://jndata-career.talent-soft.com/*",
+    "https://job.politi.dk/*",
+    "https://jobs.systematic.com/*",
+    "https://careers.tryg.com/*",
+    "https://www.lego.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -29,13 +41,29 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.linkedin.com/jobs/*", "https://*.linkedin.com/jobs/search/*"],
-      "js": ["scrapeJobs.js"],
+      "matches": ["https://*.linkedin.com/in/*"],
+      "js": ["scrapeProfile.js"],
       "run_at": "document_idle"
     },
     {
-      "matches": ["https://*.linkedin.com/in/*"],
-      "js": ["scrapeProfile.js"],
+      "matches": [
+        "https://*.linkedin.com/jobs/*", 
+        "https://*.linkedin.com/jobs/search/*", 
+        "https://*.jobindex.dk/jobsoegning/*",
+        "https://*.jobindex.dk/jobannonce/*",
+        "https://candidate.hr-manager.net/*",
+        "https://thehub.io/*",
+        "https://efzu.fa.em2.oraclecloud.com/*",
+        "https://*.career.emply.com/*",
+        "https://*.myworkdayjobs.com/*",
+        "https://portal.emagine.org/*",
+        "https://jndata-career.talent-soft.com/*",
+        "https://job.politi.dk/*",
+        "https://jobs.systematic.com/*",
+        "https://careers.tryg.com/*",
+        "https://www.lego.com/*"
+      ],
+      "js": ["multiSourceScraper.js"],
       "run_at": "document_idle"
     }
   ],
@@ -48,7 +76,21 @@
   "web_accessible_resources": [
     {
       "resources": ["*.js"],
-      "matches": ["https://*.linkedin.com/*"]
+      "matches": [
+        "https://*.linkedin.com/*", 
+        "https://*.jobindex.dk/*",
+        "https://candidate.hr-manager.net/*",
+        "https://thehub.io/*",
+        "https://efzu.fa.em2.oraclecloud.com/*",
+        "https://*.career.emply.com/*",
+        "https://*.myworkdayjobs.com/*",
+        "https://portal.emagine.org/*",
+        "https://jndata-career.talent-soft.com/*",
+        "https://job.politi.dk/*",
+        "https://jobs.systematic.com/*",
+        "https://careers.tryg.com/*",
+        "https://www.lego.com/*"
+      ]
     }
   ]
 }

@@ -219,8 +219,8 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>LinkedIn Scraper</h1>
-      <p>Extract structured data from profiles and job posts</p>
+      <h1>Multi-Source Job Scraper</h1>
+      <p>Extract structured data from LinkedIn, Jobindex.dk and more</p>
     </div>
 
     <div class="card">
@@ -231,6 +231,10 @@
           <span>🎯</span>
           Scrape Current Page
         </button>
+
+        <div id="platformStatus" style="margin-bottom: 16px; padding: 12px; background: #f8fafc; border-radius: 8px; font-size: 14px; text-align: center;">
+          <span id="platformStatusText">Detecting platform...</span>
+        </div>
 
         <div class="button-group">
           <button class="btn btn-primary" id="scrapeJobsBtn">
@@ -246,6 +250,16 @@
         <button class="btn btn-bulk" id="bulkScrapeJobsBtn" style="width: 100%; margin-bottom: 10px;">
           <span>🚀</span>
           Bulk Scrape Job List
+        </button>
+
+        <button class="btn btn-secondary" id="resolveFinalUrlsBtn" style="width: 100%; margin-bottom: 10px;">
+          <span>🔗</span>
+          Resolve Final URLs
+        </button>
+
+        <button class="btn btn-secondary" id="scrapeDescriptionsBtn" style="width: 100%; margin-bottom: 10px;">
+          <span>📄</span>
+          Scrape Job Descriptions
         </button>
 
         <button class="btn btn-danger" id="checkClosedJobsBtn" style="width: 100%; margin-bottom: 10px;">

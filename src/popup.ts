@@ -1,15 +1,27 @@
 class PopupController {
   private readonly statusIndicator: HTMLElement;
   private readonly pollingStatusText: HTMLElement;
+  private readonly platformStatusText: HTMLElement;
+
+  private log(message: string, ...args: any[]): void {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] [POPUP_CONTROLLER] ${message}`, ...args);
+  }
+
+  private sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   constructor() {
-    console.log('🚀 PopupController constructor called');
+    this.log('🚀 PopupController constructor called');
     this.statusIndicator = document.getElementById('statusIndicator')!;
     this.pollingStatusText = document.getElementById('pollingStatusText')!;
+    this.platformStatusText = document.getElementById('platformStatusText')!;
     
-    console.log('🎯 DOM elements found:', {
+    this.log('🎯 DOM elements found:', {
       statusIndicator: !!this.statusIndicator,
-      pollingStatusText: !!this.pollingStatusText
+      pollingStatusText: !!this.pollingStatusText,
+      platformStatusText: !!this.platformStatusText
     });
     
     this.initializeEventListeners();
@@ -20,10 +32,11 @@ class PopupController {
   private async initialize() {
     await this.loadSettings();
     await this.updateStatus();
+    await this.updatePlatformStatus();
   }
 
   private initializeEventListeners() {
-    console.log('🎧 Initializing event listeners...');
+    this.log('🎧 Initializing event listeners...');
     
     // Scrape current page button
     document.getElementById('scrapeCurrentBtn')?.addEventListener('click', () => {
@@ -45,6 +58,20 @@ class PopupController {
       this.bulkScrapeJobs();
     });
 
+    // Analyze Jobindex hosts button (optional UI trigger if present)
+    document.getElementById('analyzeJobindexHostsBtn')?.addEventListener('click', () => {
+      this.analyzeJobindexHosts();
+    });
+
+    document.getElementById('resolveFinalUrlsBtn')?.addEventListener('click', () => {
+      this.resolveFinalUrls();
+    });
+
+    // Scrape job descriptions button
+    document.getElementById('scrapeDescriptionsBtn')?.addEventListener('click', () => {
+      this.scrapeJobDescriptions();
+    });
+
     // Check closed jobs button
     document.getElementById('checkClosedJobsBtn')?.addEventListener('click', () => {
       this.checkClosedJobs();
@@ -62,7 +89,7 @@ class PopupController {
     });
 
     
-    console.log('✅ Event listeners initialized');
+    this.log('✅ Event listeners initialized');
   }
 
   private async scrapeCurrentPage() {
@@ -77,7 +104,8 @@ class PopupController {
         return;
       }
 
-      if (currentTab.url.includes('linkedin.com/jobs/')) {
+      // Use smart multi-source scraping for all supported platforms
+      if (currentTab.url.includes('linkedin.com/') || currentTab.url.includes('jobindex.dk/')) {
         try {
           const response = await new Promise<any>((resolve) => {
             chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, (response) => {
@@ -89,10 +117,10 @@ class PopupController {
             });
           });
           if (response?.success) {
-            console.log('✅ Job page scraped successfully');
+            console.log('✅ Page scraped successfully');
           } else {
             const errorMsg = response?.error || response?.message || 'Unknown error';
-            console.error(`❌ Failed to scrape job: ${errorMsg}`);
+            console.error(`❌ Scraping failed: ${errorMsg}`);
           }
         } catch (error) {
           console.error('❌ Content script not available on this page');
@@ -118,7 +146,8 @@ class PopupController {
           console.error('❌ Content script not available on this page');
         }
       } else {
-        console.warn('⚠️ Current page is not a LinkedIn job or profile page');
+        console.warn('⚠️ Current page is not a supported job or profile page');
+        console.log('💡 Supported platforms: LinkedIn jobs/profiles, Jobindex.dk jobs');
       }
     } catch (error) {
       console.error(`❌ Error scraping current page: ${error}`);
@@ -192,6 +221,39 @@ class PopupController {
     }
   }
 
+  private async updatePlatformStatus() {
+    try {
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+      const currentTab = tabs[0];
+      
+      if (!currentTab?.url) {
+        this.platformStatusText.textContent = '❌ No active tab';
+        return;
+      }
+
+      const url = currentTab.url;
+      
+      if (url.includes('linkedin.com/jobs/view/') || url.includes('currentJobId=')) {
+        this.platformStatusText.textContent = '✅ LinkedIn Job Page';
+      } else if (url.includes('linkedin.com/jobs/search/') || (url.includes('linkedin.com/jobs/') && !url.includes('/jobs/view/'))) {
+        this.platformStatusText.textContent = '✅ LinkedIn Job Search Page (Bulk Scraping Available)';
+      } else if (url.includes('linkedin.com/in/')) {
+        this.platformStatusText.textContent = '✅ LinkedIn Profile Page';
+      } else if (url.includes('jobindex.dk/jobsoegning/stilling/')) {
+        this.platformStatusText.textContent = '✅ Jobindex.dk Job Page';
+      } else if (url.includes('jobindex.dk/jobsoegning/') && !url.includes('/stilling/')) {
+        this.platformStatusText.textContent = '✅ Jobindex.dk Job Search Page (Bulk Scraping Available)';
+      } else if (url.includes('linkedin.com/') || url.includes('jobindex.dk/')) {
+        this.platformStatusText.textContent = '⚠️ Supported platform but not on job/profile/search page';
+      } else {
+        this.platformStatusText.textContent = '❌ Unsupported platform';
+      }
+    } catch (error) {
+      console.error('Error updating platform status:', error);
+      this.platformStatusText.textContent = '❌ Error detecting platform';
+    }
+  }
+
 
   private async loadSettings() {
     try {
@@ -228,18 +290,23 @@ class PopupController {
         return;
       }
 
-      // Check if we're on a LinkedIn jobs search page
-      if (!currentTab.url.includes('linkedin.com/jobs/search')) {
-        console.warn('⚠️ Please navigate to a LinkedIn jobs search page first');
-        console.log('💡 Go to linkedin.com/jobs/search with your filters');
+      // Check if we're on a supported search page
+      const isLinkedInSearch = currentTab.url.includes('linkedin.com/jobs/search');
+      const isJobindexSearch = currentTab.url.includes('jobindex.dk/jobsoegning/') && !currentTab.url.includes('/stilling/');
+      
+      if (!isLinkedInSearch && !isJobindexSearch) {
+        console.warn('⚠️ Please navigate to a supported job search page first');
+        console.log('💡 Supported pages:');
+        console.log('   - LinkedIn: linkedin.com/jobs/search with your filters');
+        console.log('   - Jobindex: jobindex.dk/jobsoegning/ with your filters');
         return;
       }
 
-      console.log('📋 Collecting job IDs from current page...');
+      // Use the smart multi-source scraper for both platforms
+      console.log('🔄 Starting smart bulk scraping...');
       
-      // First, just collect the job IDs to show progress
-      const jobIdsResponse = await new Promise<any>((resolve) => {
-        chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJobIds' }, (response) => {
+      const bulkResponse = await new Promise<any>((resolve) => {
+        chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, (response) => {
           if (chrome.runtime.lastError) {
             resolve({ success: false, error: 'Content script not available on this page' });
           } else {
@@ -248,40 +315,235 @@ class PopupController {
         });
       });
       
-      if (jobIdsResponse?.success) {
-        const jobCount = jobIdsResponse.jobIds?.length || 0;
-        console.log(`✅ Found ${jobCount} jobs to process`);
-        
-        if (jobCount === 0) {
-          console.error('❌ No jobs found on this page');
-          return;
-        }
+      if (bulkResponse?.success) {
+        console.log('✅ Bulk job scraping completed successfully');
+      } else {
+        const errorMsg = bulkResponse?.error || bulkResponse?.message || 'Unknown error';
+        console.error(`❌ Bulk scraping failed: ${errorMsg}`);
+      }
+    } catch (error) {
+      console.error(`❌ Error during bulk scraping: ${error}`);
+    }
+  }
 
-        // Now start the bulk scraping process
-        console.log('🔄 Starting bulk processing...');
+  private async analyzeJobindexHosts() {
+    console.log('📊 Analyzing Jobindex collected jobs by host...');
+    try {
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+      const currentTab = tabs[0];
+      if (!currentTab?.id) return;
+
+      const response = await new Promise<any>((resolve) => {
+        chrome.tabs.sendMessage(currentTab.id!, { action: 'analyzeJobindexHosts' }, (resp) => {
+          if (chrome.runtime.lastError) {
+            resolve({ success: false, error: 'Content script not available on this page' });
+          } else {
+            resolve(resp);
+          }
+        });
+      });
+
+      if (response?.success) {
+        console.log('✅ Host analysis:', response.result);
+      } else {
+        console.error('❌ Host analysis failed:', response?.error || 'Unknown error');
+      }
+    } catch (e) {
+      console.error('❌ Error during host analysis:', e);
+    }
+  }
+
+  private async resolveFinalUrls() {
+    console.log('🔗 Resolving final URLs by opening background tabs...');
+    try {
+      const result = await new Promise<any>((resolve) => {
+        chrome.runtime.sendMessage({ action: 'resolveJobindexFinalUrls' }, (resp) => {
+          if (chrome.runtime.lastError) {
+            resolve({ success: false, error: chrome.runtime.lastError.message });
+          } else {
+            resolve(resp);
+          }
+        });
+      });
+
+      if (result?.success) {
+        console.log(`✅ Final URLs resolved for ${result.updated} jobs. Data updated in storage.`);
+      } else {
+        console.error('❌ Failed to resolve final URLs:', result?.error || 'Unknown error');
+      }
+    } catch (e) {
+      console.error('❌ Error resolving final URLs:', e);
+    }
+  }
+
+  private async scrapeJobDescriptions() {
+    this.log('🚀 Starting job description scraping...');
+    
+    try {
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+      const currentTab = tabs[0];
+      
+      if (!currentTab?.id) {
+        this.log('❌ No active tab found');
+        return;
+      }
+
+      this.log(`🔍 Current tab URL: ${currentTab.url}`);
+      this.log(`🔍 Current tab ID: ${currentTab.id}`);
+
+      // First, try to ping the content script to see if it's available
+      this.log('📡 Pinging content script...');
+      const pingResponse = await new Promise<any>((resolve) => {
+        chrome.tabs.sendMessage(currentTab.id!, { action: 'ping' }, (response) => {
+          if (chrome.runtime.lastError) {
+            this.log(`❌ Content script ping failed: ${chrome.runtime.lastError.message}`);
+            resolve({ success: false, error: chrome.runtime.lastError.message });
+          } else {
+            this.log('✅ Content script ping successful');
+            resolve(response);
+          }
+        });
+      });
+
+      if (!pingResponse?.success) {
+        this.log('❌ Content script is not available on this page');
+        this.log('💡 Opening a new tab to avoid cache issues...');
         
-        const bulkResponse = await new Promise<any>((resolve) => {
-          chrome.tabs.sendMessage(currentTab.id!, { action: 'bulkScrapeJobs' }, (response) => {
+        // Open a new tab with the same URL to avoid cache issues
+        const newTab = await chrome.tabs.create({
+          url: currentTab.url,
+          active: true
+        });
+        
+        this.log(`✅ Opened new tab with ID: ${newTab.id}`);
+        this.log('⏳ Waiting 3 seconds for content script to load in new tab...');
+        await this.sleep(3000);
+        
+        // Try again with the new tab
+        this.log('🔄 Retrying with new tab...');
+        const newPingResponse = await new Promise<any>((resolve) => {
+          chrome.tabs.sendMessage(newTab.id!, { action: 'ping' }, (response) => {
             if (chrome.runtime.lastError) {
-              resolve({ success: false, error: 'Content script not available on this page' });
+              this.log(`❌ New tab ping failed: ${chrome.runtime.lastError.message}`);
+              resolve({ success: false, error: chrome.runtime.lastError.message });
             } else {
+              this.log('✅ New tab ping successful');
               resolve(response);
             }
           });
         });
         
-        if (bulkResponse?.success) {
-          console.log('✅ Bulk job scraping completed successfully');
-        } else {
-          const errorMsg = bulkResponse?.error || bulkResponse?.message || 'Unknown error';
-          console.error(`❌ Bulk scraping failed: ${errorMsg}`);
+        if (!newPingResponse?.success) {
+          this.log('❌ Content script still not available in new tab');
+          this.log('💡 Try reloading the extension');
+          return;
         }
-        } else {
-          const errorMsg = jobIdsResponse?.error || jobIdsResponse?.message || 'Unknown error';
-          console.error(`❌ Failed to collect job IDs: ${errorMsg}`);
+        
+        // Update currentTab to the new tab
+        currentTab.id = newTab.id;
+      }
+
+      // Test platform detection
+      this.log('🔍 Testing platform detection...');
+      const platformTestResponse = await new Promise<any>((resolve) => {
+        chrome.tabs.sendMessage(currentTab.id!, { action: 'testPlatformDetection' }, (response) => {
+          if (chrome.runtime.lastError) {
+            this.log(`❌ Platform test failed: ${chrome.runtime.lastError.message}`);
+            resolve({ success: false, error: chrome.runtime.lastError.message });
+          } else {
+            this.log('✅ Platform test response received');
+            resolve(response);
+          }
+        });
+      });
+
+      if (platformTestResponse?.success) {
+        this.log('📊 Platform detection result:', platformTestResponse.result);
+      } else {
+        this.log('❌ Platform detection test failed:', platformTestResponse?.error);
+      }
+
+        this.log('📡 Starting batch job description scraping via background script...');
+        
+        // Set up listener for progress and completion via storage
+        const progressPromise = new Promise<any>((resolve) => {
+          let lastProgress: any = null;
+          
+          const checkStorage = () => {
+            chrome.storage.local.get(['scrapingProgress', 'scrapingCompleted'], (data) => {
+              // Check for completion first
+              if (data.scrapingCompleted) {
+                const now = Date.now();
+                const resultTime = data.scrapingCompleted.timestamp;
+                if (now - resultTime < 10000) {
+                  // Clear the result and resolve
+                  chrome.storage.local.remove(['scrapingCompleted', 'scrapingProgress']);
+                  resolve({ completed: true, result: data.scrapingCompleted.result });
+                  return;
+                }
+              }
+              
+              // Check for progress updates
+              if (data.scrapingProgress) {
+                const now = Date.now();
+                const progressTime = data.scrapingProgress.timestamp;
+                if (now - progressTime < 10000) {
+                  const progress = data.scrapingProgress.progress;
+                  
+                  // Only log if progress changed
+                  if (!lastProgress || 
+                      lastProgress.current !== progress.current || 
+                      lastProgress.success !== progress.success || 
+                      lastProgress.errors !== progress.errors) {
+                    
+                    this.log(`📊 Progress: ${progress.current}/${progress.total} - ${progress.currentJob}`);
+                    this.log(`✅ Success: ${progress.success}, ❌ Errors: ${progress.errors}`);
+                    
+                    lastProgress = progress;
+                  }
+                }
+              }
+              
+              // Check again in 2 seconds
+              setTimeout(checkStorage, 2000);
+            });
+          };
+          
+          // Start checking
+          checkStorage();
+          
+          // Timeout after 10 minutes
+          setTimeout(() => {
+            resolve({ error: 'Timeout - scraping took too long' });
+          }, 10 * 60 * 1000);
+        });
+        
+        // Send start command to background script
+        chrome.runtime.sendMessage({ action: 'startBatchScraping' }, (response) => {
+          if (chrome.runtime.lastError) {
+            this.log(`❌ Failed to start batch scraping: ${chrome.runtime.lastError.message}`);
+          } else if (response?.success) {
+            this.log('✅ Batch scraping started successfully');
+            this.log('⏳ Waiting for scraping to complete...');
+          } else {
+            this.log(`❌ Failed to start batch scraping: ${response?.error || 'Unknown error'}`);
+          }
+        });
+        
+        // Wait for completion
+        const result = await progressPromise;
+        
+        if (result.error) {
+          this.log(`❌ Description scraping failed: ${result.error}`);
+        } else if (result.completed) {
+          this.log(`✅ Job description scraping completed successfully!`);
+          this.log(`📊 Processed: ${result.result.processed}, Success: ${result.result.success}, Errors: ${result.result.errors}`);
+          if (result.result.platformStats && Object.keys(result.result.platformStats).length > 0) {
+            this.log(`📊 Platform statistics:`, result.result.platformStats);
+          }
         }
     } catch (error) {
-      console.error(`❌ Error during bulk scraping: ${error}`);
+      this.log(`❌ Error during description scraping: ${error}`);
     }
   }
 
