@@ -7,7 +7,7 @@ import { JobindexJobListing } from '../content/jobindexBulkScraper.js';
 
 export interface BulkScrapingProgress {
   currentPage: number;
-  totalPages: number;
+  totalPages: number;  // -1 means unknown, will continue until no jobs found
   jobsCollected: number;
   currentUrl: string;
 }
@@ -35,8 +35,9 @@ export class JobindexBulkBatchScraper {
 
   /**
    * Start bulk scraping of Jobindex search results across multiple pages
+   * Will continue until no more jobs are found
    */
-  async startBulkScraping(baseUrl: string, maxPages: number = 10): Promise<void> {
+  async startBulkScraping(baseUrl: string): Promise<void> {
     if (this.isRunning) {
       this.log('⚠️ Bulk scraping already running');
       return;
@@ -44,29 +45,26 @@ export class JobindexBulkBatchScraper {
 
     this.isRunning = true;
     this.shouldStop = false;
-    this.log(`🚀 Starting Jobindex bulk scraping from ${baseUrl} (max ${maxPages} pages)...`);
+    this.log(`🚀 Starting Jobindex bulk scraping from ${baseUrl} (will continue until no more jobs found)...`);
 
     try {
       const allJobs: JobindexJobListing[] = [];
       const errors: string[] = [];
+      let pageNum = 1;
+      let hasMoreJobs = true;
 
       // Initialize progress
       await this.updateProgress({
         currentPage: 0,
-        totalPages: maxPages,
+        totalPages: -1,  // Unknown total, will scrape until empty
         jobsCollected: 0,
         currentUrl: baseUrl
       });
 
-      // Scrape each page
-      for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
-        if (this.shouldStop) {
-          this.log('🛑 Bulk scraping stopped by user');
-          break;
-        }
-
+      // Scrape pages until no more jobs found
+      while (hasMoreJobs && !this.shouldStop) {
         this.log(`\n${'='.repeat(60)}`);
-        this.log(`📄 PROCESSING PAGE ${pageNum}/${maxPages}`);
+        this.log(`📄 PROCESSING PAGE ${pageNum}`);
         this.log(`${'='.repeat(60)}`);
 
         try {
@@ -80,7 +78,7 @@ export class JobindexBulkBatchScraper {
           // Update progress
           await this.updateProgress({
             currentPage: pageNum,
-            totalPages: maxPages,
+            totalPages: -1,  // Unknown
             jobsCollected: allJobs.length,
             currentUrl: urlToScrape
           });
@@ -89,7 +87,8 @@ export class JobindexBulkBatchScraper {
           const pageJobs = await this.scrapePageInNewTab(urlToScrape, pageNum);
 
           if (pageJobs.length === 0) {
-            this.log(`⚠️ No jobs found on page ${pageNum}, stopping pagination`);
+            this.log(`✅ No jobs found on page ${pageNum} - reached the end`);
+            hasMoreJobs = false;
             break;
           }
 
@@ -102,28 +101,36 @@ export class JobindexBulkBatchScraper {
           await this.saveJobsToStorage(allJobs);
           this.log(`💾 Saved ${allJobs.length} jobs to storage`);
 
+          // Move to next page
+          pageNum++;
+
+          // Minimal delay between pages (reduced from 2s to 300ms)
+          await this.sleep(300);
+
         } catch (error) {
           const errorMsg = `Page ${pageNum} failed: ${error instanceof Error ? error.message : String(error)}`;
           this.log(`❌ ${errorMsg}`);
           errors.push(errorMsg);
+          
+          // Stop on error to avoid infinite loop
+          hasMoreJobs = false;
         }
+      }
 
-        // Delay between pages
-        if (pageNum < maxPages) {
-          this.log(`⏳ Waiting 2 seconds before next page...`);
-          await this.sleep(2000);
-        }
+      if (this.shouldStop) {
+        this.log('🛑 Bulk scraping stopped by user');
       }
 
       // Set completion
       this.log(`\n${'='.repeat(60)}`);
       this.log(`✅ BULK SCRAPING COMPLETE`);
+      this.log(`📊 Total pages scraped: ${pageNum - 1}`);
       this.log(`📊 Total jobs collected: ${allJobs.length}`);
       this.log(`❌ Errors: ${errors.length}`);
       this.log(`${'='.repeat(60)}\n`);
 
       await this.setCompletion({
-        processed: maxPages,
+        processed: pageNum - 1,
         jobsCollected: allJobs.length,
         errors: errors.length,
         errorMessages: errors
@@ -150,36 +157,21 @@ export class JobindexBulkBatchScraper {
     this.log(`🔗 Opening tab for page ${pageNum}: ${url}`);
 
     try {
-      // Save current active tab
-      const [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      this.log(`💾 Saved current active tab: ${currentTab?.id}`);
-
-      // Open new tab ACTIVE (required for content script to load)
+      // Open new tab in BACKGROUND (faster, no tab switching needed)
       const tab = await chrome.tabs.create({
         url: url,
-        active: true
+        active: false  // Open in background to avoid visual tab switching
       });
 
       this.currentTabId = tab.id!;
-      this.log(`✅ Opened tab ${tab.id} for page ${pageNum} (active)`);
+      this.log(`✅ Opened background tab ${tab.id} for page ${pageNum}`);
 
-      // Wait for tab to load
+      // Wait for tab to load (with shorter timeout)
       await this.waitForTabLoad(tab.id!);
       this.log(`✅ Tab ${tab.id} loaded successfully`);
 
-      // Wait for page to stabilize
-      this.log(`⏳ Waiting 3 seconds for page to stabilize...`);
-      await this.sleep(3000);
-
-      // Switch back to original tab
-      if (currentTab?.id) {
-        try {
-          await chrome.tabs.update(currentTab.id, { active: true });
-          this.log(`🔄 Switched back to original tab ${currentTab.id}`);
-        } catch (error) {
-          this.log(`⚠️ Could not switch back to original tab:`, error);
-        }
-      }
+      // Minimal stabilization delay (reduced from 3s to 500ms)
+      await this.sleep(500);
 
       // Send message to content script to scrape current page
       this.log(`📡 Requesting content script to scrape page ${pageNum}...`);
@@ -204,7 +196,7 @@ export class JobindexBulkBatchScraper {
       this.log(`❌ Error scraping page ${pageNum}:`, error);
       return [];
     } finally {
-      // Close the tab
+      // Close the tab immediately after scraping
       if (this.currentTabId) {
         try {
           await chrome.tabs.remove(this.currentTabId);
@@ -225,7 +217,7 @@ export class JobindexBulkBatchScraper {
       const timeout = setTimeout(() => {
         chrome.tabs.onUpdated.removeListener(listener);
         reject(new Error('Tab load timeout'));
-      }, 30000);
+      }, 10000);  // Reduced from 30s to 10s
 
       const listener = (updatedTabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
         if (updatedTabId === tabId && changeInfo.status === 'complete') {
@@ -240,19 +232,30 @@ export class JobindexBulkBatchScraper {
   }
 
   /**
-   * Send message to a specific tab
+   * Send message to a specific tab with retry logic
    */
-  private async sendMessageToTab(tabId: number, message: any): Promise<any> {
-    return new Promise((resolve) => {
-      chrome.tabs.sendMessage(tabId, message, (response) => {
-        if (chrome.runtime.lastError) {
-          this.log(`❌ Message to tab ${tabId} failed:`, chrome.runtime.lastError.message);
-          resolve({ success: false, error: chrome.runtime.lastError.message });
-        } else {
-          resolve(response);
+  private async sendMessageToTab(tabId: number, message: any, retries: number = 3): Promise<any> {
+    for (let i = 0; i < retries; i++) {
+      try {
+        const response = await new Promise((resolve, reject) => {
+          chrome.tabs.sendMessage(tabId, message, (response) => {
+            if (chrome.runtime.lastError) {
+              reject(new Error(chrome.runtime.lastError.message));
+            } else {
+              resolve(response);
+            }
+          });
+        });
+        return response;
+      } catch (error) {
+        if (i === retries - 1) {
+          this.log(`❌ Message to tab ${tabId} failed after ${retries} attempts`);
+          return { success: false, error: error instanceof Error ? error.message : String(error) };
         }
-      });
-    });
+        // Wait a bit before retry
+        await this.sleep(200);
+      }
+    }
   }
 
   /**

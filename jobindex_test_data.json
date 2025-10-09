@@ -1,5 +1,280 @@
 [
     {
+        "company": "Jobindex",
+        "companyUrl": "https://www.jobindex.dk/jobannonce/h1603556/androidudvikler-vaer-med-til-at-loefte-mit-pfa-mobilappen-til-nye-hoejder",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1603556/androidudvikler-vaer-med-til-at-loefte-mit-pfa-mobilappen-til-nye-hoejder",
+        "id": "h1603556",
+        "location": "København og mulighed for hjemmearbejde",
+        "publishedDate": "2025-10-09",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603556&ctx=w&jsid=940995714&jsp=1",
+        "title": "Androidudvikler – vær med til at løfte Mit PFA mobilappen til nye højder"
+    },
+    {
+        "company": "Tryg Forsikring A/S",
+        "companyUrl": "https://tryg.dk/om-tryg",
+        "description": null,
+        "finalUrl": "https://careers.tryg.com/Tryg/job/Ballerup-Udvikler-med-forretningsforst%C3%A5else-&-kommercielt-drive/1255594901/?applySourceOverride=Jobindex.dk&utm_campaign=jobindex&utm_source=jobindex",
+        "id": "h1603630",
+        "location": "Ballerup",
+        "publishedDate": "2025-10-09",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603630&ctx=w&jsid=940995714&jsp=2",
+        "title": "Udvikler med forretningsforståelse & kommercielt drive"
+    },
+    {
+        "company": "ATP",
+        "companyUrl": "https://www.atp.dk/karriere",
+        "description": null,
+        "finalUrl": "https://www.atp.dk/karriere/python-udvikler-til-udvikling-af-finansielle-dashboards-en-af-danmarks-stoerste-investorer-184693?utm_source=Jobindex",
+        "id": "h1603595",
+        "location": "Hillerød",
+        "publishedDate": "2025-10-09",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603595&ctx=w&jsid=940995714&jsp=3",
+        "title": "Python-udvikler til udvikling af finansielle dashboards for en af Danmarks største investorer"
+    },
+    {
+        "company": "Det Nationale Sorgcenter",
+        "companyUrl": "https://sorgcenter.dk/",
+        "description": null,
+        "finalUrl": "https://sorgcenter.career.emply.com/ad/it-digitaliseringsmedarbejder/jgc2lc/da",
+        "id": "h1603578",
+        "location": "København S",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603578&ctx=w&jsid=940995714&jsp=4",
+        "title": "IT- & Digitaliseringsmedarbejder"
+    },
+    {
+        "company": "Bygningsstyrelsen",
+        "companyUrl": "http://www.bygst.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=5001&ProjectId=190956&DepartmentId=7832&MediaId=3137",
+        "id": "h1603569",
+        "location": "København V og mulighed for hjemmearbejde",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603569&ctx=w&jsid=940995714&jsp=5",
+        "title": "Vil du være med til at opbygge Bygningsstyrelsens nye datafundament som dataspecialist eller data engineer?"
+    },
+    {
+        "company": "Sopra Steria A/S",
+        "companyUrl": "https://www.soprasteria.dk/",
+        "description": null,
+        "finalUrl": "https://jobs.smartrecruiters.com/SopraSteria1/744000086370616-head-of-data-intelligence-til-team-i-udvikling-?trid=9d2eabcd-9d60-437c-9898-b00a031932db",
+        "id": "h1603548",
+        "location": "København K og mulighed for hjemmearbejde",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603548&ctx=w&jsid=940995714&jsp=6",
+        "title": "Head of Data Intelligence - til team i udvikling"
+    },
+    {
+        "company": "Banedanmark",
+        "companyUrl": "https://www.banedanmark.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=3010&ProjectId=151426&DepartmentId=19783&MediaId=5107",
+        "id": "h1603545",
+        "location": "Ringsted",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603545&ctx=w&jsid=940995714&jsp=7",
+        "title": "Ingeniørstuderende til trafikanalyse og planlægning"
+    },
+    {
+        "company": "Systematic A/S",
+        "companyUrl": "https://jobs.systematic.com/job/Copenhagen-Senior-Full-Stack-Developer-Shape-the-future-of-defence-software-training-technology-1300/1255497801/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "description": null,
+        "finalUrl": "https://jobs.systematic.com/job/Copenhagen-Senior-Full-Stack-Developer-Shape-the-future-of-defence-software-training-technology-1300/1255497801/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "id": "h1603501",
+        "location": "Copenhagen or Aarhus",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603501&ctx=w&jsid=940995714&jsp=8",
+        "title": "Senior Full Stack Developer - Shape the future of defence software training technology"
+    },
+    {
+        "company": "Systematic A/S",
+        "companyUrl": "https://jobs.systematic.com/job/Copenhagen-On-site-Solution-Engineer%2C-Defence-Services-1300/1198087801/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "description": null,
+        "finalUrl": "https://jobs.systematic.com/job/Copenhagen-On-site-Solution-Engineer%2C-Defence-Services-1300/1198087801/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "id": "h1603495",
+        "location": "Copenhagen",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603495&ctx=w&jsid=940995714&jsp=9",
+        "title": "On-site Solution Engineer, Defence Services"
+    },
+    {
+        "company": "Københavns Erhvervsakademi",
+        "companyUrl": "https://www.ek.dk/",
+        "description": null,
+        "finalUrl": "https://ek.career.emply.com/ad/underviser-til-it-arkitektur-og-datamatikeruddannelsen/wugxuh/da",
+        "id": "h1603457",
+        "location": "København N",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603457&ctx=w&jsid=940995714&jsp=10",
+        "title": "Underviser til IT-arkitektur- og datamatikeruddannelsen"
+    },
+    {
+        "company": "JN Data A/S",
+        "companyUrl": "https://www.jndata.dk/",
+        "description": null,
+        "finalUrl": "https://jndata-career.talent-soft.com/job/job-observability-domain-architect_452.aspx",
+        "id": "h1603260",
+        "location": "Silkeborg, Roskilde og mulighed for hjemmearbejde",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603260&ctx=w&jsid=940995714&jsp=11",
+        "title": "Observability Domain Architect"
+    },
+    {
+        "company": "Ellab A/S",
+        "companyUrl": "https://www.ellab.com/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=2275&ProjectId=143976&DepartmentId=18956&MediaId=4616",
+        "id": "h1603250",
+        "location": "Hillerød",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603250&ctx=w&jsid=940995714&jsp=12",
+        "title": "R&D Internship"
+    },
+    {
+        "company": "Danske Spil A/S",
+        "companyUrl": "http://www.danskespil.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1516&ProjectId=144184&DepartmentId=19008&MediaId=4616",
+        "id": "h1603237",
+        "location": "Brøndby",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603237&ctx=w&jsid=940995714&jsp=13",
+        "title": "Salesforce Specialist med teknisk snilde og blik for brugeroplevelse"
+    },
+    {
+        "company": "BEC",
+        "companyUrl": "https://www.bec.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1603230/java-software-engineer-regular",
+        "id": "h1603230",
+        "location": "Roskilde, Hybrid position",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603230&ctx=w&jsid=940995714&jsp=14",
+        "title": "Java software engineer (regular)"
+    },
+    {
+        "company": "Everllence",
+        "companyUrl": "https://www.everllence.com/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1877&ProjectId=145914&DepartmentId=19149&MediaId=4619",
+        "id": "h1603228",
+        "location": "Copenhagen",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603228&ctx=w&jsid=940995714&jsp=15",
+        "title": "Student Assistant – Electronic Hardware Engineering"
+    },
+    {
+        "company": "BEC",
+        "companyUrl": "https://www.bec.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1603220/java-software-engineer-senior",
+        "id": "h1603220",
+        "location": "Roskilde, hybrid position",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603220&ctx=w&jsid=940995714&jsp=16",
+        "title": "Java software engineer (senior)"
+    },
+    {
+        "company": "Andel Holding A/S",
+        "companyUrl": "https://andel.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1603188/enterprise-arkitekt-til-ea-vaerktoej-og-tvaergaaende-raadgivning-i-andel",
+        "id": "h1603188",
+        "location": "Virum",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603188&ctx=w&jsid=940995714&jsp=17",
+        "title": "Enterprise Arkitekt til EA-værktøj og tværgående rådgivning i Andel"
+    },
+    {
+        "company": "Andel Holding A/S",
+        "companyUrl": "https://andel.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1603184/enterprise-arkitekt-med-fokus-paa-it-maalarkitektur-strategisk-retning",
+        "id": "h1603184",
+        "location": "Virum og mulighed for hjemmearbejde",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603184&ctx=w&jsid=940995714&jsp=18",
+        "title": "Enterprise Arkitekt med fokus på IT-målarkitektur & strategisk retning"
+    },
+    {
+        "company": "Region Sjælland",
+        "companyUrl": "https://www.regionsjaelland.dk/",
+        "description": null,
+        "finalUrl": "https://www.regionsjaelland.dk/job-og-uddannelse/jobside?hr=show-job/53798&linkref=87116&locale=da_DK",
+        "id": "h1595529",
+        "location": "Ringsted",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1595529&ctx=w&jsid=940995714&jsp=19",
+        "title": "IT-løsningsarkitekt med interesse for Enterprise Arkitektur"
+    },
+    {
+        "company": "KMD A/S",
+        "companyUrl": "https://www.kmd.dk/",
+        "description": null,
+        "finalUrl": "https://jobs.kmd.net/default/job/Ballerup-Product-Owner-til-KMD-Nexus-2750/1255515301/?utm_source=jobindex",
+        "id": "h1603461",
+        "location": "Ballerup",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603461&ctx=w&jsid=940995714&jsp=20",
+        "title": "Product Owner til KMD Nexus"
+    },
+    {
+        "company": "Bloom",
+        "companyUrl": "https://bloom.dk/",
+        "description": null,
+        "finalUrl": "https://bloom.dk/jobs/senior-ux-designer-for-a-growing-e-learning-company-361/",
+        "id": "h1603428",
+        "location": "København K",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603428&ctx=w&jsid=940995714&jsp=21",
+        "title": "Senior UX Designer for a growing e-learning company"
+    },
+    {
+        "company": "Rigspolitiet",
+        "companyUrl": "https://www.politi.dk/",
+        "description": null,
+        "finalUrl": "https://job.politi.dk/job/Udvikler-til-Backend-udviklingsteam-i-Rigspolitiet/2875-da_DK",
+        "id": "h1603265",
+        "location": "Hvidovre/København SV",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603265&ctx=w&jsid=940995714&jsp=22",
+        "title": "Udvikler til Backend udviklingsteam"
+    },
+    {
+        "company": "DTU, Danmarks Tekniske Universitet",
+        "companyUrl": "https://www.dtu.dk/",
+        "description": null,
+        "finalUrl": "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/da/sites/CX_2001/job/5921",
+        "id": "h1603219",
+        "location": "Kongens Lyngby",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603219&ctx=w&jsid=940995714&jsp=23",
+        "title": "PhD scholarship in Cryptography - DTU Compute"
+    },
+    {
+        "company": "Forsvarets Efterretningstjeneste",
+        "companyUrl": "https://fe-ddis.dk/da/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=5001&ProjectId=190944&DepartmentId=8076&MediaId=5",
+        "id": "h1603119",
+        "location": "København Ø",
+        "publishedDate": "2025-10-07",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603119&ctx=w&jsid=940995714&jsp=24",
+        "title": "Erfaren udvikler/​løsningsarkitekt søges til team for udvikling af IT-løsninger til FE’s cybersektor"
+    },
+    {
+        "company": "CGI Danmark A/S",
+        "companyUrl": "https://www.cgi.com/dk/da",
+        "description": null,
+        "finalUrl": "https://cgi.njoyn.com/corp/xweb/xweb.asp?CLID=21001&page=jobdetails&JobID=J0625-0160&lang=10",
+        "id": "h1603032",
+        "location": "Ballerup",
+        "publishedDate": "2025-10-07",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1603032&ctx=w&jsid=940995714&jsp=25",
+        "title": "Functional Solution Architect – Finance, D365FO"
+    },
+    {
         "company": "Socialpædagogernes Landsforbund",
         "companyUrl": "http://www.sl.dk/",
         "description": null,
@@ -7,18 +282,18 @@
         "id": "h1602983",
         "location": "København K",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602983&ctx=w&jsid=939965259&jsp=1",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602983&ctx=w&jsid=940995714&jsp=26",
         "title": "BI-udvikler med sans for datakvalitet"
     },
     {
         "company": "Servier Symphogen A/S",
         "companyUrl": "https://serviersymphogen.com/",
         "description": null,
-        "finalUrl": "https://serviersymphogen.com/careers/open-positions/postdoc-scientist-for-machine-learning-applied-to-antibody-discovery-and-design/",
+        "finalUrl": "https://www.jobindex.dk/c?t=h1602967&ctx=w&jsid=940995714&jsp=27",
         "id": "h1602967",
         "location": "Ballerup",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602967&ctx=w&jsid=939965259&jsp=2",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602967&ctx=w&jsid=940995714&jsp=27",
         "title": "Postdoc Scientist for Machine Learning applied to Antibody Discovery and Design"
     },
     {
@@ -29,7 +304,7 @@
         "id": "h1602952",
         "location": "Nordhavn og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602952&ctx=w&jsid=939965259&jsp=3",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602952&ctx=w&jsid=940995714&jsp=28",
         "title": "Senior CRM-konsulent /​ CRM-konsulent i ambitiøst IT-hus"
     },
     {
@@ -40,7 +315,7 @@
         "id": "h1595323",
         "location": "Brøndby",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1595323&ctx=w&jsid=939965259&jsp=4",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1595323&ctx=w&jsid=940995714&jsp=29",
         "title": "Senior Subsea Flexible Pipe Design Engineer"
     },
     {
@@ -51,7 +326,7 @@
         "id": "h1595319",
         "location": "Brøndby and remote",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1595319&ctx=w&jsid=939965259&jsp=5",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1595319&ctx=w&jsid=940995714&jsp=30",
         "title": "Subsea Flexible Pipe Design Engineer"
     },
     {
@@ -62,7 +337,7 @@
         "id": "h1595305",
         "location": "Copenhagen",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1595305&ctx=w&jsid=939965259&jsp=6",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1595305&ctx=w&jsid=940995714&jsp=31",
         "title": "Lead Developer for AI platform within defence technology"
     },
     {
@@ -73,8 +348,96 @@
         "id": "h1602979",
         "location": "Kgs. Lyngby",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602979&ctx=w&jsid=939965259&jsp=7",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602979&ctx=w&jsid=940995714&jsp=32",
         "title": "PhD scholarship in 3D Vision and Spatial AI - DTU Compute"
+    },
+    {
+        "company": "emagine søger for kunde",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://portal.emagine.org/jobs/171055/senior-app-udvikler-med-net-maui-og-blazor-erfaring?utm_source=JobindexDk",
+        "id": "r13371293",
+        "location": "København",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13371293&ctx=w&jsid=940995714&jsp=33",
+        "title": "Senior App udvikler med .NET MAUI og Blazor erfaring"
+    },
+    {
+        "company": "emagine",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://portal.emagine.org/jobs/171071/test-and-qa-lead?utm_source=JobindexDk",
+        "id": "r13372243",
+        "location": "København",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13372243&ctx=w&jsid=940995714&jsp=34",
+        "title": "Test and QA Lead"
+    },
+    {
+        "company": "Fysiofresh",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68e617ae8247622ae08ef6b3?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13373104",
+        "location": "København",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13373104&ctx=w&jsid=940995714&jsp=35",
+        "title": "Softwareudvikler"
+    },
+    {
+        "company": "GN Group",
+        "companyUrl": "/virksomhed/442/gn-group#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://gn.wd3.myworkdayjobs.com/GN-Careers/job/Ballerup/Agile-Transformation-Leader-for-Software-Solutions_R26528-1",
+        "id": "r13372948",
+        "location": "Ballerup",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13372948&ctx=w&jsid=940995714&jsp=36",
+        "title": "Agile Transformation Leader for Software Solutions"
+    },
+    {
+        "company": "GN Group",
+        "companyUrl": "/virksomhed/442/gn-group#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://gn.wd3.myworkdayjobs.com/GN-Careers/job/Ballerup/Software-Project-Manager-for-R-D--Software-Solutions_R26586",
+        "id": "r13372947",
+        "location": "Ballerup",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13372947&ctx=w&jsid=940995714&jsp=37",
+        "title": "Software Project Manager for R&D, Software Solutions"
+    },
+    {
+        "company": "Gyldendal A/S",
+        "companyUrl": "/virksomhed/26313/gyldendal-a-s#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://www.it-jobbank.dk/jobannonce/h1603378/er-du-vores-naeste-php-udvikler-i-gyldendal-uddannelse?utm_campaign=jobannonce&utm_medium=jobindex&utm_source=partner",
+        "id": "r13372332",
+        "location": "København K",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13372332&ctx=w&jsid=940995714&jsp=38",
+        "title": "Er du vores næste PHP-udvikler i Gyldendal Uddannelse?"
+    },
+    {
+        "company": "LEGO System A/S",
+        "companyUrl": "/virksomhed/9659/lego-system-a-s#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://www.lego.com/da-dk/careers/job/associate-software-engineer-greenfield-packing-automation-f81edb9b9de0100208607f09347f0000",
+        "id": "r13372819",
+        "location": "København K",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13372819&ctx=w&jsid=940995714&jsp=39",
+        "title": "Associate Software Engineer - Greenfield Packing Automation"
+    },
+    {
+        "company": "LEGO System A/S",
+        "companyUrl": "/virksomhed/9659/lego-system-a-s#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://www.lego.com/da-dk/careers/job/senior-engineer-greenfield-packing-automation-038f91eb4e9b1000c70fce361bdb0000",
+        "id": "r13372820",
+        "location": "København K",
+        "publishedDate": "2025-10-08",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13372820&ctx=w&jsid=940995714&jsp=40",
+        "title": "Senior Engineer - Greenfield Packing Automation"
     },
     {
         "company": "Demant",
@@ -84,7 +447,7 @@
         "id": "h1602851",
         "location": "Smørum and hybrid",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602851&ctx=w&jsid=939965259&jsp=8",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602851&ctx=w&jsid=940995714&jsp=41",
         "title": "(Senior) Software Engineer"
     },
     {
@@ -95,7 +458,7 @@
         "id": "h1602830",
         "location": "Copenhagen with the possibility to work from home",
         "publishedDate": "2025-10-07",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602830&ctx=w&jsid=939965259&jsp=9",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602830&ctx=w&jsid=940995714&jsp=42",
         "title": "Senior UI Engineer"
     },
     {
@@ -106,7 +469,7 @@
         "id": "h1602717",
         "location": "Taastrup og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602717&ctx=w&jsid=939965259&jsp=10",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602717&ctx=w&jsid=940995714&jsp=43",
         "title": "Solution Architect - Skab tekniske løsninger til fremtidens fuldautomatiske S-bane"
     },
     {
@@ -117,7 +480,7 @@
         "id": "h1602686",
         "location": "København SV",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602686&ctx=w&jsid=939965259&jsp=11",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602686&ctx=w&jsid=940995714&jsp=44",
         "title": "Selvstændig og løsningsorienteret Oracle-udvikler"
     },
     {
@@ -128,7 +491,7 @@
         "id": "h1602571",
         "location": "Valby og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602571&ctx=w&jsid=939965259&jsp=12",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602571&ctx=w&jsid=940995714&jsp=45",
         "title": "Forretningsorienteret GIS-systemkoordinator til Danmarks største trafikselskab"
     },
     {
@@ -139,7 +502,7 @@
         "id": "h1602519",
         "location": "Ballerup og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602519&ctx=w&jsid=939965259&jsp=13",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602519&ctx=w&jsid=940995714&jsp=46",
         "title": "Backend-udvikler med erfaring indenfor SolR/​OpenSearch/​ElasticSearch"
     },
     {
@@ -150,7 +513,7 @@
         "id": "h1602506",
         "location": "København, Aarhus, Horsens eller Aalborg",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602506&ctx=w&jsid=939965259&jsp=14",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602506&ctx=w&jsid=940995714&jsp=47",
         "title": "Senior integrationsarkitekt"
     },
     {
@@ -161,7 +524,7 @@
         "id": "h1602481",
         "location": "Ballerup og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602481&ctx=w&jsid=939965259&jsp=15",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602481&ctx=w&jsid=940995714&jsp=48",
         "title": "DBC udvider igen: Bliv en af vores næste AI Udviklere i januar 2026"
     },
     {
@@ -172,7 +535,7 @@
         "id": "h1594665",
         "location": "Copenhagen",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1594665&ctx=w&jsid=939965259&jsp=16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1594665&ctx=w&jsid=940995714&jsp=49",
         "title": "Software Developer - start your career within the defence software domain"
     },
     {
@@ -183,7 +546,7 @@
         "id": "h1594552",
         "location": "Allerød, hybrid position",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1594552&ctx=w&jsid=939965259&jsp=17",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1594552&ctx=w&jsid=940995714&jsp=50",
         "title": "PHP Developer – join our Workforce Management Team"
     },
     {
@@ -194,7 +557,7 @@
         "id": "h1602640",
         "location": "København V",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602640&ctx=w&jsid=939965259&jsp=18",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602640&ctx=w&jsid=940995714&jsp=51",
         "title": "Data Engineer"
     },
     {
@@ -205,7 +568,7 @@
         "id": "h1602501",
         "location": "Ballerup, Aalborg og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602501&ctx=w&jsid=939965259&jsp=19",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602501&ctx=w&jsid=940995714&jsp=52",
         "title": "DevOps Engineer"
     },
     {
@@ -216,140 +579,41 @@
         "id": "h1602309",
         "location": "Kgs. Lyngby",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602309&ctx=w&jsid=939965259&jsp=20",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602309&ctx=w&jsid=940995714&jsp=53",
         "title": "PhD scholarship in Trustworthy AI for control of Renewable Power Grids - DTU Wind"
     },
     {
-        "company": "JN Data A/S",
-        "companyUrl": "https://www.jndata.dk/",
+        "company": "Aalborg Universitet",
+        "companyUrl": "/virksomhed/9797/aalborg-universitet#om-virksomhed",
         "description": null,
-        "finalUrl": "https://jndata-career.talent-soft.com/job/job-automation-and-tools-domain-architect_428.aspx",
-        "id": "h1601423",
-        "location": "Silkeborg, Roskilde og mulighed for hjemmearbejde",
-        "publishedDate": "2025-10-04",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601423&ctx=w&jsid=939965259&jsp=21",
-        "title": "Automation and Tools Domain Architect"
-    },
-    {
-        "company": "Fibia P/S",
-        "companyUrl": "https://fibia.dk/om-os/",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1601983/ux-ui-designer",
-        "id": "h1601983",
-        "location": "Tilst eller Haslev og mulighed for hjemmearbejde",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601983&ctx=w&jsid=939965259&jsp=22",
-        "title": "UX/​UI designer"
-    },
-    {
-        "company": "Fibia P/S",
-        "companyUrl": "https://fibia.dk/om-os/",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1601955/ux-ui-designer",
-        "id": "h1601955",
-        "location": "Tilst / Haslev og mulighed for hjemmearbejde",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601955&ctx=w&jsid=939965259&jsp=23",
-        "title": "UX/​UI designer"
-    },
-    {
-        "company": "Københavns Kommune",
-        "companyUrl": "https://www.kk.dk/",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1601936/udvikler-til-en-af-nordeuropas-stoerste-servicenow-installationer-i-koncernit",
-        "id": "h1601936",
-        "location": "København NV",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601936&ctx=w&jsid=939965259&jsp=24",
-        "title": "Udvikler til en af Nordeuropas største ServiceNow-installationer i KoncernIT"
-    },
-    {
-        "company": "JN Data A/S",
-        "companyUrl": "https://www.jndata.dk/",
-        "description": null,
-        "finalUrl": "https://jndata-career.talent-soft.com/job/job-automation-engineer_436.aspx",
-        "id": "h1594463",
-        "location": "Silkeborg, Roskilde og mulighed for hjemmearbejde",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1594463&ctx=w&jsid=939965259&jsp=25",
-        "title": "Automation Engineer"
-    },
-    {
-        "company": "twoday A/S",
-        "companyUrl": "https://www.twoday.dk/lets-develop-a-better-world-twoday?utm_term=twoday&utm_campaign=Brand+-+Twoday&utm_source=adwords&utm_medium=ppc&hsa_acc=4227725119&hsa_cam=20280404304&hsa_grp=151226139260&hsa_ad=662776337484&hsa_src=g&hsa_tgt=kwd-309747555064&hsa_kw=twoday&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gclid=EAIaIQobChMI19n4rv6pgQMVioRoCR0u7gHYEAAYASAAEgJBYvD_BwE",
-        "description": null,
-        "finalUrl": "https://twodaydenmark.teamtailor.com/jobs/6554087-leder-du-efter-dit-naeste-job-som-udvikler",
-        "id": "h1602222",
-        "location": "Nordhavn",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602222&ctx=w&jsid=939965259&jsp=26",
-        "title": "Leder du efter dit næste job som udvikler?"
-    },
-    {
-        "company": "Semler Gruppen",
-        "companyUrl": "http://www.semler.dk/",
-        "description": null,
-        "finalUrl": "https://jobs.semler.dk/job/Br%C3%B8ndby-Studentermedhj%C3%A6lper-til-digital-l%C3%A6ring-hos-Semler-IT-2605/1328594757/",
-        "id": "h1602189",
-        "location": "Brøndby",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602189&ctx=w&jsid=939965259&jsp=27",
-        "title": "Studentermedhjælper til digital læring hos Semler IT"
-    },
-    {
-        "company": "Tryg Forsikring A/S",
-        "companyUrl": "https://tryg.dk/om-tryg",
-        "description": null,
-        "finalUrl": "https://careers.tryg.com/Tryg/job/Ballerup-Software-Engineer/1254100401/?applySourceOverride=Jobindex.dk&utm_campaign=jobindex&utm_source=jobindex",
-        "id": "h1602018",
-        "location": "Ballerup",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602018&ctx=w&jsid=939965259&jsp=28",
-        "title": "Software Engineer"
-    },
-    {
-        "company": "Tryg Forsikring A/S",
-        "companyUrl": "https://tryg.dk/om-tryg",
-        "description": null,
-        "finalUrl": "https://careers.tryg.com/Tryg/job/Ballerup-Data-Engineer/1254092701/?applySourceOverride=Jobindex.dk&utm_campaign=jobindex&utm_source=jobindex",
-        "id": "h1602004",
-        "location": "Ballerup",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1602004&ctx=w&jsid=939965259&jsp=29",
-        "title": "Data Engineer"
-    },
-    {
-        "company": "DTU, Danmarks Tekniske Universitet",
-        "companyUrl": "https://www.dtu.dk/",
-        "description": null,
-        "finalUrl": "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/da/sites/CX_2001/job/5857",
-        "id": "h1601846",
-        "location": "Kongens Lyngby",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601846&ctx=w&jsid=939965259&jsp=30",
-        "title": "PhD scholarship in computational chemistry and machine learning for organic electrolyte stability - DTU Energy"
-    },
-    {
-        "company": "Københavns Kommune",
-        "companyUrl": "/virksomhed/10683/koebenhavns-kommune#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1518&ProjectId=209690&DepartmentId=19530&MediaId=5",
-        "id": "r13361711",
+        "finalUrl": "https://www.vacancies.aau.dk/phd-positions/show-vacancy/vacancyId/863997",
+        "id": "r13369573",
         "location": "København",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13361711&ctx=w&jsid=939965259&jsp=31",
-        "title": "Udvikler til en af Nordeuropas største ServiceNow-installationer i Koncern IT"
+        "publishedDate": "2025-10-07",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13369573&ctx=w&jsid=940995714&jsp=54",
+        "title": "PhD in AI:SECURITY lab - Advanced trustworthy AI and its application to cybersecurity"
     },
     {
-        "company": "emagine",
-        "companyUrl": null,
+        "company": "Danske Bank",
+        "companyUrl": "/virksomhed/95/danske-bank#om-virksomhed",
         "description": null,
-        "finalUrl": "https://portal.emagine.org/jobs/170949/bi-consultant-architect?utm_source=JobindexDk",
-        "id": "r13361764",
-        "location": "København",
-        "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13361764&ctx=w&jsid=939965259&jsp=32",
-        "title": "BI Consultant / Architect"
+        "finalUrl": "https://www.jobindex.dk/jobannonce/r13369811/ai-operational-risk-governance-specialist-til-ai-data-innovation-i-danica",
+        "id": "r13369811",
+        "location": "København V",
+        "publishedDate": "2025-10-07",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13369811&ctx=w&jsid=940995714&jsp=55",
+        "title": "AI Operational risk & Governance specialist til AI & Data Innovation i Danica"
+    },
+    {
+        "company": "T P RADIO V/TONI PETERSEN",
+        "companyUrl": "/virksomhed/7507/tp-radio#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/r13369102/udvikler-til-elektronikvirksomheden-soeges",
+        "id": "r13369102",
+        "location": "Greve",
+        "publishedDate": "2025-10-07",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13369102&ctx=w&jsid=940995714&jsp=56",
+        "title": "Udvikler til elektronikvirksomheden søges"
     },
     {
         "company": "Flextribe",
@@ -359,7 +623,7 @@
         "id": "r13367470",
         "location": "København",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13367470&ctx=w&jsid=939965259&jsp=33",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13367470&ctx=w&jsid=940995714&jsp=57",
         "title": "UI/UX Designer"
     },
     {
@@ -370,7 +634,7 @@
         "id": "r13367468",
         "location": "København",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13367468&ctx=w&jsid=939965259&jsp=34",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13367468&ctx=w&jsid=940995714&jsp=58",
         "title": "Director of Engineering"
     },
     {
@@ -381,7 +645,7 @@
         "id": "r13367287",
         "location": "København",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13367287&ctx=w&jsid=939965259&jsp=35",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13367287&ctx=w&jsid=940995714&jsp=59",
         "title": "Senior .NET Engineer"
     },
     {
@@ -392,52 +656,118 @@
         "id": "r13367288",
         "location": "København",
         "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13367288&ctx=w&jsid=939965259&jsp=36",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13367288&ctx=w&jsid=940995714&jsp=60",
         "title": "Senior Engineer (1 year contract)"
     },
     {
-        "company": "Numina",
-        "companyUrl": null,
+        "company": "JN Data A/S",
+        "companyUrl": "https://www.jndata.dk/",
         "description": null,
-        "finalUrl": "https://thehub.io/jobs/68e39fc56909392aa3bd42f8?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13367474",
-        "location": "København",
-        "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13367474&ctx=w&jsid=939965259&jsp=37",
-        "title": "AI Engineer"
+        "finalUrl": "https://jndata-career.talent-soft.com/job/job-automation-and-tools-domain-architect_428.aspx",
+        "id": "h1601423",
+        "location": "Silkeborg, Roskilde og mulighed for hjemmearbejde",
+        "publishedDate": "2025-10-04",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601423&ctx=w&jsid=940995714&jsp=61",
+        "title": "Automation and Tools Domain Architect"
     },
     {
-        "company": "SimCorp A/S",
-        "companyUrl": "/virksomhed/319/simcorp-a-s#om-virksomhed",
+        "company": "Fibia P/S",
+        "companyUrl": "https://fibia.dk/om-os/",
         "description": null,
-        "finalUrl": "https://simcorp.wd3.myworkdayjobs.com/SimCorp_Jobs/job/Copenhagen/Lead-Software-Engineer_R-210186",
-        "id": "r13367700",
-        "location": "København",
-        "publishedDate": "2025-10-06",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13367700&ctx=w&jsid=939965259&jsp=38",
-        "title": "Lead Software Engineer (C#/.NET, Azure)"
-    },
-    {
-        "company": "Synthesia",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68e0671d6b6a942af77f3915?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13365149",
-        "location": "København",
-        "publishedDate": "2025-10-05",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13365149&ctx=w&jsid=939965259&jsp=39",
-        "title": "Senior Machine Learning - AI & GPU Performance"
-    },
-    {
-        "company": "LEGO System A/S",
-        "companyUrl": "/virksomhed/9659/lego-system-a-s#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://www.lego.com/da-dk/careers/job/software-engineer-genai-tech-enablement-beef5105ce2c1000dc959c21feb60000",
-        "id": "r13363406",
-        "location": "København",
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1601983/ux-ui-designer",
+        "id": "h1601983",
+        "location": "Tilst eller Haslev og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-03",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13363406&ctx=w&jsid=939965259&jsp=40",
-        "title": "Software Engineer - GenAI Tech Enablement"
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601983&ctx=w&jsid=940995714&jsp=62",
+        "title": "UX/​UI designer"
+    },
+    {
+        "company": "Fibia P/S",
+        "companyUrl": "https://fibia.dk/om-os/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1601955/ux-ui-designer",
+        "id": "h1601955",
+        "location": "Tilst / Haslev og mulighed for hjemmearbejde",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601955&ctx=w&jsid=940995714&jsp=63",
+        "title": "UX/​UI designer"
+    },
+    {
+        "company": "Københavns Kommune",
+        "companyUrl": "https://www.kk.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1601936/udvikler-til-en-af-nordeuropas-stoerste-servicenow-installationer-i-koncernit",
+        "id": "h1601936",
+        "location": "København NV",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601936&ctx=w&jsid=940995714&jsp=64",
+        "title": "Udvikler til en af Nordeuropas største ServiceNow-installationer i KoncernIT"
+    },
+    {
+        "company": "JN Data A/S",
+        "companyUrl": "https://www.jndata.dk/",
+        "description": null,
+        "finalUrl": "https://jndata-career.talent-soft.com/job/job-automation-softwaredeveloper_436.aspx",
+        "id": "h1594463",
+        "location": "Silkeborg, Roskilde og mulighed for hjemmearbejde",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1594463&ctx=w&jsid=940995714&jsp=65",
+        "title": "Automation Softwaredeveloper"
+    },
+    {
+        "company": "twoday A/S",
+        "companyUrl": "https://www.twoday.dk/lets-develop-a-better-world-twoday?utm_term=twoday&utm_campaign=Brand+-+Twoday&utm_source=adwords&utm_medium=ppc&hsa_acc=4227725119&hsa_cam=20280404304&hsa_grp=151226139260&hsa_ad=662776337484&hsa_src=g&hsa_tgt=kwd-309747555064&hsa_kw=twoday&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gclid=EAIaIQobChMI19n4rv6pgQMVioRoCR0u7gHYEAAYASAAEgJBYvD_BwE",
+        "description": null,
+        "finalUrl": "https://twodaydenmark.teamtailor.com/jobs/6554087-leder-du-efter-dit-naeste-job-som-udvikler",
+        "id": "h1602222",
+        "location": "Nordhavn",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602222&ctx=w&jsid=940995714&jsp=66",
+        "title": "Leder du efter dit næste job som udvikler?"
+    },
+    {
+        "company": "Semler Gruppen",
+        "companyUrl": "http://www.semler.dk/",
+        "description": null,
+        "finalUrl": "https://jobs.semler.dk/job/Br%C3%B8ndby-Studentermedhj%C3%A6lper-til-digital-l%C3%A6ring-hos-Semler-IT-2605/1328594757/",
+        "id": "h1602189",
+        "location": "Brøndby",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602189&ctx=w&jsid=940995714&jsp=67",
+        "title": "Studentermedhjælper til digital læring hos Semler IT"
+    },
+    {
+        "company": "Tryg Forsikring A/S",
+        "companyUrl": "https://tryg.dk/om-tryg",
+        "description": null,
+        "finalUrl": "https://careers.tryg.com/Tryg/job/Ballerup-Software-Engineer/1254100401/?applySourceOverride=Jobindex.dk&utm_campaign=jobindex&utm_source=jobindex",
+        "id": "h1602018",
+        "location": "Ballerup",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602018&ctx=w&jsid=940995714&jsp=68",
+        "title": "Software Engineer"
+    },
+    {
+        "company": "Tryg Forsikring A/S",
+        "companyUrl": "https://tryg.dk/om-tryg",
+        "description": null,
+        "finalUrl": "https://careers.tryg.com/Tryg/job/Ballerup-Data-Engineer/1254092701/?applySourceOverride=Jobindex.dk&utm_campaign=jobindex&utm_source=jobindex",
+        "id": "h1602004",
+        "location": "Ballerup",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1602004&ctx=w&jsid=940995714&jsp=69",
+        "title": "Data Engineer"
+    },
+    {
+        "company": "DTU, Danmarks Tekniske Universitet",
+        "companyUrl": "https://www.dtu.dk/",
+        "description": null,
+        "finalUrl": "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/da/sites/CX_2001/job/5857",
+        "id": "h1601846",
+        "location": "Kongens Lyngby",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601846&ctx=w&jsid=940995714&jsp=70",
+        "title": "PhD scholarship in computational chemistry and machine learning for organic electrolyte stability - DTU Energy"
     },
     {
         "company": "e-Boks",
@@ -447,7 +777,7 @@
         "id": "h1601542",
         "location": "Hellerup og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-02",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601542&ctx=w&jsid=939965259&jsp=41",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601542&ctx=w&jsid=940995714&jsp=71",
         "title": "Senior Output Management Specialist"
     },
     {
@@ -458,7 +788,7 @@
         "id": "h1601453",
         "location": "Roskilde og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-02",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601453&ctx=w&jsid=939965259&jsp=42",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601453&ctx=w&jsid=940995714&jsp=72",
         "title": "Batch Planner"
     },
     {
@@ -469,7 +799,7 @@
         "id": "h1601421",
         "location": "Roskilde og mulighed for hjemmearbejde",
         "publishedDate": "2025-10-02",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601421&ctx=w&jsid=939965259&jsp=43",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601421&ctx=w&jsid=940995714&jsp=73",
         "title": "Shared Services Domain Architect"
     },
     {
@@ -480,8 +810,74 @@
         "id": "h1601704",
         "location": "Nordhavn",
         "publishedDate": "2025-10-02",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601704&ctx=w&jsid=939965259&jsp=44",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601704&ctx=w&jsid=940995714&jsp=74",
         "title": "Forretningsudvikler med flair for ESDH og digitale løsninger"
+    },
+    {
+        "company": "Københavns Kommune",
+        "companyUrl": "/virksomhed/10683/koebenhavns-kommune#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1518&ProjectId=209690&DepartmentId=19530&MediaId=5",
+        "id": "r13361711",
+        "location": "København",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13361711&ctx=w&jsid=940995714&jsp=75",
+        "title": "Udvikler til en af Nordeuropas største ServiceNow-installationer i Koncern IT"
+    },
+    {
+        "company": "emagine",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://portal.emagine.org/jobs/170949/bi-consultant-architect?utm_source=JobindexDk",
+        "id": "r13361764",
+        "location": "København",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13361764&ctx=w&jsid=940995714&jsp=76",
+        "title": "BI Consultant / Architect"
+    },
+    {
+        "company": "Numina",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68e39fc56909392aa3bd42f8?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13367474",
+        "location": "København",
+        "publishedDate": "2025-10-06",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13367474&ctx=w&jsid=940995714&jsp=77",
+        "title": "AI Engineer"
+    },
+    {
+        "company": "SimCorp A/S",
+        "companyUrl": "/virksomhed/319/simcorp-a-s#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://simcorp.wd3.myworkdayjobs.com/SimCorp_Jobs/job/Copenhagen/Lead-Software-Engineer_R-210186",
+        "id": "r13367700",
+        "location": "København",
+        "publishedDate": "2025-10-06",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13367700&ctx=w&jsid=940995714&jsp=78",
+        "title": "Lead Software Engineer (C#/.NET, Azure)"
+    },
+    {
+        "company": "Synthesia",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68e0671d6b6a942af77f3915?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13365149",
+        "location": "København",
+        "publishedDate": "2025-10-05",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13365149&ctx=w&jsid=940995714&jsp=79",
+        "title": "Senior Machine Learning Engineer - AI & GPU Performance"
+    },
+    {
+        "company": "LEGO System A/S",
+        "companyUrl": "/virksomhed/9659/lego-system-a-s#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://www.lego.com/da-dk/careers/job/software-engineer-genai-tech-enablement-beef5105ce2c1000dc959c21feb60000",
+        "id": "r13363406",
+        "location": "København",
+        "publishedDate": "2025-10-03",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13363406&ctx=w&jsid=940995714&jsp=80",
+        "title": "Software Engineer - GenAI Tech Enablement"
     },
     {
         "company": "Academic Work",
@@ -491,7 +887,7 @@
         "id": "h1601445",
         "location": "København",
         "publishedDate": "2025-10-02",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601445&ctx=w&jsid=939965259&jsp=45",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601445&ctx=w&jsid=940995714&jsp=81",
         "title": "Bliv COBOL udvikler hos Jyske Bank på 12 uger via AW-Academy!"
     },
     {
@@ -502,7 +898,7 @@
         "id": "h1601186",
         "location": "Copenhagen, hybrid position",
         "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601186&ctx=w&jsid=939965259&jsp=46",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601186&ctx=w&jsid=940995714&jsp=82",
         "title": "Product Owner - Product Configuration"
     },
     {
@@ -513,7 +909,7 @@
         "id": "h1600989",
         "location": "København SV",
         "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600989&ctx=w&jsid=939965259&jsp=47",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600989&ctx=w&jsid=940995714&jsp=83",
         "title": "Ansvarlig for frontend-udvikling til vores selvbetjenings-platform"
     },
     {
@@ -524,7 +920,7 @@
         "id": "h1600979",
         "location": "København SV",
         "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600979&ctx=w&jsid=939965259&jsp=48",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600979&ctx=w&jsid=940995714&jsp=84",
         "title": "Ansvarlig for backend-udvikling til vores selvbetjenings-platform (.NET-udvikler)"
     },
     {
@@ -535,7 +931,7 @@
         "id": "h1585271",
         "location": "Copenhagen",
         "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1585271&ctx=w&jsid=939965259&jsp=49",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1585271&ctx=w&jsid=940995714&jsp=85",
         "title": "Senior Developer Experience Engineer"
     },
     {
@@ -546,7 +942,7 @@
         "id": "h1601200",
         "location": "Hørsholm",
         "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1601200&ctx=w&jsid=939965259&jsp=50",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1601200&ctx=w&jsid=940995714&jsp=86",
         "title": "Developer"
     },
     {
@@ -557,7 +953,7 @@
         "id": "h1600977",
         "location": "Kgs. Lyngby",
         "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600977&ctx=w&jsid=939965259&jsp=51",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600977&ctx=w&jsid=940995714&jsp=87",
         "title": "PhD scholarship in Runtime Multimodal Multiplayer Virtual Learning Environment (VLE) - DTU Construct"
     },
     {
@@ -568,7 +964,7 @@
         "id": "h1600933",
         "location": "Søborg",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600933&ctx=w&jsid=939965259&jsp=52",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600933&ctx=w&jsid=940995714&jsp=88",
         "title": "Teknisk tester og Systemspecialist"
     },
     {
@@ -579,7 +975,7 @@
         "id": "h1600838",
         "location": "Ølstykke og mulighed for hjemmearbejde",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600838&ctx=w&jsid=939965259&jsp=53",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600838&ctx=w&jsid=940995714&jsp=89",
         "title": "RPA-udvikler til Digitaliseringsafdelingen"
     },
     {
@@ -590,74 +986,8 @@
         "id": "h1600802",
         "location": "Herlev",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600802&ctx=w&jsid=939965259&jsp=54",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600802&ctx=w&jsid=940995714&jsp=90",
         "title": "Netværksarkitekt/​-ingeniør med projektfokus – vil du have ansvar, indflydelse og komplekse udfordringer?"
-    },
-    {
-        "company": "Region Hovedstaden",
-        "companyUrl": "/virksomhed/22929/region-hovedstaden#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=342&ProjectId=264646&DepartmentId=11977&MediaId=5",
-        "id": "r13359778",
-        "location": "Hillerød",
-        "publishedDate": "2025-10-02",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13359778&ctx=w&jsid=939965259&jsp=55",
-        "title": "IT-arkitekt med kodekræfter til miljøets tjeneste"
-    },
-    {
-        "company": "UNOPS",
-        "companyUrl": "/virksomhed/22303/unops#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://unjobs.org/vacancies/1759343424996",
-        "id": "r13360967",
-        "location": "København Ø",
-        "publishedDate": "2025-10-02",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13360967&ctx=w&jsid=939965259&jsp=56",
-        "title": "Atlassian Solution Coordinator, Copenhagen, Denmark"
-    },
-    {
-        "company": "DataPeeps ApS",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/r13356597/junior-data-scientist",
-        "id": "r13356597",
-        "location": "Kastrup",
-        "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13356597&ctx=w&jsid=939965259&jsp=57",
-        "title": "Junior Data Scientist"
-    },
-    {
-        "company": "Enfx",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68c94e37ca64915567541a33?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13357922",
-        "location": "København",
-        "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13357922&ctx=w&jsid=939965259&jsp=58",
-        "title": "Front-end developer (UI/UX) for Fintech Startup"
-    },
-    {
-        "company": "Movinn",
-        "companyUrl": "/virksomhed/48364/movinn-a-s#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68dd08386909392aa307f8a2?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13357921",
-        "location": "København",
-        "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13357921&ctx=w&jsid=939965259&jsp=59",
-        "title": "Full-stack developer"
-    },
-    {
-        "company": "Self® AI massage robot",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d3f0f8d32d603140adf957?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13357881",
-        "location": "København",
-        "publishedDate": "2025-10-01",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13357881&ctx=w&jsid=939965259&jsp=60",
-        "title": "IoT / robotics developer for disruptive massage robotics startup"
     },
     {
         "company": "Actuo A/S",
@@ -667,7 +997,7 @@
         "id": "h1600720",
         "location": "København K",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600720&ctx=w&jsid=939965259&jsp=61",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600720&ctx=w&jsid=940995714&jsp=91",
         "title": "IT-specialist til drift og overvågning af servermiljøer samt udvikling og test af software applikationer"
     },
     {
@@ -678,7 +1008,7 @@
         "id": "h1600716",
         "location": "Taastrup",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600716&ctx=w&jsid=939965259&jsp=62",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600716&ctx=w&jsid=940995714&jsp=92",
         "title": "LPS Design Engineer"
     },
     {
@@ -689,7 +1019,7 @@
         "id": "h1600670",
         "location": "Frederiksberg",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600670&ctx=w&jsid=939965259&jsp=63",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600670&ctx=w&jsid=940995714&jsp=93",
         "title": "Domænearkitekt til Gældssystemer"
     },
     {
@@ -700,8 +1030,74 @@
         "id": "h1592864",
         "location": "Roskilde og mulighed for hjemmearbejde",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1592864&ctx=w&jsid=939965259&jsp=64",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1592864&ctx=w&jsid=940995714&jsp=94",
         "title": "Senior Batch Planner"
+    },
+    {
+        "company": "Region Hovedstaden",
+        "companyUrl": "/virksomhed/22929/region-hovedstaden#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=342&ProjectId=264646&DepartmentId=11977&MediaId=5",
+        "id": "r13359778",
+        "location": "Hillerød",
+        "publishedDate": "2025-10-02",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13359778&ctx=w&jsid=940995714&jsp=95",
+        "title": "IT-arkitekt med kodekræfter til miljøets tjeneste"
+    },
+    {
+        "company": "UNOPS",
+        "companyUrl": "/virksomhed/22303/unops#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://unjobs.org/vacancies/1759343424996",
+        "id": "r13360967",
+        "location": "København Ø",
+        "publishedDate": "2025-10-02",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13360967&ctx=w&jsid=940995714&jsp=96",
+        "title": "Atlassian Solution Coordinator, Copenhagen, Denmark"
+    },
+    {
+        "company": "DataPeeps ApS",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/r13356597/junior-data-scientist",
+        "id": "r13356597",
+        "location": "Kastrup",
+        "publishedDate": "2025-10-01",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13356597&ctx=w&jsid=940995714&jsp=97",
+        "title": "Junior Data Scientist"
+    },
+    {
+        "company": "Enfx",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68c94e37ca64915567541a33?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13357922",
+        "location": "København",
+        "publishedDate": "2025-10-01",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13357922&ctx=w&jsid=940995714&jsp=98",
+        "title": "Front-end developer (UI/UX) for Fintech Startup"
+    },
+    {
+        "company": "Movinn",
+        "companyUrl": "/virksomhed/48364/movinn-a-s#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68dd08386909392aa307f8a2?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13357921",
+        "location": "København",
+        "publishedDate": "2025-10-01",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13357921&ctx=w&jsid=940995714&jsp=99",
+        "title": "Full-stack developer"
+    },
+    {
+        "company": "Self® AI massage robot",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68d3f0f8d32d603140adf957?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13357881",
+        "location": "København",
+        "publishedDate": "2025-10-01",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13357881&ctx=w&jsid=940995714&jsp=100",
+        "title": "IoT / robotics developer for disruptive massage robotics startup"
     },
     {
         "company": "Collectia A/S",
@@ -711,7 +1107,7 @@
         "id": "h1600940",
         "location": "Brøndby",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600940&ctx=w&jsid=939965259&jsp=65",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600940&ctx=w&jsid=940995714&jsp=101",
         "title": "Tænder udvikling og innovation en gnist i dig? Så er du måske vores nye Frontend Developer"
     },
     {
@@ -722,7 +1118,7 @@
         "id": "h1600779",
         "location": "Søborg",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600779&ctx=w&jsid=939965259&jsp=66",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600779&ctx=w&jsid=940995714&jsp=102",
         "title": "Udvikler med flair for infrastruktur til PET, der vil være med, når det gælder"
     },
     {
@@ -733,7 +1129,7 @@
         "id": "h1600759",
         "location": "Kgs. Lyngby",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600759&ctx=w&jsid=939965259&jsp=67",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600759&ctx=w&jsid=940995714&jsp=103",
         "title": "Two PhD scholarships in Privacy-Preserving Data Sharing for Future Energy Systems - DTU Wind"
     },
     {
@@ -744,7 +1140,7 @@
         "id": "h1600699",
         "location": "Smørum",
         "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600699&ctx=w&jsid=939965259&jsp=68",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600699&ctx=w&jsid=940995714&jsp=104",
         "title": "Student Assistant - IT & Digitalization"
     },
     {
@@ -755,18 +1151,18 @@
         "id": "h1600555",
         "location": "Copenhagen",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600555&ctx=w&jsid=939965259&jsp=69",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600555&ctx=w&jsid=940995714&jsp=105",
         "title": "Senior Data Steward for Genome Database"
     },
     {
         "company": "Servier Symphogen A/S",
         "companyUrl": "https://serviersymphogen.com/",
         "description": null,
-        "finalUrl": "https://serviersymphogen.com/careers/open-positions/it-data-engineer-1-year-maternity-cover/",
+        "finalUrl": "https://www.jobindex.dk/c?t=h1600514&ctx=w&jsid=940995714&jsp=106",
         "id": "h1600514",
         "location": "Ballerup",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600514&ctx=w&jsid=939965259&jsp=70",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600514&ctx=w&jsid=940995714&jsp=106",
         "title": "IT Data Engineer (1-year maternity cover)"
     },
     {
@@ -777,7 +1173,7 @@
         "id": "h1600508",
         "location": "Ballerup og mulighed for hjemmearbejde",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600508&ctx=w&jsid=939965259&jsp=71",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600508&ctx=w&jsid=940995714&jsp=107",
         "title": "Mainframe Platform Engineer"
     },
     {
@@ -788,7 +1184,7 @@
         "id": "h1600417",
         "location": "Hvidovre og mulighed for hjemmearbejde",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600417&ctx=w&jsid=939965259&jsp=72",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600417&ctx=w&jsid=940995714&jsp=108",
         "title": "Erfarne og nyuddannede Teknisk Risiko Managers samt militære officerer søges - sammen sikrer vi fundamentet for Danmarks digitale forsvarsevne"
     },
     {
@@ -799,7 +1195,7 @@
         "id": "h1600335",
         "location": "Ringsted",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600335&ctx=w&jsid=939965259&jsp=73",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600335&ctx=w&jsid=940995714&jsp=109",
         "title": "Vil du arbejde med kritisk IT? Vi søger Backup- og Storage/​VMware-specialister med passion!"
     },
     {
@@ -810,7 +1206,7 @@
         "id": "h1600243",
         "location": "Copenhagen",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600243&ctx=w&jsid=939965259&jsp=74",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600243&ctx=w&jsid=940995714&jsp=110",
         "title": "Senior Software Developer - become a part of new team in Copenhagen with the defence software domain"
     },
     {
@@ -821,7 +1217,7 @@
         "id": "h1600513",
         "location": "Ballerup",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600513&ctx=w&jsid=939965259&jsp=75",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600513&ctx=w&jsid=940995714&jsp=111",
         "title": "Full-Stack udvikler til Tryg Trade (Vikariat)"
     },
     {
@@ -832,7 +1228,7 @@
         "id": "h1600482",
         "location": "Nordhavn og mulighed for hjemmearbejde",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600482&ctx=w&jsid=939965259&jsp=76",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600482&ctx=w&jsid=940995714&jsp=112",
         "title": "Development Lead (Teamleder) - Credit Risk & IRB Modelling Tech samt Credit Risk Platforms"
     },
     {
@@ -843,41 +1239,8 @@
         "id": "h1600477",
         "location": "Nordhavn eller Aalborg",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600477&ctx=w&jsid=939965259&jsp=77",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600477&ctx=w&jsid=940995714&jsp=113",
         "title": "Fullstack Developer til Channels (Optimizely)"
-    },
-    {
-        "company": "emagine",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://portal.emagine.org/jobs/170888/senior-data-architect-data-engineer?utm_source=JobindexDk",
-        "id": "r13353912",
-        "location": "København",
-        "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13353912&ctx=w&jsid=939965259&jsp=78",
-        "title": "Senior Data Architect / Data Engineer"
-    },
-    {
-        "company": "Neurons",
-        "companyUrl": "/virksomhed/62060/neurons-inc#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68db1ddd6b6a942af756bb56?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13354206",
-        "location": "Taastrup",
-        "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13354206&ctx=w&jsid=939965259&jsp=79",
-        "title": "Senior AI Engineer"
-    },
-    {
-        "company": "VELUX A/S",
-        "companyUrl": "/virksomhed/370/velux-a-s#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://velux.wd3.myworkdayjobs.com/Velux_Residential/job/Jupitervej-4-Kolding/Solution-Architect---HCI---Windows-Infrastructure_R1069530",
-        "id": "r13354688",
-        "location": "Hørsholm, Kolding",
-        "publishedDate": "2025-09-30",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13354688&ctx=w&jsid=939965259&jsp=80",
-        "title": "Solution Architect – HCI & Windows Infrastructure"
     },
     {
         "company": "Nykredit",
@@ -887,7 +1250,7 @@
         "id": "h1600269",
         "location": "Nordhavn",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600269&ctx=w&jsid=939965259&jsp=81",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600269&ctx=w&jsid=940995714&jsp=114",
         "title": "SimCorp Dimension Specialist for Exciting Product Team in Nykredit's Wealth Division"
     },
     {
@@ -898,162 +1261,41 @@
         "id": "h1600258",
         "location": "Nordhavn",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600258&ctx=w&jsid=939965259&jsp=82",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600258&ctx=w&jsid=940995714&jsp=115",
         "title": "Development Lead (Team Leader) - Wealth Back Office Products"
     },
     {
-        "company": "Frederiksberg Kommune",
-        "companyUrl": "https://www.frederiksberg.dk/",
+        "company": "emagine",
+        "companyUrl": null,
         "description": null,
-        "finalUrl": "https://frederiksberg.career.emply.com/ad/rpa-udvikler-med-staerke-samarbejdsevner-interesse-for-ai-og-lyst-til-at-nytaenke/0lceyl/da",
-        "id": "h1600194",
-        "location": "Frederiksberg",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600194&ctx=w&jsid=939965259&jsp=83",
-        "title": "RPA-udvikler med stærke samarbejdsevner, interesse for AI og lyst til at nytænke digitale processer"
+        "finalUrl": "https://portal.emagine.org/jobs/170888/senior-data-architect-data-engineer?utm_source=JobindexDk",
+        "id": "r13353912",
+        "location": "København",
+        "publishedDate": "2025-09-30",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13353912&ctx=w&jsid=940995714&jsp=116",
+        "title": "Senior Data Architect / Data Engineer"
     },
     {
-        "company": "If Skadeforsikring",
-        "companyUrl": "https://www.if.dk/privat",
+        "company": "Neurons",
+        "companyUrl": "/virksomhed/62060/neurons-inc#om-virksomhed",
         "description": null,
-        "finalUrl": "https://if.wd3.myworkdayjobs.com/Careers/job/Kbenhavn/Guidewire-Platform---Operations-Lead_JobReqID9640",
-        "id": "h1600164",
-        "location": "Ballerup with the possibility to work from home",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600164&ctx=w&jsid=939965259&jsp=84",
-        "title": "Guidewire Platform & Operations Lead"
-    },
-    {
-        "company": "If Skadeforsikring",
-        "companyUrl": "https://www.if.dk/privat",
-        "description": null,
-        "finalUrl": "https://if.wd3.myworkdayjobs.com/Careers/job/Kbenhavn/Guidewire-Tech-Lead_JobReqID9641",
-        "id": "h1600153",
-        "location": "Ballerup with the possibility to work from home",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600153&ctx=w&jsid=939965259&jsp=85",
-        "title": "Guidewire Tech Lead"
-    },
-    {
-        "company": "KAB",
-        "companyUrl": "https://www.kab-bolig.dk/boligsoegende",
-        "description": null,
-        "finalUrl": "https://kab.career.emply.com/ad/service-integration-application-manager/m68i62/da",
-        "id": "h1600147",
-        "location": "København SV",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600147&ctx=w&jsid=939965259&jsp=86",
-        "title": "Service Integration & Application Manager"
-    },
-    {
-        "company": "Andel Holding A/S",
-        "companyUrl": "https://andel.dk/",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=277&ProjectId=190715&DepartmentId=21847&MediaId=5558",
-        "id": "h1600118",
-        "location": "Svinninge og mulighed for hjemmearbejde",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600118&ctx=w&jsid=939965259&jsp=87",
-        "title": "SAP Senior Consultant – kom med på vores grønne IT-transformationsrejse"
-    },
-    {
-        "company": "Tjellesen Max Jenne A/S",
-        "companyUrl": "http://www.tmj.dk/",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1600016/it-manager",
-        "id": "h1600016",
+        "finalUrl": "https://thehub.io/jobs/68db1ddd6b6a942af756bb56?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13354206",
         "location": "Taastrup",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600016&ctx=w&jsid=939965259&jsp=88",
-        "title": "IT-Manager"
+        "publishedDate": "2025-09-30",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13354206&ctx=w&jsid=940995714&jsp=117",
+        "title": "Senior AI Engineer"
     },
     {
-        "company": "GF Forsikring",
-        "companyUrl": "https://www.gfforsikring.dk/",
+        "company": "VELUX A/S",
+        "companyUrl": "/virksomhed/370/velux-a-s#om-virksomhed",
         "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1599950/tia-oracle-udvikler",
-        "id": "h1599950",
-        "location": "København S",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599950&ctx=w&jsid=939965259&jsp=89",
-        "title": "TIA/​Oracle-udvikler"
-    },
-    {
-        "company": "Vurderingsstyrelsen",
-        "companyUrl": "https://www.vurdst.dk/",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=3010&ProjectId=151012&DepartmentId=19145&MediaId=5130",
-        "id": "h1599901",
-        "location": "Frederiksberg",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599901&ctx=w&jsid=939965259&jsp=90",
-        "title": "Datadreven forretningsanalytiker til videreudvikling af ejendomsbeskatning"
-    },
-    {
-        "company": "Everllence",
-        "companyUrl": "https://www.everllence.com/",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1877&ProjectId=145895&DepartmentId=19149&MediaId=4619",
-        "id": "h1599827",
-        "location": "Copenhagen",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599827&ctx=w&jsid=939965259&jsp=91",
-        "title": "Python & AI Developer - Engine Lifecycle Management"
-    },
-    {
-        "company": "Systematic A/S",
-        "companyUrl": "https://jobs.systematic.com/job/Copenhagen-Azure-Cloud-Engineer-Shape-the-future-of-defence-software-training-technology-1300/1241804401/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
-        "description": null,
-        "finalUrl": "https://jobs.systematic.com/job/Copenhagen-Azure-Cloud-Engineer-Shape-the-future-of-defence-software-training-technology-1300/1241804401/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
-        "id": "h1592068",
-        "location": "Copenhagen",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1592068&ctx=w&jsid=939965259&jsp=92",
-        "title": "Azure Cloud Engineer - Shape the future of defence software training technology"
-    },
-    {
-        "company": "Rigspolitiet",
-        "companyUrl": "https://www.politi.dk/",
-        "description": null,
-        "finalUrl": "https://job.politi.dk/job/Teknisk-testere-til-nyt%2C-internationalt-dom%C3%A6ne/2822-da_DK",
-        "id": "h1600175",
-        "location": "Glostrup",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600175&ctx=w&jsid=939965259&jsp=93",
-        "title": "Tekniske testere til nyt, internationalt domæne"
-    },
-    {
-        "company": "Politiets Efterretningstjeneste",
-        "companyUrl": "https://pet.dk/da",
-        "description": null,
-        "finalUrl": "https://job.politi.dk/job/Bliv-en-af-L%C3%B8sningsarkitekterne-bag-PET&apos;s-teknologiske-fremtid-og-bidrag-til-national-sikkerhed/2813-da_DK",
-        "id": "h1600160",
-        "location": "Søborg",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600160&ctx=w&jsid=939965259&jsp=94",
-        "title": "Bliv en af løsningsarkitekterne bag PET's teknologiske fremtid og bidrag til national sikkerhed"
-    },
-    {
-        "company": "Politiets Efterretningstjeneste",
-        "companyUrl": "https://pet.dk/da",
-        "description": null,
-        "finalUrl": "https://job.politi.dk/job/PET-s%C3%B8ger-IT-sikkerhedsspecialister-med-mod-p%C3%A5-en-hverdag%2C-der-aldrig-bliver-hverdag/2816-da_DK",
-        "id": "h1600156",
-        "location": "Søborg",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600156&ctx=w&jsid=939965259&jsp=95",
-        "title": "PET søger IT-sikkerhedsspecialister med mod på en hverdag, der aldrig bliver hverdag"
-    },
-    {
-        "company": "PFA",
-        "companyUrl": "http://www.pfa.dk/",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1600005/data-engineer-med-interesse-i-azure-og-databricks",
-        "id": "h1600005",
-        "location": "København Ø og mulighed for hjemmearbejde",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1600005&ctx=w&jsid=939965259&jsp=96",
-        "title": "Data Engineer med interesse i Azure og Databricks"
+        "finalUrl": "https://velux.wd3.myworkdayjobs.com/Velux_Residential/job/Jupitervej-4-Kolding/Solution-Architect---HCI---Windows-Infrastructure_R1069530",
+        "id": "r13354688",
+        "location": "Hørsholm, Kolding",
+        "publishedDate": "2025-09-30",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13354688&ctx=w&jsid=940995714&jsp=118",
+        "title": "Solution Architect – HCI & Windows Infrastructure"
     },
     {
         "company": "Alice.tech",
@@ -1063,7 +1305,7 @@
         "id": "r13352086",
         "location": "København",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13352086&ctx=w&jsid=939965259&jsp=97",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13352086&ctx=w&jsid=940995714&jsp=119",
         "title": "Senior Frontend Engineer"
     },
     {
@@ -1074,30 +1316,151 @@
         "id": "r13352087",
         "location": "København",
         "publishedDate": "2025-09-29",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13352087&ctx=w&jsid=939965259&jsp=98",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13352087&ctx=w&jsid=940995714&jsp=120",
         "title": "Staff Data Engineer"
     },
     {
-        "company": "GN Group",
-        "companyUrl": "/virksomhed/442/gn-group#om-virksomhed",
+        "company": "Frederiksberg Kommune",
+        "companyUrl": "https://www.frederiksberg.dk/",
         "description": null,
-        "finalUrl": "https://gn.wd3.myworkdayjobs.com/GN-Careers/job/Ballerup/Domain-Architect_R26456",
-        "id": "r13350094",
-        "location": "Ballerup",
-        "publishedDate": "2025-09-28",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13350094&ctx=w&jsid=939965259&jsp=99",
-        "title": "Domain Architect"
+        "finalUrl": "https://frederiksberg.career.emply.com/ad/rpa-udvikler-med-staerke-samarbejdsevner-interesse-for-ai-og-lyst-til-at-nytaenke/0lceyl/da",
+        "id": "h1600194",
+        "location": "Frederiksberg",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600194&ctx=w&jsid=940995714&jsp=121",
+        "title": "RPA-udvikler med stærke samarbejdsevner, interesse for AI og lyst til at nytænke digitale processer"
     },
     {
-        "company": "Pandektes",
-        "companyUrl": null,
+        "company": "If Skadeforsikring",
+        "companyUrl": "https://www.if.dk/privat",
         "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d909100c688c2ac6bb18ff?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13350095",
-        "location": "København",
-        "publishedDate": "2025-09-28",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13350095&ctx=w&jsid=939965259&jsp=100",
-        "title": "Senior Backend Engineer"
+        "finalUrl": "https://if.wd3.myworkdayjobs.com/Careers/job/Kbenhavn/Guidewire-Platform---Operations-Lead_JobReqID9640",
+        "id": "h1600164",
+        "location": "Ballerup with the possibility to work from home",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600164&ctx=w&jsid=940995714&jsp=122",
+        "title": "Guidewire Platform & Operations Lead"
+    },
+    {
+        "company": "If Skadeforsikring",
+        "companyUrl": "https://www.if.dk/privat",
+        "description": null,
+        "finalUrl": "https://if.wd3.myworkdayjobs.com/Careers/job/Kbenhavn/Guidewire-Tech-Lead_JobReqID9641",
+        "id": "h1600153",
+        "location": "Ballerup with the possibility to work from home",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600153&ctx=w&jsid=940995714&jsp=123",
+        "title": "Guidewire Tech Lead"
+    },
+    {
+        "company": "KAB",
+        "companyUrl": "https://www.kab-bolig.dk/boligsoegende",
+        "description": null,
+        "finalUrl": "https://kab.career.emply.com/ad/service-integration-application-manager/m68i62/da",
+        "id": "h1600147",
+        "location": "København SV",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600147&ctx=w&jsid=940995714&jsp=124",
+        "title": "Service Integration & Application Manager"
+    },
+    {
+        "company": "Andel Holding A/S",
+        "companyUrl": "https://andel.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=277&ProjectId=190715&DepartmentId=21847&MediaId=5558",
+        "id": "h1600118",
+        "location": "Svinninge og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600118&ctx=w&jsid=940995714&jsp=125",
+        "title": "SAP Senior Consultant – kom med på vores grønne IT-transformationsrejse"
+    },
+    {
+        "company": "Tjellesen Max Jenne A/S",
+        "companyUrl": "http://www.tmj.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1600016/it-manager",
+        "id": "h1600016",
+        "location": "Taastrup",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600016&ctx=w&jsid=940995714&jsp=126",
+        "title": "IT-Manager"
+    },
+    {
+        "company": "GF Forsikring",
+        "companyUrl": "https://www.gfforsikring.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1599950/tia-oracle-udvikler",
+        "id": "h1599950",
+        "location": "København S",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599950&ctx=w&jsid=940995714&jsp=127",
+        "title": "TIA/​Oracle-udvikler"
+    },
+    {
+        "company": "Vurderingsstyrelsen",
+        "companyUrl": "https://www.vurdst.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=3010&ProjectId=151012&DepartmentId=19145&MediaId=5130",
+        "id": "h1599901",
+        "location": "Frederiksberg",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599901&ctx=w&jsid=940995714&jsp=128",
+        "title": "Datadreven forretningsanalytiker til videreudvikling af ejendomsbeskatning"
+    },
+    {
+        "company": "Everllence",
+        "companyUrl": "https://www.everllence.com/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1877&ProjectId=145895&DepartmentId=19149&MediaId=4619",
+        "id": "h1599827",
+        "location": "Copenhagen",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599827&ctx=w&jsid=940995714&jsp=129",
+        "title": "Python & AI Developer - Engine Lifecycle Management"
+    },
+    {
+        "company": "Systematic A/S",
+        "companyUrl": "https://jobs.systematic.com/job/Copenhagen-Azure-Cloud-Engineer-Shape-the-future-of-defence-software-training-technology-1300/1241804401/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "description": null,
+        "finalUrl": "https://jobs.systematic.com/job/Copenhagen-Azure-Cloud-Engineer-Shape-the-future-of-defence-software-training-technology-1300/1241804401/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "id": "h1592068",
+        "location": "Copenhagen",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1592068&ctx=w&jsid=940995714&jsp=130",
+        "title": "Azure Cloud Engineer - Shape the future of defence software training technology"
+    },
+    {
+        "company": "Rigspolitiet",
+        "companyUrl": "https://www.politi.dk/",
+        "description": null,
+        "finalUrl": "https://job.politi.dk/job/Teknisk-testere-til-nyt%2C-internationalt-dom%C3%A6ne/2822-da_DK",
+        "id": "h1600175",
+        "location": "Glostrup",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600175&ctx=w&jsid=940995714&jsp=131",
+        "title": "Tekniske testere til nyt, internationalt domæne"
+    },
+    {
+        "company": "Politiets Efterretningstjeneste",
+        "companyUrl": "https://pet.dk/da",
+        "description": null,
+        "finalUrl": "https://job.politi.dk/job/Bliv-en-af-L%C3%B8sningsarkitekterne-bag-PET&apos;s-teknologiske-fremtid-og-bidrag-til-national-sikkerhed/2813-da_DK",
+        "id": "h1600160",
+        "location": "Søborg",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600160&ctx=w&jsid=940995714&jsp=132",
+        "title": "Bliv en af løsningsarkitekterne bag PET's teknologiske fremtid og bidrag til national sikkerhed"
+    },
+    {
+        "company": "Politiets Efterretningstjeneste",
+        "companyUrl": "https://pet.dk/da",
+        "description": null,
+        "finalUrl": "https://job.politi.dk/job/PET-s%C3%B8ger-IT-sikkerhedsspecialister-med-mod-p%C3%A5-en-hverdag%2C-der-aldrig-bliver-hverdag/2816-da_DK",
+        "id": "h1600156",
+        "location": "Søborg",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1600156&ctx=w&jsid=940995714&jsp=133",
+        "title": "PET søger IT-sikkerhedsspecialister med mod på en hverdag, der aldrig bliver hverdag"
     },
     {
         "company": "Politiets Efterretningstjeneste",
@@ -1107,7 +1470,7 @@
         "id": "h1599939",
         "location": "Søborg",
         "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599939&ctx=w&jsid=939965259&jsp=101",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599939&ctx=w&jsid=940995714&jsp=134",
         "title": "Er du vores næste systemadministrator eller Devops til Center for CNE-Operationer?"
     },
     {
@@ -1118,7 +1481,7 @@
         "id": "h1599883",
         "location": "Vordingborg og mulighed for hjemmearbejde",
         "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599883&ctx=w&jsid=939965259&jsp=102",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599883&ctx=w&jsid=940995714&jsp=135",
         "title": "Sagsbehandlere til arbejdsskadesager i spændingsfeltet mellem medicin og jura"
     },
     {
@@ -1129,7 +1492,7 @@
         "id": "h1599844",
         "location": "Hedehusene",
         "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599844&ctx=w&jsid=939965259&jsp=103",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599844&ctx=w&jsid=940995714&jsp=136",
         "title": "Engineering Project Management"
     },
     {
@@ -1140,8 +1503,41 @@
         "id": "h1599774",
         "location": "Taastrup",
         "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599774&ctx=w&jsid=939965259&jsp=104",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599774&ctx=w&jsid=940995714&jsp=137",
         "title": "BI-Developer til dansk miljøvirksomhed"
+    },
+    {
+        "company": "emagine søger for kunde",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://portal.emagine.org/jobs/170825/dynamics-365-crm-developer?utm_source=JobindexDk",
+        "id": "r13346793",
+        "location": "København",
+        "publishedDate": "2025-09-26",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346793&ctx=w&jsid=940995714&jsp=138",
+        "title": "Dynamics 365 CRM Developer"
+    },
+    {
+        "company": "GN Group",
+        "companyUrl": "/virksomhed/442/gn-group#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://gn.wd3.myworkdayjobs.com/GN-Careers/job/Ballerup/Domain-Architect_R26456",
+        "id": "r13350094",
+        "location": "Ballerup",
+        "publishedDate": "2025-09-28",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13350094&ctx=w&jsid=940995714&jsp=139",
+        "title": "Domain Architect"
+    },
+    {
+        "company": "Pandektes",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68d909100c688c2ac6bb18ff?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13350095",
+        "location": "København",
+        "publishedDate": "2025-09-28",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13350095&ctx=w&jsid=940995714&jsp=140",
+        "title": "Senior Backend Engineer"
     },
     {
         "company": "Sydbank",
@@ -1151,7 +1547,7 @@
         "id": "h1599663",
         "location": "21 km",
         "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599663&ctx=w&jsid=939965259&jsp=105",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599663&ctx=w&jsid=940995714&jsp=141",
         "title": "Udviklere til digitalisering og automatisering i Sydbank -  Slagelse eller Glostrup"
     },
     {
@@ -1162,7 +1558,7 @@
         "id": "h1599604",
         "location": "København K",
         "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599604&ctx=w&jsid=939965259&jsp=106",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599604&ctx=w&jsid=940995714&jsp=142",
         "title": "Alsidig IT-udvikler"
     },
     {
@@ -1173,7 +1569,7 @@
         "id": "h1599603",
         "location": "Kongens Lyngby",
         "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599603&ctx=w&jsid=939965259&jsp=107",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599603&ctx=w&jsid=940995714&jsp=143",
         "title": "Control Engineer"
     },
     {
@@ -1184,7 +1580,7 @@
         "id": "h1599516",
         "location": "Kgs. Lyngby",
         "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599516&ctx=w&jsid=939965259&jsp=108",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599516&ctx=w&jsid=940995714&jsp=144",
         "title": "Part time assistant - Cloud Hosting for Data Science Tools - DTU Bioengineering"
     },
     {
@@ -1195,7 +1591,7 @@
         "id": "h1599505",
         "location": "Kgs. Lyngby",
         "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599505&ctx=w&jsid=939965259&jsp=109",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599505&ctx=w&jsid=940995714&jsp=145",
         "title": "Part time assistant - digital research data tools - DTU Bioengineering"
     },
     {
@@ -1206,118 +1602,8 @@
         "id": "h1599471",
         "location": "Roskilde",
         "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599471&ctx=w&jsid=939965259&jsp=110",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599471&ctx=w&jsid=940995714&jsp=146",
         "title": "PhD scholarship in Smart Grids: Embedded Machine Learning to Unlock Demand Flexibility - DTU Wind"
-    },
-    {
-        "company": "emagine søger for kunde",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://portal.emagine.org/jobs/170825/dynamics-365-crm-developer?utm_source=JobindexDk",
-        "id": "r13346793",
-        "location": "København",
-        "publishedDate": "2025-09-26",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346793&ctx=w&jsid=939965259&jsp=111",
-        "title": "Dynamics 365 CRM Developer"
-    },
-    {
-        "company": "Danske Bank",
-        "companyUrl": "/virksomhed/95/danske-bank#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/r13345629/senior-data-scientist-in-genai",
-        "id": "r13345629",
-        "location": "København V",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13345629&ctx=w&jsid=939965259&jsp=112",
-        "title": "Senior Data Scientist in GenAI"
-    },
-    {
-        "company": "Domstolsstyrelsen",
-        "companyUrl": "/virksomhed/23858/domstolsstyrelsen#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://www.it-jobbank.dk/jobannonce/h1599795/studentermedhjaelpere-til-it-udviklingsopgaver-i-stort-digitaliseringsprogram?utm_campaign=jobannonce&utm_medium=jobindex&utm_source=partner",
-        "id": "r13346331",
-        "location": "København K, København K",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346331&ctx=w&jsid=939965259&jsp=113",
-        "title": "Studentermedhjælpere til it-udviklingsopgaver i stort digitaliseringsprogram"
-    },
-    {
-        "company": "Factofly",
-        "companyUrl": "/virksomhed/66399/factofly-aps#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d536640364ee048b22867c?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13346272",
-        "location": "København",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346272&ctx=w&jsid=939965259&jsp=114",
-        "title": "Part time/student QA tester for Factofly"
-    },
-    {
-        "company": "GN Group",
-        "companyUrl": "/virksomhed/442/gn-group#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://gn.wd3.myworkdayjobs.com/GN-Careers/job/Ballerup/Product-Lifecycle-Management--PLM--Functional-Specialist--Digital--Data-and-IT_R26354",
-        "id": "r13346095",
-        "location": "Ballerup",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346095&ctx=w&jsid=939965259&jsp=115",
-        "title": "Product Lifecycle Management (PLM) Functional Specialist, Digital, Data and IT"
-    },
-    {
-        "company": "GN Group",
-        "companyUrl": "/virksomhed/442/gn-group#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://gn.wd3.myworkdayjobs.com/GN-Careers/job/Ballerup/Senior-Functional-Consultant_R24552",
-        "id": "r13346096",
-        "location": "Ballerup",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346096&ctx=w&jsid=939965259&jsp=116",
-        "title": "Senior Functional Consultant"
-    },
-    {
-        "company": "Numina",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d5318833ef2f04a3074b5c?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13346267",
-        "location": "København",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346267&ctx=w&jsid=939965259&jsp=117",
-        "title": "Full-stack Developer (Typescript, AI)"
-    },
-    {
-        "company": "Oktogrid",
-        "companyUrl": "/virksomhed/65410/oktogrid#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d54a52ffdc3f04654cc441?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13346271",
-        "location": "København N",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346271&ctx=w&jsid=939965259&jsp=118",
-        "title": "Software Engineer (Part-Time, Full-Stack)"
-    },
-    {
-        "company": "PhaseTree",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d55f91a3ce1d0478502f74?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13346273",
-        "location": "Søborg",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346273&ctx=w&jsid=939965259&jsp=119",
-        "title": "Backend Engineer"
-    },
-    {
-        "company": "Werktøj.dk",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d3dff635ed0a8300940ae9?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13346259",
-        "location": "København",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346259&ctx=w&jsid=939965259&jsp=120",
-        "title": "Teknisk Studentermedhjælp"
     },
     {
         "company": "Danske Spil A/S",
@@ -1327,7 +1613,7 @@
         "id": "h1599417",
         "location": "Brøndby",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599417&ctx=w&jsid=939965259&jsp=121",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599417&ctx=w&jsid=940995714&jsp=147",
         "title": "We are building something new – do you want to join?"
     },
     {
@@ -1338,30 +1624,8 @@
         "id": "h1599388",
         "location": "Brøndby",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599388&ctx=w&jsid=939965259&jsp=122",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599388&ctx=w&jsid=940995714&jsp=148",
         "title": "We are building something new – do you want to join?"
-    },
-    {
-        "company": "Fonden Dansk Standard",
-        "companyUrl": "http://www.ds.dk/",
-        "description": null,
-        "finalUrl": "https://ds.career.emply.com/ad/digitaliseringskonsulent-til-fonden-dansk-standard/bm1utt/da",
-        "id": "h1599315",
-        "location": "Nordhavn",
-        "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599315&ctx=w&jsid=939965259&jsp=123",
-        "title": "Digitaliseringskonsulent"
-    },
-    {
-        "company": "Digitaliseringsstyrelsen",
-        "companyUrl": "http://www.digst.dk/",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=5001&ProjectId=190725&DepartmentId=10346&MediaId=3792",
-        "id": "h1599293",
-        "location": "København K",
-        "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599293&ctx=w&jsid=939965259&jsp=124",
-        "title": "UX/​UI-designer til Digital Post"
     },
     {
         "company": "ALK",
@@ -1371,7 +1635,7 @@
         "id": "h1599284",
         "location": "Hørsholm",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599284&ctx=w&jsid=939965259&jsp=125",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599284&ctx=w&jsid=940995714&jsp=149",
         "title": "Automation Engineer til Operational Technology"
     },
     {
@@ -1382,7 +1646,7 @@
         "id": "h1599226",
         "location": "Skovlunde",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599226&ctx=w&jsid=939965259&jsp=126",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599226&ctx=w&jsid=940995714&jsp=150",
         "title": "Automationssoftwareingeniør"
     },
     {
@@ -1393,8 +1657,107 @@
         "id": "h1599125",
         "location": "København K",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599125&ctx=w&jsid=939965259&jsp=127",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599125&ctx=w&jsid=940995714&jsp=151",
         "title": "Testmanager med fokus på kvalitet i IT"
+    },
+    {
+        "company": "Danske Bank",
+        "companyUrl": "/virksomhed/95/danske-bank#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/r13345629/senior-data-scientist-in-genai",
+        "id": "r13345629",
+        "location": "København V",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13345629&ctx=w&jsid=940995714&jsp=152",
+        "title": "Senior Data Scientist in GenAI"
+    },
+    {
+        "company": "Domstolsstyrelsen",
+        "companyUrl": "/virksomhed/23858/domstolsstyrelsen#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://www.it-jobbank.dk/jobannonce/h1599795/studentermedhjaelpere-til-it-udviklingsopgaver-i-stort-digitaliseringsprogram?utm_campaign=jobannonce&utm_medium=jobindex&utm_source=partner",
+        "id": "r13346331",
+        "location": "København K, København K",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346331&ctx=w&jsid=940995714&jsp=153",
+        "title": "Studentermedhjælpere til it-udviklingsopgaver i stort digitaliseringsprogram"
+    },
+    {
+        "company": "Factofly",
+        "companyUrl": "/virksomhed/66399/factofly-aps#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68d536640364ee048b22867c?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13346272",
+        "location": "København",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346272&ctx=w&jsid=940995714&jsp=154",
+        "title": "Part time/student QA tester for Factofly"
+    },
+    {
+        "company": "GN Group",
+        "companyUrl": "/virksomhed/442/gn-group#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://gn.wd3.myworkdayjobs.com/GN-Careers/job/Ballerup/Product-Lifecycle-Management--PLM--Functional-Specialist--Digital--Data-and-IT_R26354",
+        "id": "r13346095",
+        "location": "Ballerup",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346095&ctx=w&jsid=940995714&jsp=155",
+        "title": "Product Lifecycle Management (PLM) Functional Specialist, Digital, Data and IT"
+    },
+    {
+        "company": "GN Group",
+        "companyUrl": "/virksomhed/442/gn-group#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://gn.wd3.myworkdayjobs.com/GN-Careers/job/Ballerup/Senior-Functional-Consultant_R24552",
+        "id": "r13346096",
+        "location": "Ballerup",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346096&ctx=w&jsid=940995714&jsp=156",
+        "title": "Senior Functional Consultant"
+    },
+    {
+        "company": "Numina",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68d5318833ef2f04a3074b5c?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13346267",
+        "location": "København",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346267&ctx=w&jsid=940995714&jsp=157",
+        "title": "Full-stack Developer (Typescript, AI)"
+    },
+    {
+        "company": "Oktogrid",
+        "companyUrl": "/virksomhed/65410/oktogrid#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68d54a52ffdc3f04654cc441?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13346271",
+        "location": "København N",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346271&ctx=w&jsid=940995714&jsp=158",
+        "title": "Software Engineer (Part-Time, Full-Stack)"
+    },
+    {
+        "company": "PhaseTree",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68d55f91a3ce1d0478502f74?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13346273",
+        "location": "Søborg",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346273&ctx=w&jsid=940995714&jsp=159",
+        "title": "Backend Engineer"
+    },
+    {
+        "company": "Werktøj.dk",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68d3dff635ed0a8300940ae9?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13346259",
+        "location": "København",
+        "publishedDate": "2025-09-25",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13346259&ctx=w&jsid=940995714&jsp=160",
+        "title": "Teknisk Studentermedhjælp"
     },
     {
         "company": "cBrain A/S",
@@ -1404,7 +1767,7 @@
         "id": "h1590587",
         "location": "København Ø",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1590587&ctx=w&jsid=939965259&jsp=128",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1590587&ctx=w&jsid=940995714&jsp=161",
         "title": "Bid Manager til softwarevirksomhed i vækst"
     },
     {
@@ -1415,7 +1778,7 @@
         "id": "h1584612",
         "location": "Brøndby and the possibility to work from home",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1584612&ctx=w&jsid=939965259&jsp=129",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1584612&ctx=w&jsid=940995714&jsp=162",
         "title": "Senior Designer – End Fitting R&D"
     },
     {
@@ -1426,7 +1789,7 @@
         "id": "h1599355",
         "location": "Hedehusene",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599355&ctx=w&jsid=939965259&jsp=130",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599355&ctx=w&jsid=940995714&jsp=163",
         "title": "SAP S/​4 Finance Solutions Architect - Shape Global Logistics"
     },
     {
@@ -1437,7 +1800,7 @@
         "id": "h1599260",
         "location": "Kgs. Lyngby",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599260&ctx=w&jsid=939965259&jsp=131",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599260&ctx=w&jsid=940995714&jsp=164",
         "title": "PhD scholarship in enhancing food safety using AI and long-read sequencing - DTU Food"
     },
     {
@@ -1448,7 +1811,7 @@
         "id": "h1599258",
         "location": "Ballerup eller Aarhus N",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599258&ctx=w&jsid=939965259&jsp=132",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599258&ctx=w&jsid=940995714&jsp=165",
         "title": "SAP Arkitekt"
     },
     {
@@ -1459,7 +1822,7 @@
         "id": "h1599250",
         "location": "Roskilde, hybrid position",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599250&ctx=w&jsid=939965259&jsp=133",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599250&ctx=w&jsid=940995714&jsp=166",
         "title": "Development Engineer – Scientific Software Development for Wind Resource Assessment - DTU Wind"
     },
     {
@@ -1470,7 +1833,7 @@
         "id": "h1599242",
         "location": "København S og Kgs. Lyngby",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599242&ctx=w&jsid=939965259&jsp=134",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599242&ctx=w&jsid=940995714&jsp=167",
         "title": "Løsningsarkitekt for studie-informations-system - IT Service"
     },
     {
@@ -1481,19 +1844,8 @@
         "id": "r13341993",
         "location": "København NV",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13341993&ctx=w&jsid=939965259&jsp=135",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13341993&ctx=w&jsid=940995714&jsp=168",
         "title": "Data Scientist med speciale i Generativ AI til Koncern IT i Københavns Kommune"
-    },
-    {
-        "company": "Werktøj.dk",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d3dff635ed0a8300940ae9?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13346259",
-        "location": "København",
-        "publishedDate": "2025-09-25",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13346259&ctx=w&jsid=939965259&jsp=136",
-        "title": "Teknisk Studentermedhjælp"
     },
     {
         "company": "Danske Bank",
@@ -1503,7 +1855,7 @@
         "id": "r13343084",
         "location": "København V",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13343084&ctx=w&jsid=939965259&jsp=137",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13343084&ctx=w&jsid=940995714&jsp=169",
         "title": "Senior GenAI Specialist - Credit Journey OCB AI Acceleration"
     },
     {
@@ -1514,7 +1866,7 @@
         "id": "r13343083",
         "location": "København V",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13343083&ctx=w&jsid=939965259&jsp=138",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13343083&ctx=w&jsid=940995714&jsp=170",
         "title": "Senior/Chief Software Engineer - Credit Journey OCB AI Acceleration"
     },
     {
@@ -1525,7 +1877,7 @@
         "id": "r13342796",
         "location": "Hillerød",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13342796&ctx=w&jsid=939965259&jsp=139",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13342796&ctx=w&jsid=940995714&jsp=171",
         "title": "Principal Database Administrator"
     },
     {
@@ -1536,118 +1888,8 @@
         "id": "r13344019",
         "location": "København",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13344019&ctx=w&jsid=939965259&jsp=140",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13344019&ctx=w&jsid=940995714&jsp=172",
         "title": "AI Developer"
-    },
-    {
-        "company": "cBrain A/S",
-        "companyUrl": "https://www.cbrain.com/da/company/careers",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1599092/project-manager-til-digitaliseringsprojekter",
-        "id": "h1599092",
-        "location": "København Ø",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599092&ctx=w&jsid=939965259&jsp=141",
-        "title": "Project Manager til digitaliseringsprojekter"
-    },
-    {
-        "company": "Region Sjælland",
-        "companyUrl": "https://www.regionsjaelland.dk/",
-        "description": null,
-        "finalUrl": "https://www.regionsjaelland.dk/job-og-uddannelse/jobside?hr=show-job/54163&linkref=88379&locale=da_DK",
-        "id": "h1599044",
-        "location": "Ringsted og mulighed for hjemmearbejde",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599044&ctx=w&jsid=939965259&jsp=142",
-        "title": "Proces Management og Compliance, er det sød musik i dine ører?"
-    },
-    {
-        "company": "Karnov Group Denmark A/S",
-        "companyUrl": "https://www.karnovgroup.dk/",
-        "description": null,
-        "finalUrl": "https://karnovgroupdenmark.teamtailor.com/jobs/6493830-ruby-backend-engineer",
-        "id": "h1599042",
-        "location": "Copenhagen or Stockholm",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599042&ctx=w&jsid=939965259&jsp=143",
-        "title": "Ruby Backend Engineer"
-    },
-    {
-        "company": "Banedanmark",
-        "companyUrl": "https://www.banedanmark.dk/",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=3010&ProjectId=150908&DepartmentId=19781&MediaId=5107",
-        "id": "h1599012",
-        "location": "København V",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599012&ctx=w&jsid=939965259&jsp=144",
-        "title": "Enterprise Arkitekt til It-Forretningsudvikling – med fokus på Microsoft og informationssikkerhed"
-    },
-    {
-        "company": "Cibicom Gruppen",
-        "companyUrl": "https://cibicom.dk/",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1693&ProjectId=143707&DepartmentId=18956&MediaId=5&IsAdPreviewRequest=true&AdvertisementId=99214",
-        "id": "h1599009",
-        "location": "Ballerup",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1599009&ctx=w&jsid=939965259&jsp=145",
-        "title": "Systemarkitekt/​Presales Engineer LTE450 – Cibicom A/​S"
-    },
-    {
-        "company": "DOMS ApS",
-        "companyUrl": "https://www.jobindex.dk/jobannonce/h1590591/udvikler-til-devops-system-test-automatisering",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1590591/udvikler-til-devops-system-test-automatisering",
-        "id": "h1590591",
-        "location": "",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1590591&ctx=w&jsid=939965259&jsp=146",
-        "title": "Udvikler til DevOps /​ System Test Automatisering"
-    },
-    {
-        "company": "Everllence",
-        "companyUrl": "https://www.everllence.com/",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1877&ProjectId=145767&DepartmentId=19149&MediaId=4619",
-        "id": "h1582176",
-        "location": "København SV",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1582176&ctx=w&jsid=939965259&jsp=147",
-        "title": "Senior Cloud Architect"
-    },
-    {
-        "company": "twoday A/S",
-        "companyUrl": "https://www.twoday.dk/lets-develop-a-better-world-twoday?utm_term=twoday&utm_campaign=Brand+-+Twoday&utm_source=adwords&utm_medium=ppc&hsa_acc=4227725119&hsa_cam=20280404304&hsa_grp=151226139260&hsa_ad=662776337484&hsa_src=g&hsa_tgt=kwd-309747555064&hsa_kw=twoday&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gclid=EAIaIQobChMI19n4rv6pgQMVioRoCR0u7gHYEAAYASAAEgJBYvD_BwE",
-        "description": null,
-        "finalUrl": "https://twodaydenmark.teamtailor.com/jobs/6469020-java-developer",
-        "id": "h1598985",
-        "location": "Nordhavn",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598985&ctx=w&jsid=939965259&jsp=148",
-        "title": "Java Developer"
-    },
-    {
-        "company": "Politiets Efterretningstjeneste",
-        "companyUrl": "https://pet.dk/da",
-        "description": null,
-        "finalUrl": "https://job.politi.dk/job/Bliv-applikationsspecialist-i-PET-og-f%C3%A5-et-arbejde-med-et-h%C3%B8jere-form%C3%A5l/2772-da_DK",
-        "id": "h1598929",
-        "location": "Søborg",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598929&ctx=w&jsid=939965259&jsp=149",
-        "title": "Bliv applikationsspecialist i PET og få et arbejde med et højere formål"
-    },
-    {
-        "company": "Moment",
-        "companyUrl": null,
-        "description": null,
-        "finalUrl": "https://my.enaportal.com/jobopslag/vis?no=197531",
-        "id": "r13339473",
-        "location": "København V",
-        "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13339473&ctx=w&jsid=939965259&jsp=150",
-        "title": "QA Engineer"
     },
     {
         "company": "Gneis Agency",
@@ -1657,7 +1899,7 @@
         "id": "r13344024",
         "location": "København",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13344024&ctx=w&jsid=939965259&jsp=151",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13344024&ctx=w&jsid=940995714&jsp=173",
         "title": "CloudOps Developer"
     },
     {
@@ -1668,7 +1910,7 @@
         "id": "r13344023",
         "location": "København",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13344023&ctx=w&jsid=939965259&jsp=152",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13344023&ctx=w&jsid=940995714&jsp=174",
         "title": "Senior Backend Developer"
     },
     {
@@ -1679,19 +1921,8 @@
         "id": "r13342645",
         "location": "København K",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13342645&ctx=w&jsid=939965259&jsp=153",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13342645&ctx=w&jsid=940995714&jsp=175",
         "title": "Developer (C#/.NET) – Full-time"
-    },
-    {
-        "company": "LEGO System A/S",
-        "companyUrl": "/virksomhed/9659/lego-system-a-s#om-virksomhed",
-        "description": null,
-        "finalUrl": "https://www.lego.com/da-dk/careers/job/engineer-marketing-technology-beef5105ce2c1001166c944812140000",
-        "id": "r13343304",
-        "location": "København K",
-        "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13343304&ctx=w&jsid=939965259&jsp=154",
-        "title": "Engineer, Marketing Technology"
     },
     {
         "company": "Styrelsen For It og Læring",
@@ -1701,7 +1932,7 @@
         "id": "r13342768",
         "location": "Højbjerg, København V, København V",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13342768&ctx=w&jsid=939965259&jsp=155",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13342768&ctx=w&jsid=940995714&jsp=176",
         "title": "Ambitiøs it-arkitekt til tværgående arkitekturenhed"
     },
     {
@@ -1712,7 +1943,7 @@
         "id": "r13342769",
         "location": "Højbjerg, København V, København V",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13342769&ctx=w&jsid=939965259&jsp=156",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13342769&ctx=w&jsid=940995714&jsp=177",
         "title": "Erfaren enterprisearkitekt til tværgående arkitekturenhed"
     },
     {
@@ -1723,7 +1954,7 @@
         "id": "r13342767",
         "location": "København, København SV, Odense, Odense C",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13342767&ctx=w&jsid=939965259&jsp=157",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13342767&ctx=w&jsid=940995714&jsp=178",
         "title": "Data Engineer til vores Play Content Recommendations team"
     },
     {
@@ -1734,7 +1965,7 @@
         "id": "r13344030",
         "location": "København",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13344030&ctx=w&jsid=939965259&jsp=158",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13344030&ctx=w&jsid=940995714&jsp=179",
         "title": "AI DevOps Engineer"
     },
     {
@@ -1745,19 +1976,118 @@
         "id": "r13344031",
         "location": "København N",
         "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13344031&ctx=w&jsid=939965259&jsp=159",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13344031&ctx=w&jsid=940995714&jsp=180",
         "title": "AI Forretningskonsulent"
     },
     {
-        "company": "Werktøj.dk",
-        "companyUrl": null,
+        "company": "cBrain A/S",
+        "companyUrl": "https://www.cbrain.com/da/company/careers",
         "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d3cec335ed0a83008fa1ac?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13344029",
-        "location": "København",
-        "publishedDate": "2025-09-24",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13344029&ctx=w&jsid=939965259&jsp=160",
-        "title": "AI/ML Udvikler"
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1599092/project-manager-til-digitaliseringsprojekter",
+        "id": "h1599092",
+        "location": "København Ø",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599092&ctx=w&jsid=940995714&jsp=181",
+        "title": "Project Manager til digitaliseringsprojekter"
+    },
+    {
+        "company": "Region Sjælland",
+        "companyUrl": "https://www.regionsjaelland.dk/",
+        "description": null,
+        "finalUrl": "https://www.regionsjaelland.dk/job-og-uddannelse/jobside?hr=show-job/54163&linkref=88379&locale=da_DK",
+        "id": "h1599044",
+        "location": "Ringsted og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599044&ctx=w&jsid=940995714&jsp=182",
+        "title": "Proces Management og Compliance, er det sød musik i dine ører?"
+    },
+    {
+        "company": "Karnov Group Denmark A/S",
+        "companyUrl": "https://www.karnovgroup.dk/",
+        "description": null,
+        "finalUrl": "https://karnovgroupdenmark.teamtailor.com/jobs/6493830-ruby-backend-engineer",
+        "id": "h1599042",
+        "location": "Copenhagen or Stockholm",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599042&ctx=w&jsid=940995714&jsp=183",
+        "title": "Ruby Backend Engineer"
+    },
+    {
+        "company": "Banedanmark",
+        "companyUrl": "https://www.banedanmark.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=3010&ProjectId=150908&DepartmentId=19781&MediaId=5107",
+        "id": "h1599012",
+        "location": "København V",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599012&ctx=w&jsid=940995714&jsp=184",
+        "title": "Enterprise Arkitekt til It-Forretningsudvikling – med fokus på Microsoft og informationssikkerhed"
+    },
+    {
+        "company": "Cibicom Gruppen",
+        "companyUrl": "https://cibicom.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1693&ProjectId=143707&DepartmentId=18956&MediaId=5&IsAdPreviewRequest=true&AdvertisementId=99214",
+        "id": "h1599009",
+        "location": "Ballerup",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599009&ctx=w&jsid=940995714&jsp=185",
+        "title": "Systemarkitekt/​Presales Engineer LTE450 – Cibicom A/​S"
+    },
+    {
+        "company": "DOMS ApS",
+        "companyUrl": "https://www.jobindex.dk/jobannonce/h1590591/udvikler-til-devops-system-test-automatisering",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1590591/udvikler-til-devops-system-test-automatisering",
+        "id": "h1590591",
+        "location": "",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1590591&ctx=w&jsid=940995714&jsp=186",
+        "title": "Udvikler til DevOps /​ System Test Automatisering"
+    },
+    {
+        "company": "Everllence",
+        "companyUrl": "https://www.everllence.com/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1877&ProjectId=145776&DepartmentId=19149&MediaId=4619",
+        "id": "h1583196",
+        "location": "København SV",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1583196&ctx=w&jsid=940995714&jsp=187",
+        "title": "R&D Platform Engineer – Edge platform"
+    },
+    {
+        "company": "Politiets Efterretningstjeneste",
+        "companyUrl": "https://pet.dk/da",
+        "description": null,
+        "finalUrl": "https://job.politi.dk/job/PET-s%C3%B8ger-AD-specialister-til-Danmarks-mest-hemmelige-AD-infrastruktur/2775-da_DK",
+        "id": "h1599032",
+        "location": "Søborg",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1599032&ctx=w&jsid=940995714&jsp=188",
+        "title": "PET søger AD-specialister til Danmarks mest hemmelige AD-infrastruktur"
+    },
+    {
+        "company": "twoday A/S",
+        "companyUrl": "https://www.twoday.dk/lets-develop-a-better-world-twoday?utm_term=twoday&utm_campaign=Brand+-+Twoday&utm_source=adwords&utm_medium=ppc&hsa_acc=4227725119&hsa_cam=20280404304&hsa_grp=151226139260&hsa_ad=662776337484&hsa_src=g&hsa_tgt=kwd-309747555064&hsa_kw=twoday&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gclid=EAIaIQobChMI19n4rv6pgQMVioRoCR0u7gHYEAAYASAAEgJBYvD_BwE",
+        "description": null,
+        "finalUrl": "https://twodaydenmark.teamtailor.com/jobs/6469020-java-developer",
+        "id": "h1598985",
+        "location": "Nordhavn",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598985&ctx=w&jsid=940995714&jsp=189",
+        "title": "Java Developer"
+    },
+    {
+        "company": "Politiets Efterretningstjeneste",
+        "companyUrl": "https://pet.dk/da",
+        "description": null,
+        "finalUrl": "https://job.politi.dk/job/Bliv-applikationsspecialist-i-PET-og-f%C3%A5-et-arbejde-med-et-h%C3%B8jere-form%C3%A5l/2772-da_DK",
+        "id": "h1598929",
+        "location": "Søborg",
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598929&ctx=w&jsid=940995714&jsp=190",
+        "title": "Bliv applikationsspecialist i PET og få et arbejde med et højere formål"
     },
     {
         "company": "Udviklings- og Forenklingsstyrelsen",
@@ -1767,85 +2097,19 @@
         "id": "h1598486",
         "location": "Frederiksberg",
         "publishedDate": "2025-09-22",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598486&ctx=w&jsid=939965259&jsp=161",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598486&ctx=w&jsid=940995714&jsp=191",
         "title": "Business Analyst til AI-udvikling"
     },
     {
-        "company": "Rigspolitiet",
-        "companyUrl": "https://www.politi.dk/",
+        "company": "Moment",
+        "companyUrl": null,
         "description": null,
-        "finalUrl": "https://job.politi.dk/job/Application-managers-til-Rigspolitiets-Koncern-IT/2765-da_DK",
-        "id": "h1598557",
+        "finalUrl": "https://my.enaportal.com/jobopslag/vis?no=197531",
+        "id": "r13339473",
         "location": "København V",
-        "publishedDate": "2025-09-22",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598557&ctx=w&jsid=939965259&jsp=162",
-        "title": "Application managers til Rigspolitiets Koncern IT"
-    },
-    {
-        "company": "Rigspolitiet",
-        "companyUrl": "https://www.politi.dk/",
-        "description": null,
-        "finalUrl": "https://job.politi.dk/job/It-arkitekter-til-Rigspolitiet/2766-da_DK",
-        "id": "h1598516",
-        "location": "København V",
-        "publishedDate": "2025-09-22",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598516&ctx=w&jsid=939965259&jsp=163",
-        "title": "It-arkitekter til Rigspolitiet"
-    },
-    {
-        "company": "Skattestyrelsen",
-        "companyUrl": "https://www.sktst.dk/",
-        "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=3010&ProjectId=150808&DepartmentId=19143&MediaId=5130",
-        "id": "h1598374",
-        "location": "København S",
-        "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598374&ctx=w&jsid=939965259&jsp=164",
-        "title": "Erfaren it-projektudvikler til varetagelse af forretningens ansvar i komplekse it-projekter"
-    },
-    {
-        "company": "Siemens Healthineers",
-        "companyUrl": "https://www.siemens-healthineers.com/dk",
-        "description": null,
-        "finalUrl": "https://jobs.siemens.com/en_US/externaljobs/JobDetail/477279",
-        "id": "h1598351",
-        "location": "Ballerup",
-        "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598351&ctx=w&jsid=939965259&jsp=165",
-        "title": "Studentermedhjælper med fokus på IT-løsninger"
-    },
-    {
-        "company": "Erhvervsakademi København",
-        "companyUrl": "https://www.ek.dk/",
-        "description": null,
-        "finalUrl": "https://ek.career.emply.com/ad/erhvervsakademi-kobenhavn-soger-underviser-til-pba-i-cybersikkerhed/fl5n8c/da",
-        "id": "h1598284",
-        "location": "København N",
-        "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598284&ctx=w&jsid=939965259&jsp=166",
-        "title": "Underviser til PBA i cybersikkerhed"
-    },
-    {
-        "company": "Shure Scandinavia A/S",
-        "companyUrl": "http://www.shure.com/",
-        "description": null,
-        "finalUrl": "https://www.jobindex.dk/jobannonce/h1598253/signal-processing-developer-with-ambitions",
-        "id": "h1598253",
-        "location": "Copenhagen",
-        "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598253&ctx=w&jsid=939965259&jsp=167",
-        "title": "Signal Processing Developer with Ambitions"
-    },
-    {
-        "company": "Ase",
-        "companyUrl": "https://www.ase.dk/",
-        "description": null,
-        "finalUrl": "https://ase.career.emply.com/ad/studentermedhjaelper-til-data-og-analyse/y0a8ik/da",
-        "id": "h1598155",
-        "location": "København SV",
-        "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598155&ctx=w&jsid=939965259&jsp=168",
-        "title": "Studentermedhjælper til data og analyse"
+        "publishedDate": "2025-09-23",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13339473&ctx=w&jsid=940995714&jsp=192",
+        "title": "QA Engineer"
     },
     {
         "company": "emagine søger for kunde",
@@ -1855,19 +2119,19 @@
         "id": "r13339403",
         "location": "København SV",
         "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13339403&ctx=w&jsid=939965259&jsp=169",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13339403&ctx=w&jsid=940995714&jsp=193",
         "title": "Salesforce konsulenter"
     },
     {
-        "company": "emagine søger for kunde",
+        "company": "Werktøj.dk",
         "companyUrl": null,
         "description": null,
-        "finalUrl": "https://portal.emagine.org/jobs/170722/natural-mainframe-konsulenter?utm_source=JobindexDk",
-        "id": "r13337793",
+        "finalUrl": "https://thehub.io/jobs/68d3cec335ed0a83008fa1ac?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13344029",
         "location": "København",
-        "publishedDate": "2025-09-22",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13337793&ctx=w&jsid=939965259&jsp=170",
-        "title": "Natural Mainframe konsulenter"
+        "publishedDate": "2025-09-24",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13344029&ctx=w&jsid=940995714&jsp=194",
+        "title": "AI/ML Udvikler"
     },
     {
         "company": "Clever A/S",
@@ -1877,7 +2141,7 @@
         "id": "r13340260",
         "location": "København SV",
         "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13340260&ctx=w&jsid=939965259&jsp=171",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13340260&ctx=w&jsid=940995714&jsp=195",
         "title": "Ansvarlig for kvalitetssikring af digitale B2B-produkter (QA)"
     },
     {
@@ -1888,7 +2152,7 @@
         "id": "r13340220",
         "location": "Hillerød",
         "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13340220&ctx=w&jsid=939965259&jsp=172",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13340220&ctx=w&jsid=940995714&jsp=196",
         "title": "Director, Data & AI Engineering"
     },
     {
@@ -1899,7 +2163,7 @@
         "id": "r13340221",
         "location": "Hillerød",
         "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13340221&ctx=w&jsid=939965259&jsp=173",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13340221&ctx=w&jsid=940995714&jsp=197",
         "title": "Director, Product Engineering & Deployment"
     },
     {
@@ -1910,7 +2174,7 @@
         "id": "r13341170",
         "location": "København S",
         "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13341170&ctx=w&jsid=939965259&jsp=174",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13341170&ctx=w&jsid=940995714&jsp=198",
         "title": "Senior Kubernetes platform engineer and customer lead for on-prem Platforms"
     },
     {
@@ -1921,7 +2185,7 @@
         "id": "r13341515",
         "location": "København",
         "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13341515&ctx=w&jsid=939965259&jsp=175",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13341515&ctx=w&jsid=940995714&jsp=199",
         "title": "Senior software engineer"
     },
     {
@@ -1932,52 +2196,74 @@
         "id": "r13341498",
         "location": "København",
         "publishedDate": "2025-09-23",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13341498&ctx=w&jsid=939965259&jsp=176",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13341498&ctx=w&jsid=940995714&jsp=200",
         "title": "QA Specialist at Woba.io"
     },
     {
-        "company": "Criipto",
-        "companyUrl": null,
+        "company": "Rigspolitiet",
+        "companyUrl": "https://www.politi.dk/",
         "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d10c4135ed0a830015f342?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13338389",
-        "location": "København",
+        "finalUrl": "https://job.politi.dk/job/Application-managers-til-Rigspolitiets-Koncern-IT/2765-da_DK",
+        "id": "h1598557",
+        "location": "København V",
         "publishedDate": "2025-09-22",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13338389&ctx=w&jsid=939965259&jsp=177",
-        "title": "Fullstack Developer"
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598557&ctx=w&jsid=940995714&jsp=201",
+        "title": "Application managers til Rigspolitiets Koncern IT"
     },
     {
-        "company": "Criipto",
-        "companyUrl": null,
+        "company": "Rigspolitiet",
+        "companyUrl": "https://www.politi.dk/",
         "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d10aa2d32d6031402d23aa?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13338390",
-        "location": "København",
+        "finalUrl": "https://job.politi.dk/job/It-arkitekter-til-Rigspolitiet/2766-da_DK",
+        "id": "h1598516",
+        "location": "København V",
         "publishedDate": "2025-09-22",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13338390&ctx=w&jsid=939965259&jsp=178",
-        "title": "Software Engineer"
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598516&ctx=w&jsid=940995714&jsp=202",
+        "title": "It-arkitekter til Rigspolitiet"
     },
     {
-        "company": "Fujifilm Diosynth Biotechnologies",
-        "companyUrl": "/virksomhed/49/fujifilm-diosynth-biotechnologies#om-virksomhed",
+        "company": "Skattestyrelsen",
+        "companyUrl": "https://www.sktst.dk/",
         "description": null,
-        "finalUrl": "https://fujifilmdiosynth.wd3.myworkdayjobs.com/External/job/Hillerod/Director--Data-Platforms---Architecture_JR4889",
-        "id": "r13339006",
-        "location": "Hillerød",
-        "publishedDate": "2025-09-22",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13339006&ctx=w&jsid=939965259&jsp=179",
-        "title": "Director, Data Platforms & Architecture"
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=3010&ProjectId=150808&DepartmentId=19143&MediaId=5130",
+        "id": "h1598374",
+        "location": "København S",
+        "publishedDate": "2025-09-19",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598374&ctx=w&jsid=940995714&jsp=203",
+        "title": "Erfaren it-projektudvikler til varetagelse af forretningens ansvar i komplekse it-projekter"
     },
     {
-        "company": "Horaizon",
-        "companyUrl": null,
+        "company": "Siemens Healthineers",
+        "companyUrl": "https://www.siemens-healthineers.com/dk",
         "description": null,
-        "finalUrl": "https://thehub.io/jobs/68d086973078d83153c71ed3?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
-        "id": "r13338395",
-        "location": "København",
-        "publishedDate": "2025-09-22",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13338395&ctx=w&jsid=939965259&jsp=180",
-        "title": "Fullstack React Native Developer"
+        "finalUrl": "https://jobs.siemens.com/en_US/externaljobs/JobDetail/477279",
+        "id": "h1598351",
+        "location": "Ballerup",
+        "publishedDate": "2025-09-19",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598351&ctx=w&jsid=940995714&jsp=204",
+        "title": "Studentermedhjælper med fokus på IT-løsninger"
+    },
+    {
+        "company": "Shure Scandinavia A/S",
+        "companyUrl": "http://www.shure.com/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1598253/signal-processing-developer-with-ambitions",
+        "id": "h1598253",
+        "location": "Copenhagen",
+        "publishedDate": "2025-09-19",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598253&ctx=w&jsid=940995714&jsp=205",
+        "title": "Signal Processing Developer with Ambitions"
+    },
+    {
+        "company": "Ase",
+        "companyUrl": "https://www.ase.dk/",
+        "description": null,
+        "finalUrl": "https://ase.career.emply.com/ad/studentermedhjaelper-til-data-og-analyse/y0a8ik/da",
+        "id": "h1598155",
+        "location": "København SV",
+        "publishedDate": "2025-09-19",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598155&ctx=w&jsid=940995714&jsp=206",
+        "title": "Studentermedhjælper til data og analyse"
     },
     {
         "company": "Andel Holding A/S",
@@ -1987,29 +2273,29 @@
         "id": "h1598115",
         "location": "Virum",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598115&ctx=w&jsid=939965259&jsp=181",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598115&ctx=w&jsid=940995714&jsp=207",
         "title": "SAP Developer - CAP"
     },
     {
         "company": "dao",
         "companyUrl": "https://www.dao.as/",
         "description": null,
-        "finalUrl": "https://dao.career.emply.com/da/ad/product-owner-til-interne-it-systemer/dpmvd7",
+        "finalUrl": "https://dao.career.emply.com/da/job-not-found/product-owner-til-interne-it-systemer/dpmvd7",
         "id": "h1598107",
         "location": "Rødovre eller Vejle",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598107&ctx=w&jsid=939965259&jsp=182",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598107&ctx=w&jsid=940995714&jsp=208",
         "title": "Product owner til interne IT systemer"
     },
     {
         "company": "dao",
         "companyUrl": "https://www.dao.as/",
         "description": null,
-        "finalUrl": "https://dao.career.emply.com/da/ad/backend-udvikler/tzbl5j",
+        "finalUrl": "https://dao.career.emply.com/da/job-not-found/backend-udvikler/tzbl5j",
         "id": "h1598096",
         "location": "Rødovre eller Vejle",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598096&ctx=w&jsid=939965259&jsp=183",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598096&ctx=w&jsid=940995714&jsp=209",
         "title": "Backend Udvikler"
     },
     {
@@ -2020,7 +2306,7 @@
         "id": "h1598064",
         "location": "Nordhavn or Viby J",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598064&ctx=w&jsid=939965259&jsp=184",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598064&ctx=w&jsid=940995714&jsp=210",
         "title": "Technical Advisor - Take the lead on commercial activities and full-stack development"
     },
     {
@@ -2031,7 +2317,7 @@
         "id": "h1598058",
         "location": "København S og mulighed for hjemmearbejde",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598058&ctx=w&jsid=939965259&jsp=185",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598058&ctx=w&jsid=940995714&jsp=211",
         "title": "Cloud Engineer til HOFORs cloudtransformationsrejse"
     },
     {
@@ -2042,7 +2328,7 @@
         "id": "h1598377",
         "location": "Taastrup",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598377&ctx=w&jsid=939965259&jsp=186",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598377&ctx=w&jsid=940995714&jsp=212",
         "title": "Teknisk system- og kontraktansvarlig"
     },
     {
@@ -2053,7 +2339,7 @@
         "id": "h1598343",
         "location": "Gilleleje eller Glostrup",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598343&ctx=w&jsid=939965259&jsp=187",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598343&ctx=w&jsid=940995714&jsp=213",
         "title": "Studentermedhjælper til digitale integrationer og AI i tilbudsafdelingen"
     },
     {
@@ -2064,7 +2350,7 @@
         "id": "h1598270",
         "location": "Ballerup",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598270&ctx=w&jsid=939965259&jsp=188",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598270&ctx=w&jsid=940995714&jsp=214",
         "title": "Digital Service Engineer – skab værdi I den digitale transformation"
     },
     {
@@ -2075,30 +2361,63 @@
         "id": "h1598252",
         "location": "Smørum",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598252&ctx=w&jsid=939965259&jsp=189",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1598252&ctx=w&jsid=940995714&jsp=215",
         "title": "Java Developer for Supporting Medical Device Development"
     },
     {
-        "company": "Danske Spil A/S",
-        "companyUrl": "http://www.danskespil.dk/",
+        "company": "emagine søger for kunde",
+        "companyUrl": null,
         "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1516&ProjectId=144176&DepartmentId=19002&MediaId=4616",
-        "id": "h1598004",
-        "location": "Brøndby",
-        "publishedDate": "2025-09-18",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598004&ctx=w&jsid=939965259&jsp=190",
-        "title": "Agil softwaretester – hold kvaliteten høj i Danske Spils kerneløsninger"
+        "finalUrl": "https://portal.emagine.org/jobs/170722/natural-mainframe-konsulenter?utm_source=JobindexDk",
+        "id": "r13337793",
+        "location": "København",
+        "publishedDate": "2025-09-22",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13337793&ctx=w&jsid=940995714&jsp=216",
+        "title": "Natural Mainframe konsulenter"
     },
     {
-        "company": "Danske Spil A/S",
-        "companyUrl": "http://www.danskespil.dk/",
+        "company": "Criipto",
+        "companyUrl": null,
         "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=1516&ProjectId=144175&DepartmentId=19002&MediaId=4616",
-        "id": "h1598000",
-        "location": "Brøndby",
-        "publishedDate": "2025-09-18",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1598000&ctx=w&jsid=939965259&jsp=191",
-        "title": "Agil softwaretester – styrk den agile test af mobilapps i Danske Spil"
+        "finalUrl": "https://thehub.io/jobs/68d10aa2d32d6031402d23aa?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13338390",
+        "location": "København",
+        "publishedDate": "2025-09-22",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13338390&ctx=w&jsid=940995714&jsp=217",
+        "title": "Software Engineer"
+    },
+    {
+        "company": "Fujifilm Diosynth Biotechnologies",
+        "companyUrl": "/virksomhed/49/fujifilm-diosynth-biotechnologies#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://fujifilmdiosynth.wd3.myworkdayjobs.com/External/job/Hillerod/Director--Data-Platforms---Architecture_JR4889",
+        "id": "r13339006",
+        "location": "Hillerød",
+        "publishedDate": "2025-09-22",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13339006&ctx=w&jsid=940995714&jsp=218",
+        "title": "Director, Data Platforms & Architecture"
+    },
+    {
+        "company": "Horaizon",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68d086973078d83153c71ed3?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13338395",
+        "location": "København",
+        "publishedDate": "2025-09-22",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13338395&ctx=w&jsid=940995714&jsp=219",
+        "title": "Fullstack React Native Developer"
+    },
+    {
+        "company": "Feriepartner Danmark",
+        "companyUrl": "/virksomhed/32255/feriepartner#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=2223&ProjectId=145105&DepartmentId=18973&MediaId=4630",
+        "id": "r13334332",
+        "location": "Frederiksberg C",
+        "publishedDate": "2025-09-19",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13334332&ctx=w&jsid=940995714&jsp=220",
+        "title": "Senior Frontend Udvikler med interesse for arkitektur"
     },
     {
         "company": "NKT Photonics A/S",
@@ -2108,7 +2427,7 @@
         "id": "h1597987",
         "location": "Birkerød",
         "publishedDate": "2025-09-18",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1597987&ctx=w&jsid=939965259&jsp=192",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597987&ctx=w&jsid=940995714&jsp=221",
         "title": "Senior Software Engineer"
     },
     {
@@ -2119,30 +2438,129 @@
         "id": "h1597967",
         "location": "Ringsted",
         "publishedDate": "2025-09-18",
-        "redirectUrl": "https://www.jobindex.dk/c?t=h1597967&ctx=w&jsid=939965259&jsp=193",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597967&ctx=w&jsid=940995714&jsp=222",
         "title": "Teknisk og passioneret omkring digitale løsninger i fremtidens Sundhedsvæsen? Bliv vores nye applikationsspecialist"
     },
     {
-        "company": "emagine søger for kunde",
-        "companyUrl": null,
+        "company": "Region Sjælland",
+        "companyUrl": "https://www.regionsjaelland.dk/",
         "description": null,
-        "finalUrl": "https://portal.emagine.org/jobs/170681/data-engineer?utm_source=JobindexDk",
-        "id": "r13334279",
-        "location": "København",
-        "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13334279&ctx=w&jsid=939965259&jsp=194",
-        "title": "Data Engineer"
+        "finalUrl": "https://www.regionsjaelland.dk/job-og-uddannelse/jobside?hr=show-job/54027&linkref=87931&locale=da_DK",
+        "id": "h1597919",
+        "location": "Ringsted og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-18",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597919&ctx=w&jsid=940995714&jsp=223",
+        "title": "Kan du gribe de digitale muligheder? Bliv vores nye Application Manager"
     },
     {
-        "company": "Feriepartner Danmark",
-        "companyUrl": "/virksomhed/32255/feriepartner#om-virksomhed",
+        "company": "Dnp Denmark A/S",
+        "companyUrl": "https://www.jobindex.dk/jobannonce/h1597723/ux-ui-designer-with-design-skills-with-a-big-voice-in-the-business",
         "description": null,
-        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=2223&ProjectId=145105&DepartmentId=18973&MediaId=4630",
-        "id": "r13334332",
-        "location": "Frederiksberg C",
-        "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13334332&ctx=w&jsid=939965259&jsp=195",
-        "title": "Senior Frontend Udvikler med interesse for arkitektur"
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1597723/ux-ui-designer-with-design-skills-with-a-big-voice-in-the-business",
+        "id": "h1597723",
+        "location": "Karlslunde, remote or hybrid",
+        "publishedDate": "2025-09-18",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597723&ctx=w&jsid=940995714&jsp=224",
+        "title": "UX/​UI Designer, with design skills – with a big voice in the business"
+    },
+    {
+        "company": "Systematic A/S",
+        "companyUrl": "https://jobs.systematic.com/job/Copenhagen-AI-&-Data-Science-Consultant-1300/1248681801/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "description": null,
+        "finalUrl": "https://jobs.systematic.com/job/Copenhagen-AI-&-Data-Science-Consultant-1300/1248681801/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "id": "h1597706",
+        "location": "Copenhagen",
+        "publishedDate": "2025-09-18",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597706&ctx=w&jsid=940995714&jsp=225",
+        "title": "AI & Data Science Consultant"
+    },
+    {
+        "company": "Vitec Datamann A/S",
+        "companyUrl": "http://www.datamann.dk/",
+        "description": null,
+        "finalUrl": "https://jobs.vitecsoftware.dk/jobs/6460257-net-udvikler-til-vitec-datamann",
+        "id": "h1597704",
+        "location": "Herlev",
+        "publishedDate": "2025-09-18",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597704&ctx=w&jsid=940995714&jsp=226",
+        "title": ".NET-udvikler"
+    },
+    {
+        "company": "KMD A/S",
+        "companyUrl": "https://www.kmd.dk/",
+        "description": null,
+        "finalUrl": "https://jobs.kmd.net/default/job/Ballerup-Java-Developer-2750/1249011801/?utm_source=jobindex",
+        "id": "h1597877",
+        "location": "Ballerup, Aalborg og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-18",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597877&ctx=w&jsid=940995714&jsp=227",
+        "title": "Java Developer"
+    },
+    {
+        "company": "Lomax A/S",
+        "companyUrl": "https://www.lomax.dk/",
+        "description": null,
+        "finalUrl": "https://lomax.easycruit.com/vacancy/3544295/222829?iso=dk",
+        "id": "h1597459",
+        "location": "Frederikssund og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-17",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597459&ctx=w&jsid=940995714&jsp=228",
+        "title": "Full Stack Webudvikler"
+    },
+    {
+        "company": "Systematic A/S",
+        "companyUrl": "https://jobs.systematic.com/job/Copenhagen-K-Senior-_NET-Developer-for-Intelligence-&-National-Security/1248450301/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "description": null,
+        "finalUrl": "https://jobs.systematic.com/job/Copenhagen-K-Senior-_NET-Developer-for-Intelligence-&-National-Security/1248450301/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "id": "h1597452",
+        "location": "Copenhagen",
+        "publishedDate": "2025-09-17",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597452&ctx=w&jsid=940995714&jsp=229",
+        "title": "Senior .NET Developer for Intelligence & National Security"
+    },
+    {
+        "company": "Nordic Wing",
+        "companyUrl": "https://nordic-wing.com/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1597370/nordic-wing-soeger-2-embedded-softwareudviklere",
+        "id": "h1597370",
+        "location": "Værløse",
+        "publishedDate": "2025-09-17",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597370&ctx=w&jsid=940995714&jsp=230",
+        "title": "Nordic Wing søger 2 embedded softwareudviklere"
+    },
+    {
+        "company": "Systematic A/S",
+        "companyUrl": "https://jobs.systematic.com/job/Copenhagen-Software-Developer-contribute-to-a-data-platform-in-the-defence-domain-1300/1227695901/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "description": null,
+        "finalUrl": "https://jobs.systematic.com/job/Copenhagen-Software-Developer-contribute-to-a-data-platform-in-the-defence-domain-1300/1227695901/?utm_campaign=jobindex&utm_source=jobindex&applySourceOverride=Jobindex.dk",
+        "id": "h1583390",
+        "location": "Copenhagen and hybrid",
+        "publishedDate": "2025-09-17",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1583390&ctx=w&jsid=940995714&jsp=231",
+        "title": "Software Developer - contribute to a data platform in the defence domain"
+    },
+    {
+        "company": "Andel Holding A/S",
+        "companyUrl": "https://andel.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1597275/net-udvikler-til-customer-engagement",
+        "id": "h1597275",
+        "location": "Haslev",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597275&ctx=w&jsid=940995714&jsp=232",
+        "title": ".NET Udvikler til Customer Engagement"
+    },
+    {
+        "company": "Lomax A/S",
+        "companyUrl": "https://www.lomax.dk/",
+        "description": null,
+        "finalUrl": "https://lomax.easycruit.com/vacancy/3544129/222829?iso=dk",
+        "id": "h1597271",
+        "location": "Frederikssund",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597271&ctx=w&jsid=940995714&jsp=233",
+        "title": "NAV/​Business Central udvikler"
     },
     {
         "company": "LEGO System A/S",
@@ -2152,7 +2570,7 @@
         "id": "r13334895",
         "location": "København",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13334895&ctx=w&jsid=939965259&jsp=196",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13334895&ctx=w&jsid=940995714&jsp=234",
         "title": "Lead Engineer, GenAI Tech Enablement"
     },
     {
@@ -2163,7 +2581,7 @@
         "id": "r13335242",
         "location": "København",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13335242&ctx=w&jsid=939965259&jsp=197",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13335242&ctx=w&jsid=940995714&jsp=235",
         "title": "Senior Machine Learning Engineer"
     },
     {
@@ -2174,7 +2592,7 @@
         "id": "r13335324",
         "location": "København Ø",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13335324&ctx=w&jsid=939965259&jsp=198",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13335324&ctx=w&jsid=940995714&jsp=236",
         "title": "Cloud Service Engineering Internship, Copenhagen, Denmark"
     },
     {
@@ -2185,7 +2603,7 @@
         "id": "r13335255",
         "location": "København",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13335255&ctx=w&jsid=939965259&jsp=199",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13335255&ctx=w&jsid=940995714&jsp=237",
         "title": "Senior frontend developer"
     },
     {
@@ -2196,7 +2614,315 @@
         "id": "r13335244",
         "location": "København",
         "publishedDate": "2025-09-19",
-        "redirectUrl": "https://www.jobindex.dk/c?t=r13335244&ctx=w&jsid=939965259&jsp=200",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13335244&ctx=w&jsid=940995714&jsp=238",
         "title": "Tech lead / mini or co-CTO at Waitly"
+    },
+    {
+        "company": "Podimo",
+        "companyUrl": "/virksomhed/55413/podimo-aps#om-virksomhed",
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68cb4c2b44ba493ebcef6863?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13332688",
+        "location": "København",
+        "publishedDate": "2025-09-18",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13332688&ctx=w&jsid=940995714&jsp=239",
+        "title": "Backend Engineer, Community"
+    },
+    {
+        "company": "Simple",
+        "companyUrl": null,
+        "description": null,
+        "finalUrl": "https://thehub.io/jobs/68c3da24a2df6c7d3d1ef407?utm_source=jobindex&utm_medium=jobboard&utm_content=dk",
+        "id": "r13332713",
+        "location": "København",
+        "publishedDate": "2025-09-18",
+        "redirectUrl": "https://www.jobindex.dk/c?t=r13332713&ctx=w&jsid=940995714&jsp=240",
+        "title": "Lead Senior Full Stack Engineer (AI & Data Platform)"
+    },
+    {
+        "company": "Lomax A/S",
+        "companyUrl": "https://www.lomax.dk/",
+        "description": null,
+        "finalUrl": "https://lomax.easycruit.com/vacancy/3544143/222829?iso=dk",
+        "id": "h1597266",
+        "location": "Frederikssund og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597266&ctx=w&jsid=940995714&jsp=241",
+        "title": "Erfaren, tilpasningsdygtig og vedholdende NAV-udvikler"
+    },
+    {
+        "company": "SOS International",
+        "companyUrl": "http://www.sos.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1597231/agil-tester-qa-specialist",
+        "id": "h1597231",
+        "location": "København S og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597231&ctx=w&jsid=940995714&jsp=242",
+        "title": "Agil Tester /​ QA-specialist"
+    },
+    {
+        "company": "Forsvarets Efterretningstjeneste",
+        "companyUrl": "https://fe-ddis.dk/da/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=5001&ProjectId=190631&DepartmentId=10048&MediaId=5",
+        "id": "h1597021",
+        "location": "København Ø",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597021&ctx=w&jsid=940995714&jsp=243",
+        "title": "Vil du være hacker i Danmarks stærkeste operative miljø?"
+    },
+    {
+        "company": "Forsvarets Efterretningstjeneste",
+        "companyUrl": "https://fe-ddis.dk/da/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=5001&ProjectId=190632&DepartmentId=10048&MediaId=5",
+        "id": "h1597018",
+        "location": "Dragør",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597018&ctx=w&jsid=940995714&jsp=244",
+        "title": "DevOps-udvikler til Hackerplatformen i FE’s afdeling for CNE og CNA"
+    },
+    {
+        "company": "Udviklings- og Forenklingsstyrelsen",
+        "companyUrl": "https://www.ufst.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=3010&ProjectId=150633&DepartmentId=19140&MediaId=5130",
+        "id": "h1597012",
+        "location": "Frederiksberg",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597012&ctx=w&jsid=940995714&jsp=245",
+        "title": "Test Manager til forretnings- og samfundskritiske SAP-projekter"
+    },
+    {
+        "company": "Region Hovedstaden",
+        "companyUrl": "http://www.regionhovedstaden.dk/",
+        "description": null,
+        "finalUrl": "https://candidate.hr-manager.net/ApplicationInit.aspx?cid=342&ProjectId=264316&DepartmentId=28631&MediaId=4567",
+        "id": "h1597011",
+        "location": "København og Herlev",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1597011&ctx=w&jsid=940995714&jsp=246",
+        "title": "IT-spe­ci­a­list med flair for drift og udvikling – til Teknik, IT og Pro­ces­sup­port i Den Fælles Ste­ril­cen­tral"
+    },
+    {
+        "company": "Grafisk Maskinfabrik A/S",
+        "companyUrl": "https://gmfinishing.com/",
+        "description": null,
+        "finalUrl": "https://gmfinishing.com/jobs/softwareprogrammoer-med-erfaring-i-schneider-electric-interface/",
+        "id": "h1585133",
+        "location": "Birkerød",
+        "publishedDate": "2025-09-16",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1585133&ctx=w&jsid=940995714&jsp=247",
+        "title": "Softwareprogrammør med erfaring i Schneider Electric Interface"
+    },
+    {
+        "company": "NOV Subsea Production Systems",
+        "companyUrl": "https://www.nov.com/about/our-business-units/subsea-production-systems",
+        "description": null,
+        "finalUrl": "https://egay.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_4001/job/36555?sns_id=jobindex",
+        "id": "h1589028",
+        "location": "Brøndby",
+        "publishedDate": "2025-09-15",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1589028&ctx=w&jsid=940995714&jsp=248",
+        "title": "Sales Tools & Systems Specialist"
+    },
+    {
+        "company": "Ward247 ApS",
+        "companyUrl": "http://www.ward247.com/",
+        "description": null,
+        "finalUrl": "https://ward247.com/clinical_it_manager/",
+        "id": "h1583208",
+        "location": "Copenhagen",
+        "publishedDate": "2025-09-15",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1583208&ctx=w&jsid=940995714&jsp=249",
+        "title": "Clinical IT Project Manager"
+    },
+    {
+        "company": "KMD A/S",
+        "companyUrl": "https://www.kmd.dk/",
+        "description": null,
+        "finalUrl": "https://jobs.kmd.net/default/job/Ballerup-Head-of-Development-2750/1247593501/?utm_source=jobindex",
+        "id": "h1596860",
+        "location": "Ballerup og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-15",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596860&ctx=w&jsid=940995714&jsp=250",
+        "title": "Head of Development"
+    },
+    {
+        "company": "Nykredit",
+        "companyUrl": "https://www.nykredit.dk/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1596799/lead-software-engineer-til-credit-risk-platforms",
+        "id": "h1596799",
+        "location": "Nordhavn",
+        "publishedDate": "2025-09-15",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596799&ctx=w&jsid=940995714&jsp=251",
+        "title": "Lead Software Engineer til Credit Risk Platforms"
+    },
+    {
+        "company": "Treschow & Son",
+        "companyUrl": "https://treschowson.com/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1596752/enterprise-arkitekt",
+        "id": "h1596752",
+        "location": "Århus / Nordhavn",
+        "publishedDate": "2025-09-15",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596752&ctx=w&jsid=940995714&jsp=252",
+        "title": "Enterprise Arkitekt"
+    },
+    {
+        "company": "DTU, Danmarks Tekniske Universitet",
+        "companyUrl": "https://www.dtu.dk/",
+        "description": null,
+        "finalUrl": "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/da/sites/CX_2001/job/5951",
+        "id": "h1596749",
+        "location": "Roskilde, hybrid position",
+        "publishedDate": "2025-09-15",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596749&ctx=w&jsid=940995714&jsp=253",
+        "title": "Senior Python Backend Engineer - DTU Wind"
+    },
+    {
+        "company": "Helsingør Kommune",
+        "companyUrl": "https://www.helsingor.dk/borger/",
+        "description": null,
+        "finalUrl": "https://portal.signatur.dk/ExtJobs/DefaultHosting/JobDetails.aspx?ClientId=2296&WebAdId=144491",
+        "id": "h1596616",
+        "location": "Helsingør og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-15",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596616&ctx=w&jsid=940995714&jsp=254",
+        "title": "GIS- og dataspecialist"
+    },
+    {
+        "company": "DTU, Danmarks Tekniske Universitet",
+        "companyUrl": "https://www.dtu.dk/",
+        "description": null,
+        "finalUrl": "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/da/sites/CX_2001/job/5939",
+        "id": "h1596020",
+        "location": "Kgs. Lyngby",
+        "publishedDate": "2025-09-14",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596020&ctx=w&jsid=940995714&jsp=255",
+        "title": "PhD Scholarships in Machine Learning for Materials - DTU Compute"
+    },
+    {
+        "company": "Netcompany A/S",
+        "companyUrl": "https://www.netcompany.com/da",
+        "description": null,
+        "finalUrl": "https://jobs.smartrecruiters.com/Netcompany1/744000033937784-test-consultant",
+        "id": "h1535281",
+        "location": "København K",
+        "publishedDate": "2025-09-13",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1535281&ctx=w&jsid=940995714&jsp=256",
+        "title": "Test Consultant"
+    },
+    {
+        "company": "Netcompany A/S",
+        "companyUrl": "https://www.netcompany.com/da",
+        "description": null,
+        "finalUrl": "https://jobs.smartrecruiters.com/Netcompany1/744000016042065-software-developer",
+        "id": "h1535255",
+        "location": "København, Aarhus eller Aalborg",
+        "publishedDate": "2025-09-13",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1535255&ctx=w&jsid=940995714&jsp=257",
+        "title": "Software Developer"
+    },
+    {
+        "company": "Netcompany A/S",
+        "companyUrl": "https://www.netcompany.com/da",
+        "description": null,
+        "finalUrl": "https://jobs.smartrecruiters.com/Netcompany1/744000016022615-it-consultant",
+        "id": "h1535238",
+        "location": "København, Aarhus eller Aalborg",
+        "publishedDate": "2025-09-13",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1535238&ctx=w&jsid=940995714&jsp=258",
+        "title": "IT Consultant"
+    },
+    {
+        "company": "Landis + Gyr",
+        "companyUrl": "https://www.landisgyr.dk/",
+        "description": null,
+        "finalUrl": "https://actio-consulting.dk/ledige-stillinger/senior-customer-application-engineer-soeges",
+        "id": "h1595925",
+        "location": "Sorø",
+        "publishedDate": "2025-09-12",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1595925&ctx=w&jsid=940995714&jsp=259",
+        "title": "Senior Customer Application Engineer søges"
+    },
+    {
+        "company": "Azets Insight A/S",
+        "companyUrl": "https://www.azets.dk/karriere/",
+        "description": null,
+        "finalUrl": "https://www.azets.com/da-dk/careerid/9025",
+        "id": "h1596523",
+        "location": "Herlev",
+        "publishedDate": "2025-09-12",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596523&ctx=w&jsid=940995714&jsp=260",
+        "title": "Frontend developer hos Azets - byg fremtidens digitale løsninger"
+    },
+    {
+        "company": "GEA Process Engineering A/S",
+        "companyUrl": "https://www.gea.com/en/index.jsp",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1596372/engineering-change-management-expert",
+        "id": "h1596372",
+        "location": "Søborg",
+        "publishedDate": "2025-09-12",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596372&ctx=w&jsid=940995714&jsp=261",
+        "title": "Engineering Change Management Expert"
+    },
+    {
+        "company": "GEA Process Engineering A/S",
+        "companyUrl": "https://www.gea.com/en/index.jsp",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1596351/sap-ps-cpm-consultant",
+        "id": "h1596351",
+        "location": "Søborg",
+        "publishedDate": "2025-09-12",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596351&ctx=w&jsid=940995714&jsp=262",
+        "title": "SAP PS/​CPM consultant"
+    },
+    {
+        "company": "Azets Insight A/S",
+        "companyUrl": "https://www.azets.dk/karriere/",
+        "description": null,
+        "finalUrl": "https://www.azets.com/da-dk/careerid/9018",
+        "id": "h1596011",
+        "location": "Herlev og mulighed for hjemmearbejde",
+        "publishedDate": "2025-09-11",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1596011&ctx=w&jsid=940995714&jsp=263",
+        "title": "BI specialist hos Azets - gør data til indsigt, indsigt til værdi"
+    },
+    {
+        "company": "Alldialogue ApS",
+        "companyUrl": "https://www.alldialogue.com/",
+        "description": null,
+        "finalUrl": "https://www.jobindex.dk/jobannonce/h1595973/er-du-vores-nye-seniorprogrammoer-systemarkitekt",
+        "id": "h1595973",
+        "location": "København Ø",
+        "publishedDate": "2025-09-11",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1595973&ctx=w&jsid=940995714&jsp=264",
+        "title": "Er du vores nye seniorprogrammør /​ systemarkitekt?"
+    },
+    {
+        "company": "DTU, Danmarks Tekniske Universitet",
+        "companyUrl": "https://www.dtu.dk/",
+        "description": null,
+        "finalUrl": "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/da/sites/CX_2001/job/5937",
+        "id": "h1595911",
+        "location": "Kgs. Lyngby",
+        "publishedDate": "2025-09-11",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1595911&ctx=w&jsid=940995714&jsp=265",
+        "title": "PhD scholarship in Optimization Frameworks for Integrating Efficiency and Equity in Transportation Planning - DTU Management"
+    },
+    {
+        "company": "Købstædernes Forsikring",
+        "companyUrl": "https://www.kfforsikring.dk/",
+        "description": null,
+        "finalUrl": "https://careers.kfforsikring.dk/jobs/6418129-vi-soeger-en-loesningsorienteret-net-udvikler",
+        "id": "h1595155",
+        "location": "København K",
+        "publishedDate": "2025-09-09",
+        "redirectUrl": "https://www.jobindex.dk/c?t=h1595155&ctx=w&jsid=940995714&jsp=266",
+        "title": "Vi søger en løsningsorienteret .NET-udvikler"
     }
 ]

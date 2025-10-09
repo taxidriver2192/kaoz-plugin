@@ -16,7 +16,8 @@ async function getCurrentApiConfig() {
 // =============================================================================
 
 export interface JobDetails {
-  linkedin_job_id: number | null;
+  source_id: number; // Platform source ID (1 = LinkedIn, 2 = Jobindex)
+  source_job_id: string; // Job ID from the source platform
   title: string | null;
   location: string | null;
   description: string | null;
@@ -68,7 +69,10 @@ export interface ApiResponse<T> {
 export interface JobIdsResponse {
   success: boolean;
   count: number;
-  linkedin_job_ids: number[];
+  job_ids: Array<{
+    source_id: number;
+    source_job_id: string;
+  }>;
 }
 
 // -----------------------------------------------------------------------------
@@ -319,15 +323,23 @@ class ApiClient {
   // ==========================================================================
 
   // Get all existing job IDs from the database
-  async getExistingJobIds(): Promise<Set<string>> {
+  // Optional: filter by source_id (1 = LinkedIn, 2 = Jobindex)
+  async getExistingJobIds(sourceId?: number): Promise<Set<string>> {
     try {
       const response = await this.makeRequest<JobIdsResponse>('/jobs/ids');
       
-      if (response.success && response.data?.linkedin_job_ids) {
-        // Convert numbers to strings and return as Set for fast lookup
-        const jobIds = response.data.linkedin_job_ids.map(id => id.toString());
-        this.log(`Fetched ${jobIds.length} existing job IDs from database`);
-        return new Set(jobIds);
+      if (response.success && response.data?.job_ids) {
+        // Filter by source_id if provided, then extract source_job_id
+        let jobIds = response.data.job_ids;
+        
+        if (sourceId !== undefined) {
+          jobIds = jobIds.filter(job => job.source_id === sourceId);
+          this.log(`Filtered to ${jobIds.length} job IDs for source_id ${sourceId}`);
+        }
+        
+        const sourceJobIds = jobIds.map(job => job.source_job_id);
+        this.log(`Fetched ${sourceJobIds.length} existing job IDs from database`);
+        return new Set(sourceJobIds);
       }
       
       this.log('No existing job IDs found or API call failed');

@@ -354,7 +354,7 @@ class PopupController {
   }
 
   private async resolveFinalUrls() {
-    console.log('🔗 Resolving final URLs by opening background tabs...');
+    console.log('🔗 Resolving final URLs with database check...');
     try {
       const result = await new Promise<any>((resolve) => {
         chrome.runtime.sendMessage({ action: 'resolveJobindexFinalUrls' }, (resp) => {
@@ -366,8 +366,47 @@ class PopupController {
         });
       });
 
-      if (result?.success) {
-        console.log(`✅ Final URLs resolved for ${result.updated} jobs. Data updated in storage.`);
+      if (result?.success && result?.platformStats) {
+        const stats = result.platformStats;
+        
+        console.log(`\n${'='.repeat(60)}`);
+        console.log(`✅ FINAL URL RESOLUTION COMPLETE`);
+        console.log(`${'='.repeat(60)}`);
+        console.log(`📊 URLs resolved: ${result.updated}`);
+        console.log(`⏭️ Jobs skipped (no redirect): ${result.skipped || 0}`);
+        console.log(`🗑️ Jobs removed (already in DB): ${result.removed || 0}`);
+        console.log(`\n${'─'.repeat(60)}`);
+        console.log(`📈 PLATFORM COVERAGE ANALYSIS`);
+        console.log(`${'─'.repeat(60)}`);
+        console.log(`📦 Total jobs: ${stats.totalJobs}`);
+        console.log(`✅ Jobs that can be scraped: ${stats.scrapableJobs} (${stats.scrapablePercentage}%)`);
+        console.log(`❌ Missing: ${stats.missingJobs} (${stats.missingPercentage}%)`);
+        
+        if (stats.enabledPlatforms.length > 0) {
+          console.log(`\n🟢 Enabled Platforms (Biggest platforms):`);
+          stats.enabledPlatforms.forEach((platform: any, index: number) => {
+            console.log(`   ${index + 1}. ${platform.name}: ${platform.count} jobs (${platform.percentage}%)`);
+          });
+        }
+        
+        if (stats.disabledPlatforms.length > 0) {
+          console.log(`\n🔴 Missing or Disabled Platforms:`);
+          stats.disabledPlatforms.forEach((platform: any, index: number) => {
+            const reason = platform.reason === 'disabled' ? '(disabled)' : '(unknown)';
+            console.log(`   ${index + 1}. ${platform.name}: ${platform.count} jobs (${platform.percentage}%) ${reason}`);
+          });
+        }
+        
+        console.log(`${'='.repeat(60)}\n`);
+      } else if (result?.success) {
+        // Fallback for old format without platformStats
+        console.log(`\n${'='.repeat(60)}`);
+        console.log(`✅ FINAL URL RESOLUTION COMPLETE`);
+        console.log(`📊 URLs resolved: ${result.updated}`);
+        console.log(`⏭️ Jobs skipped (no redirect): ${result.skipped || 0}`);
+        console.log(`🗑️ Jobs removed (already in DB): ${result.removed || 0}`);
+        console.log(`📦 Check storage for updated jobs`);
+        console.log(`${'='.repeat(60)}\n`);
       } else {
         console.error('❌ Failed to resolve final URLs:', result?.error || 'Unknown error');
       }

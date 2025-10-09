@@ -154,8 +154,8 @@ export class JobDescriptionBatchScraper {
           await this.updateProgress(progress);
         }
 
-        // Small delay between jobs
-        await this.sleep(2000);
+        // Small delay between jobs (reduced for better performance)
+        await this.sleep(300);
       }
 
       // Set completion
@@ -190,18 +190,14 @@ export class JobDescriptionBatchScraper {
     this.log(`🔗 Opening tab for: ${job.finalUrl}`);
     
     try {
-      // Save current active tab to switch back later
-      const [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      this.log(`💾 Saved current active tab: ${currentTab?.id}`);
-
-      // Open new tab ACTIVE (required for script injection to work properly)
+      // Open new tab in BACKGROUND (non-intrusive scraping)
       const tab = await chrome.tabs.create({
         url: job.finalUrl,
-        active: true
+        active: false
       });
 
       this.currentTabId = tab.id!;
-      this.log(`✅ Opened tab ${tab.id} for ${job.finalUrl} (active)`);
+      this.log(`✅ Opened tab ${tab.id} for ${job.finalUrl} (background)`);
 
       // Wait for tab to load completely
       await this.waitForTabLoad(tab.id!);
@@ -224,9 +220,9 @@ export class JobDescriptionBatchScraper {
         };
       }
 
-      // Detect platform and get wait time
+      // Detect platform and get reduced wait time (background tabs load faster)
       const platform = detectPlatformFromUrl(currentUrl);
-      const waitTime = platform?.waitTime || 3000;
+      const waitTime = platform?.waitTime || 500;
       
       // Wait for page to stabilize
       this.log(`⏳ Waiting ${waitTime}ms for page to stabilize...`);
@@ -295,23 +291,12 @@ export class JobDescriptionBatchScraper {
         });
         this.log(`✅ Content script injected successfully`);
         
-        // Wait for content script to initialize
-        this.log(`⏳ Waiting 1500ms for content script to initialize...`);
-        await this.sleep(1500);
+        // Wait for content script to initialize (reduced for background tabs)
+        this.log(`⏳ Waiting 500ms for content script to initialize...`);
+        await this.sleep(500);
       } catch (error) {
         this.log(`❌ Failed to inject content script:`, error);
         throw new Error(`Content script injection failed: ${error instanceof Error ? error.message : String(error)}`);
-      }
-
-
-      // Switch back to original tab (minimize distraction for user)
-      if (currentTab?.id) {
-        try {
-          await chrome.tabs.update(currentTab.id, { active: true });
-          this.log(`🔄 Switched back to original tab ${currentTab.id}`);
-        } catch (error) {
-          this.log(`⚠️ Could not switch back to original tab:`, error);
-        }
       }
 
       // Verify content script is responding
@@ -320,8 +305,8 @@ export class JobDescriptionBatchScraper {
 
       if (!isPresent) {
         this.log(`❌ Content script not responding after injection`);
-        this.log(`⚠️ Waiting additional 2 seconds and retrying...`);
-        await this.sleep(2000);
+        this.log(`⚠️ Waiting additional 1 second and retrying...`);
+        await this.sleep(1000);
         
         const isPresent2 = await this.pingContentScript(tab.id!);
         if (!isPresent2) {
@@ -412,7 +397,7 @@ export class JobDescriptionBatchScraper {
       const timeout = setTimeout(() => {
         chrome.tabs.onUpdated.removeListener(listener);
         reject(new Error('Tab load timeout'));
-      }, 30000); // 30 second timeout
+      }, 10000); // 10 second timeout (reduced for better performance)
 
       const listener = (updatedTabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
         if (updatedTabId === tabId && changeInfo.status === 'complete') {
@@ -578,9 +563,6 @@ export class JobDescriptionBatchScraper {
         source_id: sourceId,
         source_job_id: String(job.id),
         source_url: job.finalUrl || '',
-        
-        // Legacy LinkedIn fields
-        linkedin_job_id: platform?.name === 'linkedin' ? parseInt(job.id, 10) : null,
         applicants: job.applicants || null
       };
 

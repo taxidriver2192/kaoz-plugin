@@ -170,7 +170,7 @@ export class PlatformDetector {
   private static isSearchPage(url: string, platform: PlatformConfig): boolean {
     switch (platform.name) {
       case 'linkedin':
-        return url.includes('/jobs/search/') || (url.includes('/jobs/') && !url.includes('/jobs/view/'));
+        return url.includes('/jobs/search') || (url.includes('/jobs/') && !url.includes('/jobs/view/'));
 
       case 'jobindex':
         return url.includes('/jobsoegning/') && !url.includes('/stilling/') && !url.includes('/jobannonce/');

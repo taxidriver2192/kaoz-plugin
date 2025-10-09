@@ -22,8 +22,7 @@ export interface MultiSourceJobDetails {
   source_job_id: string;
   source_url: string;
 
-  // Legacy LinkedIn fields (for backward compatibility)
-  linkedin_job_id?: number | null;
+  // Optional fields
   applicants?: number | null;
 }
 
@@ -227,8 +226,6 @@ export class MultiSourceApiClient {
       skills: jobDetails.skills,
       company: jobDetails.company,
       company_id: jobDetails.company_id,
-      // Legacy LinkedIn fields for backward compatibility
-      linkedin_job_id: jobDetails.linkedin_job_id,
       applicants: jobDetails.applicants
     };
 
@@ -292,9 +289,6 @@ export class MultiSourceApiClient {
       source_id: platform.id,
       source_job_id: jobId,
       source_url: window.location.href,
-
-      // Legacy LinkedIn fields
-      linkedin_job_id: platform.name === 'linkedin' ? parseInt(jobId, 10) : null,
       applicants: platformData.applicants || null
     };
   }

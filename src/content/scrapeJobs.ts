@@ -233,8 +233,13 @@ class JobScraper {
   private async extractJobDetails(): Promise<JobDetails> {
     this.log("Starting comprehensive job details extraction...");
 
+    // Extract job ID from URL first - this should always work with currentJobId parameter
+    const jobIdFromUrl = this.extractJobId();
+    const jobIdString = jobIdFromUrl && jobIdFromUrl !== `job_${Date.now()}` ? jobIdFromUrl : '';
+    
     const jobDetails: JobDetails = {
-      linkedin_job_id: null,
+      source_id: 1, // LinkedIn source ID
+      source_job_id: jobIdString,
       title: null,
       location: null,
       description: null,
@@ -247,12 +252,9 @@ class JobScraper {
     };
 
     try {
-      // Extract job ID from URL first - this should always work with currentJobId parameter
-      const jobIdFromUrl = this.extractJobId();
-      if (jobIdFromUrl && jobIdFromUrl !== `job_${Date.now()}`) {
-        jobDetails.linkedin_job_id = parseInt(jobIdFromUrl, 10);
-        jobDetails.apply_url = `https://www.linkedin.com/jobs/view/${jobIdFromUrl}/`;
-        this.log(`Extracted job ID from URL: ${jobIdFromUrl}`);
+      if (jobIdString) {
+        jobDetails.apply_url = `https://www.linkedin.com/jobs/view/${jobIdString}/`;
+        this.log(`Extracted job ID from URL: ${jobIdString}`);
       }
 
       // Try multiple possible selectors for the main job card
@@ -929,7 +931,8 @@ class JobScraper {
       const skillsCount = jobDetails.skills?.length || 0;
       
       this.log('📝 Job extraction completed:', {
-        linkedin_job_id: jobDetails.linkedin_job_id,
+        source_id: jobDetails.source_id,
+        source_job_id: jobDetails.source_job_id,
         title: jobDetails.title,
         company: jobDetails.company,
         location: jobDetails.location,
@@ -943,9 +946,9 @@ class JobScraper {
         this.log(`🎯 Skills fundet (${skillsCount}): ${jobDetails.skills?.join(', ')}`);
       }
       
-      if (!jobDetails.linkedin_job_id || !jobDetails.title || !jobDetails.company) {
+      if (!jobDetails.source_job_id || !jobDetails.title || !jobDetails.company) {
         this.log('❌ Missing required job data:', {
-          hasJobId: !!jobDetails.linkedin_job_id,
+          hasSourceJobId: !!jobDetails.source_job_id,
           hasTitle: !!jobDetails.title,
           hasCompany: !!jobDetails.company
         });

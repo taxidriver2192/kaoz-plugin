@@ -145,8 +145,8 @@ export class JobindexBulkScraper {
           allJobs.push(...pageJobs);
           currentPage++;
           
-          // Add delay between pages to be respectful
-          await this.delay(2000);
+          // Minimal delay between pages
+          await this.delay(300);
         }
       }
 
@@ -195,8 +195,7 @@ export class JobindexBulkScraper {
   private async extractJobsFromCurrentPage(): Promise<JobindexJobListing[]> {
     this.log('🔍 Extracting jobs from current page...');
     
-    // Wait for page to load
-    await this.delay(1000);
+    // No wait needed - page is already loaded when content script runs
     
     // Find all potential job containers and filter
     const allContainers = Array.from(document.querySelectorAll('[data-tid]')) as HTMLElement[];
@@ -453,8 +452,7 @@ export class JobindexBulkScraper {
 
         result.processedJobs++;
         
-        // Small delay to be respectful
-        await this.delay(400);
+        // No delay needed - we're just processing DOM elements, not making network requests
         
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);

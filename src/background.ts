@@ -4,6 +4,7 @@
 import { CONFIG, validateConfig } from './config/environment';
 import { batchScraper } from './background/jobDescriptionBatchScraper';
 import { jobindexBulkBatchScraper } from './background/jobindexBulkBatchScraper';
+import { detectPlatformFromUrl, JOB_DESCRIPTION_PLATFORMS } from './config/jobDescriptionConfig';
 
 interface BgProfileData {
   firstName: string;
@@ -363,7 +364,7 @@ class BackgroundService {
   }
 
   private logJobSummary(job: any, index: number, total: number, lastChecked?: string) {
-    const jobId = job.linkedin_job_id || job.id;
+    const jobId = job.source_job_id || job.id;
     const jobUrl = `${CONFIG.LINKEDIN.JOB_URL_PREFIX}${jobId}`;
     const lastCheckedInfo = lastChecked ? ` | Sidst tjekket: ${new Date(lastChecked).toLocaleString('da-DK')}` : '';
     
@@ -419,7 +420,13 @@ class BackgroundService {
       } else if (request.action === 'resolveJobindexFinalUrls') {
         console.info(`[LINKEDIN_SCRAPER_BG] Resolving Jobindex final URLs...`);
         this.resolveJobindexFinalUrls()
-          .then(result => sendResponse({ success: true, updated: result.updated }))
+          .then(result => sendResponse({ 
+            success: true, 
+            updated: result.updated, 
+            skipped: result.skipped, 
+            removed: result.removed,
+            platformStats: result.platformStats
+          }))
           .catch(error => sendResponse({ success: false, error: error instanceof Error ? error.message : String(error) }));
         return true;
       } else if (request.action === 'startBatchScraping') {
@@ -454,10 +461,10 @@ class BackgroundService {
         });
       } else if (request.action === 'startJobindexBulkScraping') {
         console.info(`[LINKEDIN_SCRAPER_BG] Starting Jobindex bulk scraping...`);
-        console.info(`[LINKEDIN_SCRAPER_BG] Base URL: ${request.baseUrl}, Max pages: ${request.maxPages}`);
+        console.info(`[LINKEDIN_SCRAPER_BG] Base URL: ${request.baseUrl}`);
         
         try {
-          jobindexBulkBatchScraper.startBulkScraping(request.baseUrl, request.maxPages || 10)
+          jobindexBulkBatchScraper.startBulkScraping(request.baseUrl)
             .then(() => {
               console.info(`[LINKEDIN_SCRAPER_BG] ✅ Jobindex bulk scraping completed successfully`);
               sendResponse({ success: true });
@@ -505,17 +512,92 @@ class BackgroundService {
     });
   }
 
-  private async resolveJobindexFinalUrls(): Promise<{ updated: number }> {
+  private async resolveJobindexFinalUrls(): Promise<{
+    updated: number;
+    skipped: number;
+    removed: number;
+    platformStats: {
+      totalJobs: number;
+      scrapableJobs: number;
+      scrapablePercentage: number;
+      missingJobs: number;
+      missingPercentage: number;
+      enabledPlatforms: Array<{ name: string; count: number; percentage: number }>;
+      disabledPlatforms: Array<{ name: string; count: number; percentage: number; reason: 'disabled' | 'unknown' }>;
+    };
+  }> {
+    this.log('🔍 Starting Jobindex final URL resolution with database check...');
+    
+    // Get all jobs from storage
     const jobs: any[] = await new Promise((resolve) => {
       chrome.storage.local.get(['jobindexBulkJobs'], (data) => {
         resolve((data?.jobindexBulkJobs as any[]) || []);
       });
     });
 
-    let updated = 0;
-    for (const job of jobs) {
-      if (!job?.redirectUrl) { continue; }
+    this.log(`📊 Total jobs in storage: ${jobs.length}`);
 
+    // Fetch existing job IDs from database
+    this.log('📡 Fetching existing job IDs from database...');
+    const endpoint = `${CONFIG.API.BASE_URL}/jobs/ids`;
+    
+    let existingJobIds: Set<string> = new Set();
+    try {
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: {
+          'X-API-Key': CONFIG.API.API_KEY,
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        this.log(`✅ Received ${result.count || 0} existing job IDs from database`);
+        
+        // For Jobindex, source_id should be 2 (assuming Jobindex is source 2)
+        // Filter only Jobindex jobs and create a Set of source_job_ids
+        if (result.job_ids && Array.isArray(result.job_ids)) {
+          const jobindexSourceId = 2; // Jobindex source ID
+          existingJobIds = new Set(
+            result.job_ids
+              .filter((job: any) => job.source_id === jobindexSourceId)
+              .map((job: any) => job.source_job_id)
+          );
+          this.log(`📋 Found ${existingJobIds.size} existing Jobindex jobs in database`);
+        }
+      } else {
+        this.log(`⚠️ API request failed: ${response.status} - continuing without filtering`);
+      }
+    } catch (error) {
+      this.log(`⚠️ Error fetching existing job IDs: ${error} - continuing without filtering`);
+    }
+
+    // Filter out jobs that already exist in database
+    const jobsBeforeFilter = jobs.length;
+    const newJobs = jobs.filter(job => !existingJobIds.has(job.id));
+    const removedCount = jobsBeforeFilter - newJobs.length;
+    
+    if (removedCount > 0) {
+      this.log(`🗑️ Removed ${removedCount} jobs that already exist in database`);
+      this.log(`📊 Jobs to process: ${newJobs.length}`);
+    } else {
+      this.log(`✅ All ${newJobs.length} jobs are new - proceeding with URL resolution`);
+    }
+
+    // Resolve final URLs for new jobs only
+    let updated = 0;
+    let skipped = 0;
+    
+    for (const job of newJobs) {
+      if (!job?.redirectUrl) {
+        this.log(`⚠️ Skipping job ${job.id} - no redirect URL`);
+        skipped++;
+        continue;
+      }
+
+      this.log(`🔗 Resolving final URL for job ${job.id}: ${job.title}`);
+      
       const tab = await chrome.tabs.create({ url: job.redirectUrl, active: false });
 
       const finalUrl: string = await new Promise((resolve) => {
@@ -547,14 +629,132 @@ class BackgroundService {
 
       job.finalUrl = finalUrl;
       updated++;
+      this.log(`✅ Resolved final URL for ${job.id}: ${finalUrl}`);
+      
       await new Promise(r => setTimeout(r, 300));
     }
 
+    // Save updated jobs back to storage
     await new Promise<void>((resolve) => {
-      chrome.storage.local.set({ jobindexBulkJobs: jobs }, () => resolve());
+      chrome.storage.local.set({ jobindexBulkJobs: newJobs }, () => resolve());
     });
 
-    return { updated };
+    // Analyze platform statistics
+    this.log('\n📊 Analyzing platform statistics...');
+    
+    const platformCounts: Map<string, { platform: any; count: number; enabled: boolean }> = new Map();
+    let unknownPlatformCount = 0;
+    const unknownDomains: Map<string, number> = new Map();
+
+    // Analyze each job's final URL
+    for (const job of newJobs) {
+      if (!job.finalUrl) {
+        continue;
+      }
+
+      // Check all platforms (enabled and disabled)
+      let foundPlatform = false;
+      
+      for (const [key, config] of Object.entries(JOB_DESCRIPTION_PLATFORMS)) {
+        if (config.urlPatterns.some(pattern => job.finalUrl.includes(pattern))) {
+          if (!platformCounts.has(key)) {
+            platformCounts.set(key, { platform: config, count: 0, enabled: config.enabled });
+          }
+          platformCounts.get(key)!.count++;
+          foundPlatform = true;
+          break; // Stop checking once we find a match
+        }
+      }
+      
+      if (!foundPlatform) {
+        // Unknown platform - extract domain
+        try {
+          const url = new URL(job.finalUrl);
+          const domain = url.hostname;
+          unknownDomains.set(domain, (unknownDomains.get(domain) || 0) + 1);
+          unknownPlatformCount++;
+        } catch {
+          unknownPlatformCount++;
+        }
+      }
+    }
+
+    // Separate enabled and disabled/unknown platforms
+    const enabledPlatforms = Array.from(platformCounts.values())
+      .filter(p => p.enabled)
+      .map(p => ({
+        name: p.platform.displayName,
+        count: p.count,
+        percentage: Math.round((p.count / newJobs.length) * 100)
+      }))
+      .sort((a, b) => b.count - a.count);
+
+    const disabledPlatforms = Array.from(platformCounts.values())
+      .filter(p => !p.enabled)
+      .map(p => ({
+        name: p.platform.displayName,
+        count: p.count,
+        percentage: Math.round((p.count / newJobs.length) * 100),
+        reason: 'disabled' as const
+      }))
+      .sort((a, b) => b.count - a.count);
+
+    // Add unknown domains
+    const unknownPlatformsList = Array.from(unknownDomains.entries())
+      .map(([domain, count]) => ({
+        name: domain,
+        count,
+        percentage: Math.round((count / newJobs.length) * 100),
+        reason: 'unknown' as const
+      }))
+      .sort((a, b) => b.count - a.count);
+
+    const allDisabledAndUnknown = [...disabledPlatforms, ...unknownPlatformsList];
+
+    const scrapableJobs = enabledPlatforms.reduce((sum, p) => sum + p.count, 0);
+    const missingJobs = newJobs.length - scrapableJobs;
+
+    const platformStats = {
+      totalJobs: newJobs.length,
+      scrapableJobs,
+      scrapablePercentage: newJobs.length > 0 ? Math.round((scrapableJobs / newJobs.length) * 100) : 0,
+      missingJobs,
+      missingPercentage: newJobs.length > 0 ? Math.round((missingJobs / newJobs.length) * 100) : 0,
+      enabledPlatforms,
+      disabledPlatforms: allDisabledAndUnknown
+    };
+
+    this.log(`\n${'='.repeat(60)}`);
+    this.log(`✅ FINAL URL RESOLUTION COMPLETE`);
+    this.log(`📊 Jobs processed: ${updated}`);
+    this.log(`⏭️ Jobs skipped (no redirect URL): ${skipped}`);
+    this.log(`🗑️ Jobs removed (already in database): ${removedCount}`);
+    this.log(`📦 Total jobs remaining: ${newJobs.length}`);
+    this.log(`\n📊 PLATFORM STATISTICS:`);
+    this.log(`   Total jobs: ${platformStats.totalJobs}`);
+    this.log(`   Scrapable: ${platformStats.scrapableJobs} (${platformStats.scrapablePercentage}%)`);
+    this.log(`   Missing: ${platformStats.missingJobs} (${platformStats.missingPercentage}%)`);
+    
+    // Biggest platforms leaderboard
+    if (platformStats.enabledPlatforms.length > 0) {
+      this.log(`\n🏆 Biggest Platforms:`);
+      platformStats.enabledPlatforms.forEach((platform, index) => {
+        this.log(`   ${index + 1}. ${platform.name}: ${platform.count} jobs (${platform.percentage}%)`);
+      });
+    }
+    
+    // Missing or disabled platforms leaderboard
+    if (platformStats.disabledPlatforms.length > 0) {
+      this.log(`\n❌ Missing or Disabled Platforms:`);
+      platformStats.disabledPlatforms.forEach((platform, index) => {
+        const reason = platform.reason === 'disabled' ? '(disabled)' : '(unknown)';
+        this.log(`   ${index + 1}. ${platform.name}: ${platform.count} jobs (${platform.percentage}%) ${reason}`);
+      });
+    }
+    
+    this.log(`${'='.repeat(60)}\n`);
+
+    return { updated, skipped, removed: removedCount, platformStats };
   }
 
   private async scrapeCurrentTab() {
@@ -680,7 +880,7 @@ class BackgroundService {
       // Check each job using the hidden tab
       for (const job of jobsToCheck) {
         try {
-          const jobId = job.linkedin_job_id || job.id;
+          const jobId = job.source_job_id || job.id;
           const jobUrl = `${CONFIG.LINKEDIN.JOB_URL_PREFIX}${jobId}`;
           
           // Log job summary with LinkedIn link
@@ -738,8 +938,9 @@ class BackgroundService {
           
         } catch (error) {
           // Only log error if it's not a tab closure error
-          if (!error.message?.includes('No tab with id')) {
-            this.log(`❌ Fejl ved tjek af job ${job.linkedin_job_id || job.id}:`, error);
+          const errorMessage = error instanceof Error ? error.message : String(error);
+          if (!errorMessage.includes('No tab with id')) {
+            this.log(`❌ Fejl ved tjek af job ${job.source_job_id || job.id}:`, error);
           }
           checkedCount++;
         }

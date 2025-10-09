@@ -25,6 +25,7 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
       '.jobtext-jobad__body'
     ],
     waitTime: 3000,
+    // virker
     enabled: true
   },
   
@@ -37,7 +38,8 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
       '.AdContentContainer'
     ],
     waitTime: 3000,
-    enabled: true
+    // virker
+    enabled: false
   },
   
   'thehub.io': {
@@ -46,18 +48,11 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 3,
     urlPatterns: ['thehub.io'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement'
+      '.text-block__content--default'
     ],
     waitTime: 3000,
-    enabled: false
+    // virker 
+    enabled: true
   },
 
   'oraclecloud.com': {
@@ -66,20 +61,11 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 5,
     urlPatterns: ['efzu.fa.em2.oraclecloud.com'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement',
-      '.job-summary',
-      '.vacancy-description'
+      '.job-details__description-content'
     ],
     waitTime: 3000,
-    enabled: false
+    // virker
+    enabled: true
   },
 
   'emply.com': {
@@ -88,20 +74,11 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 6,
     urlPatterns: ['career.emply.com'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement',
-      '.vacancy-description',
-      '.job-summary'
+      '.csa_jobadText'
     ],
     waitTime: 3000,
-    enabled: false
+    // virker
+    enabled: true
   },
 
   'myworkdayjobs.com': {
@@ -110,21 +87,11 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 7,
     urlPatterns: ['myworkdayjobs.com'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement',
-      '.job-summary',
-      '.vacancy-description',
       '[data-automation-id="jobPostingDescription"]'
     ],
     waitTime: 3000,
-    enabled: false
+    // virker
+    enabled: true
   },
 
   'emagine.org': {
@@ -146,6 +113,7 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
       '.job-summary'
     ],
     waitTime: 3000,
+    // virker ikke den er anderledes.
     enabled: false
   },
 
@@ -155,20 +123,11 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 9,
     urlPatterns: ['jndata-career.talent-soft.com'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement',
-      '.vacancy-description',
-      '.job-summary'
+      '.card-body'
     ],
     waitTime: 3000,
-    enabled: false
+    // virker
+    enabled: true
   },
 
   'politi.dk': {
@@ -177,21 +136,12 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 10,
     urlPatterns: ['job.politi.dk'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement',
-      '.vacancy-description',
-      '.job-summary'
+      '.rtltextaligneligible'
     ],
     waitTime: 3000,
-    enabled: false
-  },
+    // virker
+    enabled: true
+  },    
 
   'systematic.com': {
     name: 'systematic.com',
@@ -199,20 +149,11 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 11,
     urlPatterns: ['jobs.systematic.com'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement',
-      '.vacancy-description',
-      '.job-summary'
+      '.rtltextaligneligible'
     ],
     waitTime: 3000,
-    enabled: false
+    // virker
+    enabled: true
   },
 
   'tryg.com': {
@@ -221,20 +162,11 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 12,
     urlPatterns: ['careers.tryg.com'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement',
-      '.vacancy-description',
-      '.job-summary'
+      '.rtltextaligneligible'
     ],
     waitTime: 3000,
-    enabled: false
+    // virker
+    enabled: true
   },
 
   'lego.com': {
@@ -243,20 +175,12 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     sourceId: 13,
     urlPatterns: ['www.lego.com'],
     descriptionSelectors: [
-      '.job-description',
-      '.job-content',
-      '.description',
-      '.content',
-      '.job-details',
-      '[data-test="job-description"]',
-      '.job-text',
-      '.job-body',
-      '.job-announcement',
-      '.vacancy-description',
-      '.job-summary'
+      '.c-content-block__text',
+      '.u-type-base',
+      '.c-content'
     ],
     waitTime: 3000,
-    enabled: false
+    enabled: true
   }
 };
 

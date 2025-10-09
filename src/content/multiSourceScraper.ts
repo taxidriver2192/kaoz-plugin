@@ -144,8 +144,8 @@ class MultiSourceScraper {
             
             chrome.runtime.sendMessage({
               action: 'startJobindexBulkScraping',
-              baseUrl: window.location.href,
-              maxPages: 10
+              baseUrl: window.location.href
+              // No maxPages - will scrape until no more jobs found
             }, (response) => {
               if (response?.success) {
                 this.log('✅ Background bulk scraping started successfully');

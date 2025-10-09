@@ -140,8 +140,12 @@ class JobindexJobScraper {
   private async extractJobDetails(): Promise<JobDetails> {
     this.log("Starting Jobindex job details extraction...");
 
+    const jobIdFromUrl = this.extractJobId();
+    const jobIdString = jobIdFromUrl || '';
+
     const jobDetails: JobDetails = {
-      linkedin_job_id: null, // Not applicable for Jobindex
+      source_id: 2, // Jobindex source ID
+      source_job_id: jobIdString,
       title: null,
       location: null,
       description: null,
