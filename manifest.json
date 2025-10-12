@@ -49,8 +49,7 @@
       "matches": [
         "https://*.linkedin.com/jobs/*", 
         "https://*.linkedin.com/jobs/search/*", 
-        "https://*.jobindex.dk/jobsoegning/*",
-        "https://*.jobindex.dk/jobannonce/*",
+        "https://*.jobindex.dk/*",
         "https://candidate.hr-manager.net/*",
         "https://thehub.io/*",
         "https://efzu.fa.em2.oraclecloud.com/*",

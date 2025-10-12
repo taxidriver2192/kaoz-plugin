@@ -107,15 +107,46 @@ class PopupController {
       // Use smart multi-source scraping for all supported platforms
       if (currentTab.url.includes('linkedin.com/') || currentTab.url.includes('jobindex.dk/')) {
         try {
-          const response = await new Promise<any>((resolve) => {
+          // Try to send message, if it fails, inject the content script first
+          let response = await new Promise<any>((resolve) => {
             chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, (response) => {
               if (chrome.runtime.lastError) {
-                resolve({ success: false, error: 'Content script not available on this page' });
+                console.log('⚠️ Content script not found, attempting to inject...');
+                resolve(null);
               } else {
                 resolve(response);
               }
             });
           });
+          
+          // If content script wasn't available, inject it and try again
+          if (response === null) {
+            try {
+              console.log('💉 Injecting content script...');
+              await chrome.scripting.executeScript({
+                target: { tabId: currentTab.id! },
+                files: ['multiSourceScraper.js']
+              });
+              
+              // Wait a moment for the script to initialize
+              await new Promise(resolve => setTimeout(resolve, 500));
+              
+              // Try sending the message again
+              response = await new Promise<any>((resolve) => {
+                chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, (response) => {
+                  if (chrome.runtime.lastError) {
+                    resolve({ success: false, error: 'Content script injection failed' });
+                  } else {
+                    resolve(response);
+                  }
+                });
+              });
+            } catch (injectionError) {
+              console.error('❌ Failed to inject content script:', injectionError);
+              response = { success: false, error: `Injection failed: ${injectionError}` };
+            }
+          }
+          
           if (response?.success) {
             console.log('✅ Page scraped successfully');
           } else {
@@ -123,19 +154,50 @@ class PopupController {
             console.error(`❌ Scraping failed: ${errorMsg}`);
           }
         } catch (error) {
-          console.error('❌ Content script not available on this page');
+          console.error('❌ Error during scraping:', error);
         }
       } else if (currentTab.url.includes('linkedin.com/in/')) {
         try {
-          const response = await new Promise<any>((resolve) => {
+          // Try to send message, if it fails, inject the content script first
+          let response = await new Promise<any>((resolve) => {
             chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeProfile' }, (response) => {
               if (chrome.runtime.lastError) {
-                resolve({ success: false, error: 'Content script not available on this page' });
+                console.log('⚠️ Content script not found, attempting to inject...');
+                resolve(null);
               } else {
                 resolve(response);
               }
             });
           });
+          
+          // If content script wasn't available, inject it and try again
+          if (response === null) {
+            try {
+              console.log('💉 Injecting profile scraper...');
+              await chrome.scripting.executeScript({
+                target: { tabId: currentTab.id! },
+                files: ['scrapeProfile.js']
+              });
+              
+              // Wait a moment for the script to initialize
+              await new Promise(resolve => setTimeout(resolve, 500));
+              
+              // Try sending the message again
+              response = await new Promise<any>((resolve) => {
+                chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeProfile' }, (response) => {
+                  if (chrome.runtime.lastError) {
+                    resolve({ success: false, error: 'Content script injection failed' });
+                  } else {
+                    resolve(response);
+                  }
+                });
+              });
+            } catch (injectionError) {
+              console.error('❌ Failed to inject content script:', injectionError);
+              response = { success: false, error: `Injection failed: ${injectionError}` };
+            }
+          }
+          
           if (response?.success) {
             console.log('✅ Profile page scraped successfully');
           } else {
@@ -143,7 +205,7 @@ class PopupController {
             console.error(`❌ Failed to scrape profile: ${errorMsg}`);
           }
         } catch (error) {
-          console.error('❌ Content script not available on this page');
+          console.error('❌ Error during profile scraping:', error);
         }
       } else {
         console.warn('⚠️ Current page is not a supported job or profile page');
@@ -241,7 +303,7 @@ class PopupController {
         this.platformStatusText.textContent = '✅ LinkedIn Profile Page';
       } else if (url.includes('jobindex.dk/jobsoegning/stilling/')) {
         this.platformStatusText.textContent = '✅ Jobindex.dk Job Page';
-      } else if (url.includes('jobindex.dk/jobsoegning/') && !url.includes('/stilling/')) {
+      } else if (url.includes('jobindex.dk/jobsoegning') && !url.includes('/stilling/')) {
         this.platformStatusText.textContent = '✅ Jobindex.dk Job Search Page (Bulk Scraping Available)';
       } else if (url.includes('linkedin.com/') || url.includes('jobindex.dk/')) {
         this.platformStatusText.textContent = '⚠️ Supported platform but not on job/profile/search page';
@@ -292,28 +354,58 @@ class PopupController {
 
       // Check if we're on a supported search page
       const isLinkedInSearch = currentTab.url.includes('linkedin.com/jobs/search');
-      const isJobindexSearch = currentTab.url.includes('jobindex.dk/jobsoegning/') && !currentTab.url.includes('/stilling/');
+      const isJobindexSearch = currentTab.url.includes('jobindex.dk/jobsoegning') && !currentTab.url.includes('/stilling/');
       
       if (!isLinkedInSearch && !isJobindexSearch) {
         console.warn('⚠️ Please navigate to a supported job search page first');
         console.log('💡 Supported pages:');
         console.log('   - LinkedIn: linkedin.com/jobs/search with your filters');
-        console.log('   - Jobindex: jobindex.dk/jobsoegning/ with your filters');
+        console.log('   - Jobindex: jobindex.dk/jobsoegning with your filters');
         return;
       }
 
       // Use the smart multi-source scraper for both platforms
       console.log('🔄 Starting smart bulk scraping...');
       
-      const bulkResponse = await new Promise<any>((resolve) => {
+      // Try to send message, if it fails, inject the content script first
+      let bulkResponse = await new Promise<any>((resolve) => {
         chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, (response) => {
           if (chrome.runtime.lastError) {
-            resolve({ success: false, error: 'Content script not available on this page' });
+            console.log('⚠️ Content script not found, attempting to inject...');
+            resolve(null);
           } else {
             resolve(response);
           }
         });
       });
+      
+      // If content script wasn't available, inject it and try again
+      if (bulkResponse === null) {
+        try {
+          console.log('💉 Injecting content script...');
+          await chrome.scripting.executeScript({
+            target: { tabId: currentTab.id! },
+            files: ['multiSourceScraper.js']
+          });
+          
+          // Wait a moment for the script to initialize
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+          // Try sending the message again
+          bulkResponse = await new Promise<any>((resolve) => {
+            chrome.tabs.sendMessage(currentTab.id!, { action: 'scrapeJob' }, (response) => {
+              if (chrome.runtime.lastError) {
+                resolve({ success: false, error: 'Content script injection failed' });
+              } else {
+                resolve(response);
+              }
+            });
+          });
+        } catch (injectionError) {
+          console.error('❌ Failed to inject content script:', injectionError);
+          bulkResponse = { success: false, error: `Injection failed: ${injectionError}` };
+        }
+      }
       
       if (bulkResponse?.success) {
         console.log('✅ Bulk job scraping completed successfully');

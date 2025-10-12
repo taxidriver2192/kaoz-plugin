@@ -39,7 +39,7 @@ export const JOB_DESCRIPTION_PLATFORMS: Record<string, PlatformConfig> = {
     ],
     waitTime: 3000,
     // virker
-    enabled: false
+    enabled: true
   },
   
   'thehub.io': {

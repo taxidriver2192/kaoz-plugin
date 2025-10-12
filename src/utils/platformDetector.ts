@@ -173,7 +173,8 @@ export class PlatformDetector {
         return url.includes('/jobs/search') || (url.includes('/jobs/') && !url.includes('/jobs/view/'));
 
       case 'jobindex':
-        return url.includes('/jobsoegning/') && !url.includes('/stilling/') && !url.includes('/jobannonce/');
+        // Match /jobsoegning/ or /jobsoegning? (with or without trailing slash)
+        return url.includes('/jobsoegning') && !url.includes('/stilling/') && !url.includes('/jobannonce/');
 
       default:
         return false;
