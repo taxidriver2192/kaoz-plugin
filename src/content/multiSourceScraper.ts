@@ -19,7 +19,7 @@ class MultiSourceScraper {
   /**
    * Detect current platform and show appropriate notification
    */
-  private detectAndNotifyPlatform(): { platform: any; jobId: string | null; isSearchPage: boolean } | null {
+  private detectAndNotifyPlatform(): { platform: any; jobId: string | null; isSearchPage: boolean; isCompanyPage: boolean } | null {
     const detected = PlatformDetector.detectCurrentPlatform();
     
     if (!detected) {
@@ -28,9 +28,9 @@ class MultiSourceScraper {
       return null;
     }
 
-    if (!detected.isJobPage && !detected.isSearchPage) {
-      this.log(`❌ Not on a job page or search page for ${detected.platform.displayName}`);
-      this.showNotification(`❌ Please navigate to a job page or search page on ${detected.platform.displayName}`, 'error');
+    if (!detected.isJobPage && !detected.isSearchPage && !detected.isCompanyPage) {
+      this.log(`❌ Not on a job page, search page, or company page for ${detected.platform.displayName}`);
+      this.showNotification(`❌ Please navigate to a job page, search page, or company page on ${detected.platform.displayName}`, 'error');
       return null;
     }
 
@@ -46,12 +46,16 @@ class MultiSourceScraper {
     } else if (detected.isSearchPage) {
       this.log(`✅ Detected ${detected.platform.displayName} search page`);
       this.showNotification(`🔍 Detected ${detected.platform.displayName} search page - ready for bulk scraping`, 'success');
+    } else if (detected.isCompanyPage) {
+      this.log(`✅ Detected ${detected.platform.displayName} company page`);
+      this.showNotification(`🔍 Detected ${detected.platform.displayName} company page - ready for bulk scraping`, 'success');
     }
     
     return {
       platform: detected.platform,
       jobId: detected.jobId,
-      isSearchPage: detected.isSearchPage
+      isSearchPage: detected.isSearchPage,
+      isCompanyPage: detected.isCompanyPage
     };
   }
 
@@ -67,11 +71,11 @@ class MultiSourceScraper {
         return;
       }
 
-      const { platform, jobId, isSearchPage } = detected;
+      const { platform, jobId, isSearchPage, isCompanyPage } = detected;
 
-      // Handle search pages (bulk scraping)
-      if (isSearchPage) {
-        await this.handleBulkScraping(platform);
+      // Handle search pages and company pages (bulk scraping)
+      if (isSearchPage || isCompanyPage) {
+        await this.handleBulkScraping(platform, isCompanyPage);
         return;
       }
 
@@ -124,9 +128,9 @@ class MultiSourceScraper {
   }
 
   /**
-   * Handle bulk scraping for search pages
+   * Handle bulk scraping for search pages and company pages
    */
-  private async handleBulkScraping(platform: any): Promise<void> {
+  private async handleBulkScraping(platform: any, isCompanyPage: boolean = false): Promise<void> {
     try {
       this.log(`🚀 Starting bulk scraping for ${platform.displayName}...`);
 
@@ -170,15 +174,22 @@ class MultiSourceScraper {
           const linkedinBulkModule = await import('./scrapeJobs.js');
           const linkedinBulkScraper = new linkedinBulkModule.JobScraper();
           
-          // Ask user if they want to scrape all pages or just current page
-          const scrapeAllLinkedinPages = confirm('Do you want to scrape all pages? (This may take a while)');
-          
-          if (scrapeAllLinkedinPages) {
-            await linkedinBulkScraper.bulkScrapeJobs();
+          if (isCompanyPage) {
+            // Handle company page scraping
+            this.log('🏢 Detected LinkedIn company page - using company scraper...');
+            await linkedinBulkScraper.bulkScrapeCompanyJobs();
           } else {
-            // For LinkedIn, we can scrape the current search page
-            await linkedinBulkScraper.scrapeLinkedInJobIds();
-            this.showNotification('✅ LinkedIn job IDs collected from current page', 'success');
+            // Handle search page scraping
+            // Ask user if they want to scrape all pages or just current page
+            const scrapeAllLinkedinPages = confirm('Do you want to scrape all pages? (This may take a while)');
+            
+            if (scrapeAllLinkedinPages) {
+              await linkedinBulkScraper.bulkScrapeJobs();
+            } else {
+              // For LinkedIn, we can scrape the current search page
+              await linkedinBulkScraper.scrapeLinkedInJobIds();
+              this.showNotification('✅ LinkedIn job IDs collected from current page', 'success');
+            }
           }
           break;
 

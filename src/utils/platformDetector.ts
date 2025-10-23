@@ -153,7 +153,8 @@ export class PlatformDetector {
   private static isCompanyPage(url: string, platform: PlatformConfig): boolean {
     switch (platform.name) {
       case 'linkedin':
-        return url.includes('/company/') && !url.includes('/jobs/');
+        // Detect company pages with jobs - these are scrapable
+        return url.includes('/company/') && url.includes('/jobs/');
 
       case 'jobindex':
         // Jobindex doesn't have separate company pages
@@ -207,7 +208,7 @@ export class PlatformDetector {
    */
   static canScrapeCurrentPage(): boolean {
     const detected = this.detectCurrentPlatform();
-    return detected !== null && (detected.isJobPage || detected.isSearchPage);
+    return detected !== null && (detected.isJobPage || detected.isSearchPage || detected.isCompanyPage);
   }
 
   /**

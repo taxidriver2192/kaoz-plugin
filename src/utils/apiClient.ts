@@ -422,6 +422,7 @@ class ApiClient {
   // ============================================================================
   // PROFILE-RELATED METHODS (current implementation for your API)
   // ============================================================================
+
 }
 
 export const apiClient = new ApiClient();

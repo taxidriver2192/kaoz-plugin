@@ -27,6 +27,32 @@ class JobScraper {
   }
 
   /**
+   * Wait for a DOM element to appear with timeout
+   * @param selector - CSS selector to wait for
+   * @param timeout - Maximum time to wait in milliseconds (default: 10000)
+   * @param checkInterval - How often to check in milliseconds (default: 100)
+   */
+  private async waitForElement(
+    selector: string, 
+    timeout: number = 10000, 
+    checkInterval: number = 100
+  ): Promise<HTMLElement | null> {
+    const startTime = Date.now();
+    
+    while (Date.now() - startTime < timeout) {
+      const element = document.querySelector<HTMLElement>(selector);
+      if (element) {
+        this.log(`✅ Found element: ${selector}`);
+        return element;
+      }
+      await this.sleep(checkInterval);
+    }
+    
+    this.log(`⏱️ Timeout waiting for element: ${selector}`);
+    return null;
+  }
+
+  /**
    * Normalizes work type text from LinkedIn to standardized values.
    * @param workTypeText - The raw work type text from LinkedIn
    * @returns 'remote' | 'hybrid' | 'onsite' | null
@@ -675,13 +701,137 @@ class JobScraper {
   }
 
   /**
+   * Scrape all job IDs from a LinkedIn company page by scrolling through it
+   */
+  async scrapeCompanyJobs(): Promise<Set<string>> {
+    this.log("Starting LinkedIn company jobs scraper...");
+
+    // Wait for the scrollable container to appear (max 10 seconds)
+    this.log("Waiting for company jobs list container to load...");
+    let scrollContainer = await this.waitForElement('.scaffold-layout__list', 10000);
+
+    if (!scrollContainer) {
+      // Try alternative selectors for company pages
+      this.log("Primary selector failed, trying alternatives...");
+      const alternativeSelectors = [
+        '.jobs-search-results-list',
+        '.scaffold-layout__list-container',
+        '[data-view-name="jobs-search-results-list"]',
+        '.jobs-list',
+        '.company-jobs-list'
+      ];
+      
+      for (const altSelector of alternativeSelectors) {
+        this.log(`Trying alternative selector: ${altSelector}`);
+        scrollContainer = await this.waitForElement(altSelector, 3000);
+        if (scrollContainer) {
+          this.log(`✅ Found container with alternative selector: ${altSelector}`);
+          break;
+        }
+      }
+    }
+
+    if (!scrollContainer) {
+      this.log("Error: Could not find the company jobs list scroll container");
+      this.showNotification('❌ Could not find company jobs list container', 'error');
+      return new Set<string>();
+    }
+
+    this.log("Successfully found the company jobs scroll container.", scrollContainer);
+    this.showNotification('🔍 Starting company jobs scraping...', 'success');
+
+    // Use a Set to automatically store only unique job IDs
+    const collectedJobIds = new Set<string>();
+    
+    // Helper function to extract IDs currently in the DOM
+    const extractVisibleJobIds = () => {
+      const jobElements = scrollContainer.querySelectorAll<HTMLLIElement>('li[data-occludable-job-id]');
+      
+      if (jobElements.length === 0) {
+        this.log("No job elements found in the current view.");
+        return;
+      }
+
+      let newIdsFound = 0;
+      jobElements.forEach(jobElement => {
+        const jobId = jobElement.dataset.occludableJobId;
+        if (jobId && !collectedJobIds.has(jobId)) {
+          collectedJobIds.add(jobId);
+          newIdsFound++;
+        }
+      });
+      
+      if (newIdsFound > 0) {
+        this.log(`Found ${newIdsFound} new job IDs. Total collected: ${collectedJobIds.size}`);
+      }
+    };
+
+    // Scroll through the container and collect IDs
+    let lastHeight = 0;
+    let currentHeight = scrollContainer.scrollHeight;
+    
+    // Initially extract whatever is visible
+    extractVisibleJobIds();
+
+    while (lastHeight !== currentHeight) {
+      lastHeight = scrollContainer.scrollHeight;
+      
+      // Scroll to the bottom of the container
+      scrollContainer.scrollTo(0, lastHeight);
+      this.log(`Scrolling to ${lastHeight}px...`);
+
+      // Wait for new jobs to load
+      await this.sleep(2000); // 2-second delay for network requests
+
+      // After waiting, extract any new job IDs that have been loaded
+      extractVisibleJobIds();
+
+      currentHeight = scrollContainer.scrollHeight;
+
+      // If the height hasn't changed after scrolling and waiting, we've reached the end
+      if (lastHeight === currentHeight) {
+        this.log("Scroll height hasn't changed. Reached the end of the list.");
+        break;
+      }
+    }
+
+    this.log("✅ Company jobs scraping complete!");
+    this.log(`Total unique job IDs collected: ${collectedJobIds.size}`);
+    this.log("All collected IDs:", Array.from(collectedJobIds));
+    
+    this.showNotification(`✅ Found ${collectedJobIds.size} unique company jobs`, 'success');
+    
+    return collectedJobIds;
+  }
+
+  /**
    * Scrape all job IDs from the LinkedIn job list by scrolling through it
    */
   async scrapeLinkedInJobIds(): Promise<Set<string>> {
     this.log("Starting LinkedIn job list scraper...");
 
-    // Find the scrollable container
-    const scrollContainer = document.querySelector<HTMLElement>('.scaffold-layout__list');
+    // Wait for the scrollable container to appear (max 10 seconds)
+    this.log("Waiting for job list container to load...");
+    let scrollContainer = await this.waitForElement('.scaffold-layout__list', 10000);
+
+    if (!scrollContainer) {
+      // Try alternative selectors
+      this.log("Primary selector failed, trying alternatives...");
+      const alternativeSelectors = [
+        '.jobs-search-results-list',
+        '.scaffold-layout__list-container',
+        '[data-view-name="jobs-search-results-list"]'
+      ];
+      
+      for (const altSelector of alternativeSelectors) {
+        this.log(`Trying alternative selector: ${altSelector}`);
+        scrollContainer = await this.waitForElement(altSelector, 3000);
+        if (scrollContainer) {
+          this.log(`✅ Found container with alternative selector: ${altSelector}`);
+          break;
+        }
+      }
+    }
 
     if (!scrollContainer) {
       this.log("Error: Could not find the job list scroll container with class '.scaffold-layout__list'.");
@@ -757,12 +907,143 @@ class JobScraper {
   }
 
   /**
+   * Bulk scrape all jobs from a company page
+   */
+  async bulkScrapeCompanyJobs(): Promise<void> {
+    try {
+      const startTime = Date.now();
+      this.log('🚀 Starting company jobs bulk scraping...');
+      
+      // Give LinkedIn's SPA time to initialize
+      this.log('⏳ Waiting for page to stabilize...');
+      await this.sleep(2000);
+      
+      // Fetch existing job IDs once at the start
+      this.showNotification('📋 Henter eksisterende jobs fra database...', 'success');
+      const existingJobIds = await apiClient.getExistingJobIds();
+      this.log(`📊 Fandt ${existingJobIds.size} eksisterende jobs i database`);
+
+      this.log('📄 Scraping company jobs from current page...');
+      const scrapedJobIds = await this.scrapeCompanyJobs();
+
+      if (scrapedJobIds.size === 0) {
+        this.log('ℹ️ Ingen job IDs fundet på denne side - stopper');
+        this.showNotification('ℹ️ Ingen jobs fundet på denne company side', 'warning');
+        return;
+      }
+
+      // Filter out jobs that already exist in the database
+      const newJobIds = new Set<string>();
+      let duplicateCount = 0;
+      for (const jobId of scrapedJobIds) {
+        if (existingJobIds.has(jobId)) {
+          duplicateCount++;
+        } else {
+          newJobIds.add(jobId);
+        }
+      }
+
+      this.log(`📊 Company side: Total: ${scrapedJobIds.size}, Nye: ${newJobIds.size}, Duplikater: ${duplicateCount}`);
+
+      if (newJobIds.size === 0) {
+        this.log('ℹ️ Alle jobs fra denne company findes allerede i databasen');
+        this.showNotification('ℹ️ Alle jobs fra denne company findes allerede i databasen', 'warning');
+        return;
+      }
+
+      this.showNotification(`🚀 Behandler ${newJobIds.size} nye jobs fra company...`, 'success');
+
+      let totalSuccess = 0;
+      let totalErrors = 0;
+      let totalSkills = 0;
+
+      let processedCount = 0;
+      for (const jobId of newJobIds) {
+        try {
+          processedCount++;
+          
+          // Log job summary with LinkedIn link
+          const jobUrl = `https://www.linkedin.com/jobs/view/${jobId}/`;
+          this.log(`📋 Job ${processedCount}/${newJobIds.size}: ${jobId}`);
+          this.log(`🔗 LinkedIn link: ${jobUrl}`);
+          
+          const navigated = await this.navigateToJob(jobId);
+          if (!navigated) {
+            this.log(`❌ Kunne ikke navigere til job ${jobId}`);
+          }
+
+          await this.sleep(500);
+
+          const result = await this.scrapeJobInternal(false);
+          if (result.success) {
+            // Extract skills count from the result if available
+            const skillsCount = result.skillsCount || 0;
+            if (skillsCount > 0) {
+              totalSkills += skillsCount;
+              this.log(`✅ Job ${jobId}: TILFØJET | Status: OK | Skills: ${skillsCount}`);
+            } else {
+              this.log(`✅ Job ${jobId}: TILFØJET | Status: OK`);
+            }
+            totalSuccess++;
+            // Prevent reprocessing the same job
+            existingJobIds.add(jobId);
+          } else {
+            this.log(`❌ Job ${jobId}: FEJL | Status: ${result.message}`);
+            totalErrors++;
+          }
+
+          // Small delay between jobs to be respectful
+          await this.sleep(1500);
+
+        } catch (error) {
+          this.log(`❌ Fejl ved behandling af job ${jobId}:`, error);
+          totalErrors++;
+        }
+      }
+
+      const endTime = Date.now();
+      const totalTimeMs = endTime - startTime;
+      const totalTimeSeconds = Math.round(totalTimeMs / 1000);
+      const totalAttempted = totalSuccess + totalErrors;
+      const averageTimePerJob = totalAttempted > 0 ? Math.round(totalTimeMs / totalAttempted) : 0;
+      const averageTimePerJobSeconds = Math.round(averageTimePerJob / 1000);
+      
+      this.log(`🏁 Company bulk scraping afsluttet: ${totalSuccess} jobs tilføjet, ${duplicateCount} duplikater, ${totalErrors} fejl`);
+      this.log(`⏱️ Køretid: ${totalTimeSeconds}s | Gennemsnit: ${averageTimePerJobSeconds}s per job`);
+      this.log(`📊 Total behandlet: ${totalAttempted} jobs`);
+      if (totalSkills > 0) {
+        this.log(`🎯 Total skills fundet: ${totalSkills}`);
+      }
+      
+      let notificationType: NotificationType = 'warning';
+      if (totalSuccess > 0) {
+        notificationType = 'success';
+      } else if (totalErrors > 0) {
+        notificationType = 'error';
+      }
+      
+      this.showNotification(
+        `✅ Company bulk scraping afsluttet! Tilføjet: ${totalSuccess}, Duplikater: ${duplicateCount}, Fejl: ${totalErrors}`,
+        notificationType
+      );
+
+    } catch (error) {
+      this.log('Error during company bulk job scraping:', error);
+      this.showNotification('❌ Error during company bulk scraping', 'error');
+    }
+  }
+
+  /**
    * Bulk scrape all jobs across search pages (25 per page)
    */
   async bulkScrapeJobs(): Promise<void> {
     try {
       const startTime = Date.now();
       this.log('🚀 Starter bulk job scraping...');
+      
+      // Give LinkedIn's SPA time to initialize
+      this.log('⏳ Waiting for page to stabilize...');
+      await this.sleep(2000);
       
       // Fetch existing job IDs once at the start
       this.showNotification('📋 Henter eksisterende jobs fra database...', 'success');

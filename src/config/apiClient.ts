@@ -219,6 +219,7 @@ export class ApiClient {
       body: JSON.stringify(profileData),
     });
   }
+
 }
 
 // Export a singleton instance

@@ -757,6 +757,16 @@ class BackgroundService {
     return { updated, skipped, removed: removedCount, platformStats };
   }
 
+  private async checkContentScriptReady(tabId: number): Promise<boolean> {
+    try {
+      // Send a ping message to check if content script is ready
+      await chrome.tabs.sendMessage(tabId, { action: 'ping' });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   private async scrapeCurrentTab() {
     try {
       this.log('INFO: Getting current active tab...');
@@ -771,15 +781,46 @@ class BackgroundService {
       this.log('INFO: Current tab URL:', currentTab.url);
       this.log('INFO: Current tab ID:', currentTab.id);
 
+      // Check if content script is ready
+      this.log('INFO: Checking if content script is ready...');
+      const isContentScriptReady = await this.checkContentScriptReady(currentTab.id);
+      
+      if (!isContentScriptReady) {
+        this.log('WARNING: Content script is not ready. This might be because:');
+        this.log('  1. The page is still loading');
+        this.log('  2. The content script failed to inject');
+        this.log('  3. The page was refreshed after the extension was loaded');
+        this.log('INFO: Try refreshing the page and clicking the button again');
+        return;
+      }
+
+      this.log('INFO: Content script is ready, proceeding with scraping...');
+
       if (currentTab.url.includes('linkedin.com/jobs/')) {
         this.log('INFO: Detected LinkedIn job page, sending scrape job message...');
-        chrome.tabs.sendMessage(currentTab.id, { action: 'scrapeJob' });
+        try {
+          await chrome.tabs.sendMessage(currentTab.id, { action: 'scrapeJob' });
+        } catch (error) {
+          this.log('ERROR: Failed to send message to content script for job scraping:', error);
+          this.log('INFO: This might be because the content script is not loaded or the page is not ready');
+        }
       } else if (currentTab.url.includes('linkedin.com/in/')) {
         this.log('INFO: Detected LinkedIn profile page, sending scrape profile message...');
-        chrome.tabs.sendMessage(currentTab.id, { action: 'scrapeProfile' });
+        try {
+          await chrome.tabs.sendMessage(currentTab.id, { action: 'scrapeProfile' });
+        } catch (error) {
+          this.log('ERROR: Failed to send message to content script for profile scraping:', error);
+          this.log('INFO: This might be because the content script is not loaded or the page is not ready');
+          this.log('INFO: Try refreshing the page and clicking the profiles button again');
+        }
       } else if (currentTab.url.includes('jobindex.dk/jobsoegning/stilling/')) {
         this.log('INFO: Detected Jobindex job page, sending scrape job message...');
-        chrome.tabs.sendMessage(currentTab.id, { action: 'scrapeJob' });
+        try {
+          await chrome.tabs.sendMessage(currentTab.id, { action: 'scrapeJob' });
+        } catch (error) {
+          this.log('ERROR: Failed to send message to content script for job scraping:', error);
+          this.log('INFO: This might be because the content script is not loaded or the page is not ready');
+        }
       } else {
         this.log('WARNING: Current tab is not a supported job or profile page');
         this.log('INFO: URL does not match supported patterns:', currentTab.url);
